@@ -4,6 +4,7 @@ import SearchBar from "../Components/SearchBar";
 import SearchCard from "../Components/Card/SearchCard";
 import { useNavigation } from "@react-navigation/native";
 import { useQuery } from "@tanstack/react-query";
+import { GenreState } from "../State/GenreState";
 
 const SearchAPI = () => {
   // const { isLoading, error, data } = useQuery(["multiSearch"], () =>
@@ -74,10 +75,8 @@ const SearchAPI = () => {
                 genero={data.genres}
                 onPressFunction={() => {
                   navigate("DetailScreen", {
-                    movies: filteredDataSource.results,
                     movieDetails: item,
                     genero: data.genres,
-                  
                   });
                 }}
               />
