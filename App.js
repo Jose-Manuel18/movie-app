@@ -6,13 +6,16 @@ import {
   QueryClientProvider,
   useQuery,
 } from "@tanstack/react-query";
+import { RecoilRoot } from "recoil";
 const queryClient = new QueryClient();
 
 export default function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <Navigation />
-    </QueryClientProvider>
+    <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <Navigation />
+      </QueryClientProvider>
+    </RecoilRoot>
   );
 }
 

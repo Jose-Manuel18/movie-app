@@ -1,7 +1,6 @@
 import { Dimensions, FlatList, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import TrendingCard from "../Cards/TrendingCard";
-import Carousel from "react-native-snap-carousel";
 import { useNavigation } from "@react-navigation/native";
 import { take } from "lodash";
 
@@ -26,8 +25,7 @@ const TrendingCarousel = ({ info }) => {
             <TrendingCard
               onPressFunction={() => {
                 navigate("DetailScreen", {
-                  movies: info,
-                  movieDetails: item.id,
+                  movieDetails: item,
                 });
               }}
               movie={item}

@@ -1,7 +1,6 @@
 import { Dimensions, FlatList, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import SeriesCard from "../Cards/SeriesCard";
-import Carousel from "react-native-snap-carousel";
 import { useNavigation } from "@react-navigation/native";
 import { take } from "lodash";
 const SeriesCarousel = ({ info }) => {
@@ -25,8 +24,7 @@ const SeriesCarousel = ({ info }) => {
             <SeriesCard
               onPressFunction={() => {
                 navigation.navigate("DetailScreen", {
-                  movies: info,
-                  movieDetails: item.id,
+                  movieDetails: item,
                 });
               }}
               movie={item}

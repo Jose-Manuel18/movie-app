@@ -13,8 +13,7 @@ import DetailScreen from "./DetailScreen/DetailScreen";
 import SearchScreen from "./SearchScreen/SearchScreen";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
-
-
+import SeeAllScreen from "./SeeAllScreen/SeeAllScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -49,7 +48,7 @@ const Navigation = () => {
           component={HomeScreen}
           options={{
             tabBarIcon: ({ size, color }) => (
-              <IconButton icon="home" color={color} size={size} />
+              <IconButton icon="home" color={color} size={size} disabled />
             ),
             tabBarIconStyle: {
               textAlign: "center",
@@ -61,7 +60,7 @@ const Navigation = () => {
           component={ExploreScreen}
           options={{
             tabBarIcon: ({ size, color }) => (
-              <IconButton icon="compass" color={color} size={size} />
+              <IconButton icon="compass" color={color} size={size} disabled />
             ),
             tabBarIconStyle: {
               paddingLeft: 8,
@@ -73,7 +72,7 @@ const Navigation = () => {
           component={LikeScreen}
           options={{
             tabBarIcon: ({ size, color }) => (
-              <IconButton icon="heart" color={color} size={size} />
+              <IconButton icon="heart" color={color} size={size} disabled />
             ),
           }}
         />
@@ -82,7 +81,12 @@ const Navigation = () => {
           component={AccountScreen}
           options={{
             tabBarIcon: ({ size, color }) => (
-              <IconButton icon="person-sharp" color={color} size={size} />
+              <IconButton
+                icon="person-sharp"
+                color={color}
+                size={size}
+                disabled
+              />
             ),
           }}
         />
@@ -106,7 +110,8 @@ const Navigation = () => {
               component={DetailScreen}
               options={{
                 headerShown: false,
-                presentation:"transparentModal"
+                presentation: "transparentModal",
+                animation: "slide_from_bottom",
               }}
             />
             <Stack.Screen
@@ -114,10 +119,14 @@ const Navigation = () => {
               component={SearchScreen}
               options={{
                 headerShown: false,
-                presentation:"transparentModal"
+                presentation: "transparentModal",
               }}
             />
-          
+            <Stack.Screen
+              name="SeeAllScreen"
+              component={SeeAllScreen}
+              options={{}}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </BottomSheetModalProvider>

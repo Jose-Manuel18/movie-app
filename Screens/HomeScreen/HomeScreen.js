@@ -9,7 +9,6 @@ import SeriesAPI from "../../API/SeriesAPI";
 import SearchButton from "../../Components/SearchBarButton/SearchButton";
 import { useNavigation } from "@react-navigation/native";
 
-
 const HomeScreen = () => {
   const { navigate } = useNavigation();
 
@@ -20,19 +19,23 @@ const HomeScreen = () => {
         <MoviesAPI />
         <View style={styles.headerContainer}>
           <ReusableText modo="bigText">Trending</ReusableText>
-          <SeeAllButton onPressFunction={() => {}} />
+          <SeeAllButton
+            onPressFunction={() => {
+              navigate("SeeAllScreen");
+            }}
+          />
         </View>
         <TopRatedMoviesAPI />
         <View style={styles.headerContainer}>
           <ReusableText modo="bigText">Series</ReusableText>
-          <SeeAllButton onPressFunction={() => {}} />
+          <SeeAllButton
+            onPressFunction={() => {
+              navigate("SeeAllScreen");
+            }}
+          />
         </View>
         <SeriesAPI />
       </ScrollView>
-      <Text> hhholaaa</Text>
-      <Text>
-        hdgdgdggdgdgddfgdgdf
-      </Text>
     </View>
   );
 };

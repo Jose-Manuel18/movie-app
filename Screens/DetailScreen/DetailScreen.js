@@ -1,5 +1,5 @@
-import { StyleSheet, View, Text } from "react-native";
-import React, { useCallback, useRef, useMemo, useState } from "react";
+import { StyleSheet, View, Text, TouchableWithoutFeedback } from "react-native";
+import React, { useCallback, useRef, useMemo, useState, Fragment } from "react";
 import DetailsCard from "./DetailsCard";
 import { Colors } from "../../Components/Utils/Colors";
 import BottomSheet, {
@@ -8,38 +8,40 @@ import BottomSheet, {
 } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
 import { Easing } from "react-native-reanimated";
+import { useRecoilValueLoadable } from "recoil";
+import { GenreState } from "../../State/GenreState";
 
 const DetailScreen = ({ route }) => {
   const navigation = useNavigation();
-  const dataResults = route.params.movies;
-  const mId = route.params.movieDetails;
+  const movieDetails = route.params.movieDetails;
   const genres = route.params.genero;
-
-  const movieDetails = dataResults.filter((details) => details === mId);
-
-  // const genreDetails = genres.filter((details) => details== dataResults)
-  // console.log(mId.genre_ids);
   const sheetRef = useRef(null);
   const snapPoints = useMemo(() => ["40%"], []);
   const handleSnapPress = useCallback((index) => {
     sheetRef.current?.snapToIndex(index);
   }, []);
 
-  // const animationConfigs = useBottomSheetSpringConfigs({
-  //   damping: 40,
-  //   overshootClamping: true,
-  //   restDisplacementThreshold: 0.1,
-  //   restSpeedThreshold: 0.1,
-  //   stiffness: 500,
-  // });
-
   const timingConfig = useBottomSheetTimingConfigs({
     duration: 200,
     easing: Easing.linear,
   });
 
+  const { state, contents } = useRecoilValueLoadable(GenreState);
+  if (state === "hasError" || state === "loading") return null;
+  // console.warn(content);
+  const currentGenre = contents.genres?.filter((genre) =>
+    movieDetails?.genre_ids?.includes(genre.id)
+  );
+
+  // const currentGenre = undefined;
+
   return (
-    <View style={styles.container}>
+    <TouchableWithoutFeedback
+      onPress={() => {
+        sheetRef.current?.close();
+      }}
+      style={styles.container}
+    >
       <BottomSheet
         ref={sheetRef}
         snapPoints={snapPoints}
@@ -56,21 +58,21 @@ const DetailScreen = ({ route }) => {
         handleStyle={styles.handleStyle}
         handleIndicatorStyle={styles.handleIndicatorStyle}
       >
-        <BottomSheetFlatList
+        <View style={styles.contentContainer}>
+          <DetailsCard movie={movieDetails} />
+          <Text>
+            {(currentGenre || []).map((genre) => genre.name).join(", ")}.
+          </Text>
+        </View>
+        {/* <BottomSheetFlatList
           data={movieDetails}
           keyExtractor={(i) => i}
           renderItem={({ item }) => {
-            return <DetailsCard movie={item} />;
           }}
           contentContainerStyle={styles.contentContainer}
-        />
-        <Text>
-          {genres.map((item) => {
-            return <Text>{item.name}</Text>;
-          })}
-        </Text>
+        /> */}
       </BottomSheet>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
