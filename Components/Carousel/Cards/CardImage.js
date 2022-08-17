@@ -12,6 +12,7 @@ const CardImage = ({ movie, onPressFunction }) => {
             }}
             style={styles.cardImage}
           />
+          
         </View>
       </TouchableOpacity>
     </View>

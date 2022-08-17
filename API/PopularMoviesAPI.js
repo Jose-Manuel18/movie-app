@@ -1,5 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import React, { useState, } from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import CarouselImages from "../Components/Carousel/TopCarousel/CarouselImages";
 
@@ -12,16 +12,15 @@ const MoviesAPI = () => {
 
   if (error || isLoading) return null;
 
+
   return (
     <View>
-      <CarouselImages
-        info={data.results}
-      />
+      <CarouselImages info={data.results} />
+      
     </View>
-
   );
 };
 
 export default MoviesAPI;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

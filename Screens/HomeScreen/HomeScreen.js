@@ -1,4 +1,4 @@
-import { Pressable, ScrollView, StyleSheet, View } from "react-native";
+import { StyleSheet, View, ScrollView, Text } from "react-native";
 import React from "react";
 import { Colors } from "../../Components/Utils/Colors";
 import MoviesAPI from "../../API/PopularMoviesAPI";
@@ -6,13 +6,13 @@ import ReusableText from "../../Components/ReusableText";
 import SeeAllButton from "../../Components/Buttons/SeeAllButton";
 import TopRatedMoviesAPI from "../../API/TrendingMoviesAPI";
 import SeriesAPI from "../../API/SeriesAPI";
-import { VStack, HStack, Spacer } from "react-native-stacks";
 import SearchButton from "../../Components/SearchBarButton/SearchButton";
 import { useNavigation } from "@react-navigation/native";
-import GenreAPI from "../../API/GenreAPI";
+
 
 const HomeScreen = () => {
   const { navigate } = useNavigation();
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -27,9 +27,12 @@ const HomeScreen = () => {
           <ReusableText modo="bigText">Series</ReusableText>
           <SeeAllButton onPressFunction={() => {}} />
         </View>
-        <GenreAPI/>
         <SeriesAPI />
       </ScrollView>
+      <Text> hhholaaa</Text>
+      <Text>
+        hdgdgdggdgdgddfgdgdf
+      </Text>
     </View>
   );
 };

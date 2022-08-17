@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import SearchBar from "../Components/SearchBar";
 import SearchCard from "../Components/Card/SearchCard";
 import { useNavigation } from "@react-navigation/native";
+import { useQuery } from "@tanstack/react-query";
+
 const SearchAPI = () => {
   // const { isLoading, error, data } = useQuery(["multiSearch"], () =>
   // fetch(
@@ -12,8 +14,10 @@ const SearchAPI = () => {
   // if (error || isLoading) return null;
   const { navigate } = useNavigation();
   const [search, setSearch] = useState("");
-  const [data, setData] = useState([]);
+  const [newData, setNewData] = useState([]);
   const [filteredDataSource, setFilteredDataSource] = useState([]);
+  const [allGenres, setAllGenres] = useState([]);
+
   useEffect(() => {
     const timeOut = setTimeout(
       () =>
@@ -23,7 +27,7 @@ const SearchAPI = () => {
           .then((response) => response.json())
           .then((responseJson) => {
             setFilteredDataSource(responseJson);
-            setData(responseJson);
+            setNewData(responseJson);
           })
           .catch((error) => {
             console.error(error);
@@ -39,10 +43,19 @@ const SearchAPI = () => {
     if (text) {
       setSearch(text);
     } else {
-      setFilteredDataSource(data);
+      setFilteredDataSource(newData);
       setSearch(text);
     }
   };
+
+  const { isLoading, error, data } = useQuery(["genreAPI"], () =>
+    fetch(
+      "https://api.themoviedb.org/3/genre/movie/list?api_key=a24edf480d427f5cb8cb54efb9ee9007&languages=en-US"
+    ).then((res) => res.json())
+  );
+  if (error || isLoading) return null;
+  // const array3 = filteredDataSource.results?.concat(data)
+
   return (
     <View style={styles.container}>
       <SearchBar
@@ -56,16 +69,18 @@ const SearchAPI = () => {
         renderItem={({ item }) => {
           if (filteredDataSource.results) {
             return (
-              
-                <SearchCard
-                  movie={item}
-                  onPressFunction={() => {
-                    navigate("DetailScreen", {
-                      movies: filteredDataSource.results,
-                      movieDetails: item.id,
-                    });
-                  }}
-                />
+              <SearchCard
+                movie={item}
+                genero={data.genres}
+                onPressFunction={() => {
+                  navigate("DetailScreen", {
+                    movies: filteredDataSource.results,
+                    movieDetails: item,
+                    genero: data.genres,
+                  
+                  });
+                }}
+              />
             );
           } else {
             console.log("no movies");

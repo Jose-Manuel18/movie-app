@@ -1,14 +1,16 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import React from "react";
-import { HStack, Spacer } from "react-native-stacks";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  FlatList,
+} from "react-native";
+import React, { useState } from "react";
 import { Colors } from "../Utils/Colors";
-import GenreAPI from "../../API/GenreAPI";
-import GenreCard from "./GenreCard";
 
-const SearchCard = ({ movie, onPressFunction, genre }) => {
-  // const movieGenre = movie.filter(
-  //   (details) => details.id === SELECTED_MOVIE
-  // );
+const SearchCard = ({ movie, onPressFunction, genero }) => {
+ 
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onPressFunction}>
@@ -23,8 +25,23 @@ const SearchCard = ({ movie, onPressFunction, genre }) => {
           </View>
           <View style={styles.textContainer}>
             <Text style={styles.text}>{movie.title || movie.name}</Text>
-            <Text>{movie.vote_average}</Text>
-            <GenreCard/>
+            {/* <FlatList
+              data={genero}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item, index }) => {
+                return (
+                  <View key={index}>
+                    <Text>
+                      {item.id == movie.genre_ids ? (
+                        <Text>{item}</Text>
+                      ) : (
+                        <Text>no</Text>
+                      )}
+                    </Text>
+                  </View>
+                );
+              }}
+            /> */}
           </View>
         </View>
       </TouchableOpacity>
@@ -36,6 +53,15 @@ export default SearchCard;
 
 const styles = StyleSheet.create({
   container: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.46,
+    shadowRadius: 11.14,
+
+    elevation: 17,
     justifyContent: "space-between",
     backgroundColor: Colors.LightPurple,
     marginVertical: 10,
@@ -64,6 +90,6 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     flexDirection: "row",
-    fontSize:15,
+    fontSize: 15,
   },
 });

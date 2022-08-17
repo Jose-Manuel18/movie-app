@@ -14,7 +14,7 @@ const GenreAPI = () => {
   return (
 
     <View>
-      <SearchAPI genre={data.genres}/>
+      {/* <SearchAPI genre={data.genres}/> */}
     </View>
   );
 };

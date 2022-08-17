@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     height: 100,
   },
   textContainer: {
+  
     maxWidth: 100,
     flexDirection: "column",
   },

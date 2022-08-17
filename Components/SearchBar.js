@@ -33,7 +33,6 @@ const SearchBar = ({ value, onChangeText }) => {
                 placeholder="Search"
                 placeholderTextColor="#ffffff"
                 autoFocus={true}
-                
               />
           </View>
           <View style={styles.searchIconContainer}>
@@ -65,18 +64,18 @@ export default SearchBar;
 const styles = StyleSheet.create({
   container: {
     // backgroundColor:"grey",
-    marginHorizontal:10,
-    marginBottom:10,
-    maxHeight:50,
+    marginHorizontal: 10,
+    marginBottom: 10,
+    maxHeight: 50,
   },
   searchBarOuterContainer: {
-    height:50,
+    height: 50,
     flexDirection: "row",
     justifyContent: "space-around",
   },
   textInput: {
     // maxWidth: 210,
-    paddingLeft:12,
+    paddingLeft: 12,
     width: 270,
     fontWeight: "bold",
     alignContent: "center",
@@ -86,7 +85,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   searchBarContainer: {
-    marginLeft:10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.46,
+    shadowRadius: 11.14,
+
+    elevation: 17,
+    marginLeft: 10,
     backgroundColor: Colors.LightPurple,
     borderRadius: 18,
     color: Colors.TextColor,
@@ -94,10 +102,19 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
   },
   filterContainer: {
-    height:50,
-    width:44,
-    marginLeft:18,
-    marginRight:10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.46,
+    shadowRadius: 11.14,
+
+    elevation: 17,
+    height: 50,
+    width: 44,
+    marginLeft: 18,
+    marginRight: 10,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: Colors.LightPurple,

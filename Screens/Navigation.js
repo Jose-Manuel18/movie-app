@@ -11,6 +11,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Colors } from "../Components/Utils/Colors";
 import DetailScreen from "./DetailScreen/DetailScreen";
 import SearchScreen from "./SearchScreen/SearchScreen";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -86,33 +90,38 @@ const Navigation = () => {
     );
   };
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="HomeTab"
-          component={MyTabs}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="DetailScreen"
-          component={DetailScreen}
-          options={{
-            headerShown: false,
-            presentation: "transparentModal",
-          }}
-        />
-        <Stack.Screen
-          name="SearchScreen"
-          component={SearchScreen}
-          options={{
-            headerShown: false,
-            presentation: "transparentModal",
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <BottomSheetModalProvider>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="HomeTab"
+              component={MyTabs}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="DetailScreen"
+              component={DetailScreen}
+              options={{
+                headerShown: false,
+                presentation:"transparentModal"
+              }}
+            />
+            <Stack.Screen
+              name="SearchScreen"
+              component={SearchScreen}
+              options={{
+                headerShown: false,
+                presentation:"transparentModal"
+              }}
+            />
+          
+          </Stack.Navigator>
+        </NavigationContainer>
+      </BottomSheetModalProvider>
+    </GestureHandlerRootView>
   );
 };
 

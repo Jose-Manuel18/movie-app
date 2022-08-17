@@ -1,18 +1,20 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
 
-const GenreCard = ({genre}) => {
+const GenreCard = ({ genero }) => {
+  // console.log(genero);
+  // const mmg = Object.values(genero)
   return (
     <View>
-      <Text style={styles.text}>{genre.name}</Text>
+      
     </View>
-  )
-}
+  );
+};
 
-export default GenreCard
+export default GenreCard;
 
 const styles = StyleSheet.create({
-  text:{
-    color:"white",
-  }
-})
+  text: {
+    color: "white",
+  },
+});

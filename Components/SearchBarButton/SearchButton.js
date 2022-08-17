@@ -42,6 +42,15 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   searchContainer: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.46,
+    shadowRadius: 11.14,
+
+    elevation: 17,
     flex: 6,
     height: 50,
     backgroundColor: Colors.LightPurple,
@@ -60,6 +69,15 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   filterContainer: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.46,
+    shadowRadius: 11.14,
+
+    elevation: 17,
     flex: 1,
     backgroundColor: Colors.LightPurple,
     paddingVertical: 10,

@@ -1,12 +1,11 @@
 import { Dimensions, FlatList, StyleSheet, View } from "react-native";
-import React, { useState, useRef } from "react";
-import Carousel, { Pagination } from "react-native-snap-carousel";
+import React from "react";
 import CardImage from "../Cards/CardImage";
 import { useNavigation } from "@react-navigation/native";
-import { Colors } from "../../Utils/Colors";
 import { take } from "lodash";
 
 const CarouselImages = ({ info }) => {
+  
   const { navigate } = useNavigation();
   const { width: viewportWidth, height: viewportHeight } =
     Dimensions.get("window");
@@ -16,8 +15,6 @@ const CarouselImages = ({ info }) => {
   const SLIDER_WIDTH = viewportWidth;
   let RandomNumber = Math.floor(Math.random() * 4) + 1;
 
-  const [index, setIndex] = useState(RandomNumber);
-  const isCarousel = useRef(null);
   return (
     <View>
       <FlatList
@@ -27,15 +24,18 @@ const CarouselImages = ({ info }) => {
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => {
           return (
-            <CardImage
-              onPressFunction={() => {
-                navigate("DetailScreen", {
-                  movies: info,
-                  movieDetails: item.id,
-                });
-              }}
-              movie={item}
-            />
+            <View>
+              <CardImage
+                onPressFunction={() => {
+                  navigate("DetailScreen", {
+                    movies: info,
+                    movieDetails: item,
+                   
+                  });
+                }}
+                movie={item}
+              />
+            </View>
           );
         }}
       />
