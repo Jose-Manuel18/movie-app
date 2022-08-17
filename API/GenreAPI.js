@@ -1,7 +1,7 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import React from "react";
-import GenreCard from "../Components/Card/GenreCard";
 import { useQuery } from "@tanstack/react-query";
+import SearchAPI from "./SearchAPI";
 
 const GenreAPI = () => {
   const { isLoading, error, data } = useQuery(["genreAPI"], () =>
@@ -10,16 +10,11 @@ const GenreAPI = () => {
     ).then((res) => res.json())
   );
   if (error || isLoading) return null;
-
+  // console.log(data)
   return (
+
     <View>
-      <FlatList
-        data={data.genres}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => {
-          return <GenreCard genre={item} />;
-        }}
-      />
+      <SearchAPI genre={data.genres}/>
     </View>
   );
 };
