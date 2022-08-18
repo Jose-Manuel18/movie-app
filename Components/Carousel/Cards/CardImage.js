@@ -12,7 +12,6 @@ const CardImage = ({ movie, onPressFunction }) => {
             }}
             style={styles.cardImage}
           />
-          
         </View>
       </TouchableOpacity>
     </View>
@@ -28,10 +27,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   cardImage: {
-    resizeMode:"stretch",
-    width:175,
-    height:250,
-    marginTop: 25,
-    borderRadius:16,
+    resizeMode: "stretch",
+    width: 175,
+    height: 250,
+    borderRadius: 16,
   },
 });

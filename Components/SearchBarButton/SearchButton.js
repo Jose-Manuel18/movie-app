@@ -15,7 +15,7 @@ const SearchButton = () => {
   const { navigate } = useNavigation();
 
   return (
-    <HStack style={styles.container}>
+    <View style={styles.container}>
       <TouchableOpacity
         style={styles.innerContainer}
         onPress={() => navigate("SearchScreen")}
@@ -35,7 +35,7 @@ const SearchButton = () => {
       <View style={styles.filterContainer}>
         <IconButton icon="filter-sharp" color={Colors.TextColor} size={24} />
       </View>
-    </HStack>
+    </View>
   );
 };
 
@@ -43,7 +43,9 @@ export default SearchButton;
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: "row",
     paddingHorizontal: 20,
+    paddingBottom: 25,
   },
   innerContainer: {
     flex: 1,
@@ -57,15 +59,13 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.46,
     shadowRadius: 11.14,
-
     elevation: 17,
-
-    height: 50,
     backgroundColor: Colors.LightPurple,
     justifyContent: "space-between",
     borderRadius: 18,
     flexDirection: "row",
     alignItems: "center",
+    padding: 15,
   },
   text: {
     color: Colors.TextColor,
@@ -84,11 +84,9 @@ const styles = StyleSheet.create({
     shadowRadius: 11.14,
     elevation: 17,
     backgroundColor: Colors.LightPurple,
-    paddingVertical: 10,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 16,
-    width: 44,
-    height: 50,
+    width: 46,
   },
 });

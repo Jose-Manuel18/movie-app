@@ -13,8 +13,8 @@ import DetailScreen from "./DetailScreen/DetailScreen";
 import SearchScreen from "./SearchScreen/SearchScreen";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
-import SeeAllScreen from "./SeeAllScreen/SeeAllScreen";
-
+import SeeAllSeriesScreen from "./SeeAllScreen/SeeAllSeriesScreen";
+import SeeAllTrendingScreen from "./SeeAllScreen/SeeAllTrendingScreen";
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -124,10 +124,20 @@ const Navigation = () => {
               }}
             />
             <Stack.Screen
-              name="SeeAllScreen"
-              component={SeeAllScreen}
+              name="SeeAllSeriesScreen"
+              component={SeeAllSeriesScreen}
               options={{
                 headerShown: false,
+                presentation: "transparentModal",
+                animation: "fade",
+              }}
+            />
+            <Stack.Screen
+              name="SeeAllTrendingScreen"
+              component={SeeAllTrendingScreen}
+              options={{
+                headerShown: false,
+                presentation: "transparentModal",
                 animation: "fade",
               }}
             />

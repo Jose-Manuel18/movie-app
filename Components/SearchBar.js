@@ -24,17 +24,14 @@ const SearchBar = ({ value, onChangeText }) => {
     <View style={styles.container}>
       <View style={styles.searchBarOuterContainer}>
         <View style={styles.searchBarContainer}>
-          <View style={styles.textInputContainer}>
-            
-              <TextInput
-                value={value}
-                onChangeText={onChangeText}
-                style={styles.textInput}
-                placeholder="Search"
-                placeholderTextColor="#ffffff"
-                autoFocus={true}
-              />
-          </View>
+          <TextInput
+            value={value}
+            onChangeText={onChangeText}
+            style={styles.textInput}
+            placeholder="Search"
+            placeholderTextColor="#ffffff"
+            autoFocus={true}
+          />
           <View style={styles.searchIconContainer}>
             <IconButton
               icon="ios-search-sharp"
@@ -44,6 +41,7 @@ const SearchBar = ({ value, onChangeText }) => {
             />
           </View>
         </View>
+        <View style={styles.spacing}></View>
         <TouchableOpacity>
           <View style={styles.filterContainer}>
             <IconButton
@@ -63,28 +61,16 @@ export default SearchBar;
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor:"grey",
-    marginHorizontal: 10,
-    marginBottom: 10,
-    maxHeight: 50,
+    paddingHorizontal: 20,
+    paddingBottom: 25,
   },
   searchBarOuterContainer: {
-    height: 50,
     flexDirection: "row",
-    justifyContent: "space-around",
-  },
-  textInput: {
-    // maxWidth: 210,
-    paddingLeft: 12,
-    width: 270,
-    fontWeight: "bold",
-    alignContent: "center",
-    color: Colors.TextColor,
-  },
-  textInputContainer: {
-    justifyContent: "center",
   },
   searchBarContainer: {
+    flex: 1,
+    paddingHorizontal: 14.5,
+    backgroundColor: "white",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -92,16 +78,28 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.46,
     shadowRadius: 11.14,
-
     elevation: 17,
-    marginLeft: 10,
     backgroundColor: Colors.LightPurple,
     borderRadius: 18,
     color: Colors.TextColor,
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
+  },
+  textInput: {
+    color: Colors.TextColor,
+  },
+
+  searchIconContainer: {
+    justifyContent: "center",
+    alignContent: "center",
+  },
+  spacing: {
+    width: 15,
   },
   filterContainer: {
+    padding: 12,
+    justifyContent: "center",
+    alignContent: "center",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -109,20 +107,9 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.46,
     shadowRadius: 11.14,
-
     elevation: 17,
-    height: 50,
-    width: 44,
-    marginLeft: 18,
-    marginRight: 10,
-    alignItems: "center",
-    justifyContent: "center",
+    width: 46,
     backgroundColor: Colors.LightPurple,
     borderRadius: 14,
-  },
-  searchIconContainer: {
-    justifyContent: "center",
-    alignContent: "center",
-    paddingRight: 12,
   },
 });

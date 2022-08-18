@@ -21,7 +21,7 @@ const HomeScreen = () => {
           <ReusableText modo="bigText">Trending</ReusableText>
           <SeeAllButton
             onPressFunction={() => {
-              navigate("SeeAllScreen");
+              navigate("SeeAllTrendingScreen");
             }}
           />
         </View>
@@ -30,7 +30,7 @@ const HomeScreen = () => {
           <ReusableText modo="bigText">Series</ReusableText>
           <SeeAllButton
             onPressFunction={() => {
-              navigate("SeeAllScreen");
+              navigate("SeeAllSeriesScreen");
             }}
           />
         </View>
