@@ -120,12 +120,16 @@ const Navigation = () => {
               options={{
                 headerShown: false,
                 presentation: "transparentModal",
+                animation: "fade",
               }}
             />
             <Stack.Screen
               name="SeeAllScreen"
               component={SeeAllScreen}
-              options={{}}
+              options={{
+                headerShown: false,
+                animation: "fade",
+              }}
             />
           </Stack.Navigator>
         </NavigationContainer>
