@@ -14,7 +14,6 @@ import { GenreState } from "../../State/GenreState";
 const DetailScreen = ({ route }) => {
   const navigation = useNavigation();
   const movieDetails = route.params.movieDetails;
-  const genres = route.params.genero;
   const sheetRef = useRef(null);
   const snapPoints = useMemo(() => ["40%"], []);
   const handleSnapPress = useCallback((index) => {
