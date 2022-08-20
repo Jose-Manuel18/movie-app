@@ -8,9 +8,9 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { Colors } from "../Utils/Colors";
+import { AirbnbRating } from "@rneui/themed";
 
 const SearchCard = ({ movie, onPressFunction, genero }) => {
- 
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onPressFunction}>
@@ -25,6 +25,17 @@ const SearchCard = ({ movie, onPressFunction, genero }) => {
           </View>
           <View style={styles.textContainer}>
             <Text style={styles.text}>{movie.title || movie.name}</Text>
+            <View style={styles.ratingContainer}>
+              <AirbnbRating
+                reviewSize={0}
+                isDisabled={true}
+                size={10}
+                defaultRating={movie.vote_average}
+                ratingContainerStyle={styles.rating}
+                showRating={false}
+              />
+              <Text>{movie.vote_average}</Text>
+            </View>
             {/* <FlatList
               data={genero}
               keyExtractor={(item) => item.id}
@@ -91,5 +102,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
     flexDirection: "row",
     fontSize: 15,
+  },
+
+  ratingContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  rating: {
+    paddingRight: 10,
   },
 });
