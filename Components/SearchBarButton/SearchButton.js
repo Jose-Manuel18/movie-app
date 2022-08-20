@@ -51,7 +51,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   searchContainer: {
-    flex: 1,
+    paddingHorizontal: 14,
+    backgroundColor: "white",
+    paddingVertical:15, 
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -65,7 +67,6 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     flexDirection: "row",
     alignItems: "center",
-    padding: 15,
   },
   text: {
     color: Colors.TextColor,
@@ -75,6 +76,9 @@ const styles = StyleSheet.create({
     width: 15,
   },
   filterContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    width:46,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -86,7 +90,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.LightPurple,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 16,
-    width: 46,
+    borderRadius: 15,
   },
 });

@@ -12,7 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Colors } from "./Utils/Colors";
 
 const SearchBar = ({ value, onChangeText }) => {
-  const {navigate} = useNavigation();
+  const { navigate } = useNavigation();
   const searchButton = () => {
     console.log("Pressed!");
   };
@@ -98,7 +98,9 @@ const styles = StyleSheet.create({
   },
   filterContainer: {
     padding: 12,
+    paddingLeft: 11,
     justifyContent: "center",
+    alignItems: "center",
     alignContent: "center",
     shadowColor: "#000",
     shadowOffset: {
