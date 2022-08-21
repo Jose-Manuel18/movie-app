@@ -32,13 +32,11 @@ const styles = StyleSheet.create({
   },
   trendingCardImage: {
     borderRadius: 16,
-    maxHeight: "100%",
-    maxWidth: "100%",
+    resizeMode: "contain",
     width: 100,
     height: 100,
   },
   textContainer: {
-  
     maxWidth: 100,
     flexDirection: "column",
   },

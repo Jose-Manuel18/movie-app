@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 
 const TrendingCard = ({ movie, onPressFunction }) => {
+
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onPressFunction}>
@@ -35,8 +36,7 @@ const styles = StyleSheet.create({
   },
   trendingCardImage: {
     borderRadius: 16,
-    maxHeight: "100%",
-    maxWidth: "100%",
+    resizeMode: "contain",
     width: 100,
     height: 100,
   },

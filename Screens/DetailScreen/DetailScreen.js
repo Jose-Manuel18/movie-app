@@ -1,15 +1,12 @@
 import { StyleSheet, View, Text, TouchableWithoutFeedback } from "react-native";
-import React, { useCallback, useRef, useMemo, useState, Fragment } from "react";
+import React, { useCallback, useRef, useMemo,  } from "react";
 import DetailsCard from "./DetailsCard";
 import { Colors } from "../../Components/Utils/Colors";
 import BottomSheet, {
-  BottomSheetFlatList,
   useBottomSheetTimingConfigs,
 } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
 import { Easing } from "react-native-reanimated";
-import { useRecoilValueLoadable } from "recoil";
-import { GenreState } from "../../State/GenreState";
 
 const DetailScreen = ({ route }) => {
   const navigation = useNavigation();
@@ -25,14 +22,7 @@ const DetailScreen = ({ route }) => {
     easing: Easing.linear,
   });
 
-  const { state, contents } = useRecoilValueLoadable(GenreState);
-  if (state === "hasError" || state === "loading") return null;
-  // console.warn(content);
-  const currentGenre = contents.genres?.filter((genre) =>
-    movieDetails?.genre_ids?.includes(genre.id)
-  );
 
-  // const currentGenre = undefined;
 
   return (
     <TouchableWithoutFeedback
@@ -59,9 +49,7 @@ const DetailScreen = ({ route }) => {
       >
         <View style={styles.contentContainer}>
           <DetailsCard movie={movieDetails} />
-          <Text>
-            {(currentGenre || []).map((genre) => genre.name).join(", ")}.
-          </Text>
+          
         </View>
         {/* <BottomSheetFlatList
           data={movieDetails}

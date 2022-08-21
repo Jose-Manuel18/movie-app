@@ -9,8 +9,16 @@ import {
 import React, { useState } from "react";
 import { Colors } from "../Utils/Colors";
 import { AirbnbRating } from "@rneui/themed";
+import { useRecoilValueLoadable } from "recoil";
+import { GenreState } from "../../State/GenreState";
 
-const SearchCard = ({ movie, onPressFunction, genero }) => {
+const SearchCard = ({ movie, onPressFunction }) => {
+  const { state, contents } = useRecoilValueLoadable(GenreState);
+  if (state === "hasError" || state === "loading") return null;
+  const currentGenre = contents.genres?.filter((genre) =>
+    movie?.genre_ids?.includes(genre.id)
+  );
+
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onPressFunction}>
@@ -25,16 +33,19 @@ const SearchCard = ({ movie, onPressFunction, genero }) => {
           </View>
           <View style={styles.textContainer}>
             <Text style={styles.text}>{movie.title || movie.name}</Text>
+            <Text style={styles.genreText}>
+              {(currentGenre || []).map((genre) => genre.name).join(", ")}.
+            </Text>
             <View style={styles.ratingContainer}>
               <AirbnbRating
                 reviewSize={0}
                 isDisabled={true}
                 size={10}
-                defaultRating={movie.vote_average}
+                defaultRating={movie.vote_average / 2}
                 ratingContainerStyle={styles.rating}
                 showRating={false}
               />
-              <Text>{movie.vote_average}</Text>
+              <Text style={styles.genreText}>{movie.vote_average}</Text>
             </View>
             {/* <FlatList
               data={genero}
@@ -93,17 +104,21 @@ const styles = StyleSheet.create({
   textContainer: {
     flex: 1,
     maxWidth: 200,
+    paddingLeft: 20,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "flex-start",
   },
   text: {
     paddingTop: 8,
     color: "white",
-    textAlign: "center",
+    textAlign: "justifyContent",
     flexDirection: "row",
     fontSize: 15,
   },
-
+  genreText: {
+    color: "white",
+    fontSize: 12,
+  },
   ratingContainer: {
     flexDirection: "row",
     justifyContent: "center",
