@@ -11,7 +11,7 @@ import IconButton from "./IconButton";
 import { useNavigation } from "@react-navigation/native";
 import { Colors } from "./Utils/Colors";
 
-const SearchBar = ({ value, onChangeText }) => {
+const SearchBar = ({ value, onChangeText, deleteText }) => {
   const { navigate } = useNavigation();
   const searchButton = () => {
     console.log("Pressed!");
@@ -34,10 +34,10 @@ const SearchBar = ({ value, onChangeText }) => {
           />
           <View style={styles.searchIconContainer}>
             <IconButton
-              icon="ios-search-sharp"
+              icon="close-sharp"
               color="#ffffff"
-              size={16}
-              onPressFunction={searchButton}
+              size={18}
+              onPressFunction={deleteText}
             />
           </View>
         </View>

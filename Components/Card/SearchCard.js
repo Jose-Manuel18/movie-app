@@ -31,7 +31,8 @@ const SearchCard = ({ movie, onPressFunction }) => {
               style={styles.trendingCardImage}
             />
           </View>
-          <View style={styles.textContainer}>
+          <View style={{ width: 30 }}></View>
+          <View style={styles.contentContainer}>
             <Text style={styles.text}>{movie.title || movie.name}</Text>
             <Text style={styles.genreText}>
               {(currentGenre || []).map((genre) => genre.name).join(", ")}.
@@ -45,7 +46,7 @@ const SearchCard = ({ movie, onPressFunction }) => {
                 ratingContainerStyle={styles.rating}
                 showRating={false}
               />
-              <Text style={styles.genreText}>{movie.vote_average}</Text>
+              <Text style={styles.genreText}>{movie.vote_average / 2}</Text>
             </View>
             {/* <FlatList
               data={genero}
@@ -101,28 +102,29 @@ const styles = StyleSheet.create({
     width: 80,
     height: 110,
   },
-  textContainer: {
+  contentContainer: {
     flex: 1,
     maxWidth: 200,
-    paddingLeft: 20,
+    paddingLeft: 30,
     justifyContent: "center",
     alignItems: "flex-start",
   },
   text: {
     paddingTop: 8,
     color: "white",
-    textAlign: "justifyContent",
+    textAlign: "left",
     flexDirection: "row",
     fontSize: 15,
+    paddingLeft: 2,
   },
   genreText: {
     color: "white",
     fontSize: 12,
+    paddingLeft: 3,
   },
   ratingContainer: {
     flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    paddingLeft: 0,
   },
   rating: {
     paddingRight: 10,

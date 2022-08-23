@@ -62,6 +62,7 @@ const SearchAPI = () => {
       <SearchBar
         value={search}
         onChangeText={(text) => searchFilterFunction(text)}
+        deleteText={() => setSearch("")}
       />
       <FlatList
         data={filteredDataSource.results}

@@ -15,33 +15,36 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import SeeAllSeriesScreen from "./SeeAllScreen/SeeAllSeriesScreen";
 import SeeAllTrendingScreen from "./SeeAllScreen/SeeAllTrendingScreen";
-const Tab = createBottomTabNavigator();
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+const Tab = createMaterialTopTabNavigator();
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
   const MyTabs = () => {
     return (
       <Tab.Navigator
-        screenOptions={{
-          tabBarActiveTintColor: Colors.Rose,
-          tabBarInactiveTintColor: Colors.Grey,
-          headerBackground: Colors.LightPurple,
-          tabBarStyle: {
-            position: "absolute",
-            borderTopLeftRadius: 16,
-            borderTopRightRadius: 16,
-            backgroundColor: Colors.TabBarColor,
-            // height:56,
-            justifyContent: "center",
-            alignItems: "center",
-          },
-          tabBarHideOnKeyboard: true,
-          headerShown: false,
-          tabBarIconStyle: {
-            justifyContent: "center",
-            alignItems: "center",
-          },
-        }}
+        screenOptions={
+          {
+            // tabBarActiveTintColor: Colors.Rose,
+            // tabBarInactiveTintColor: Colors.Grey,
+            // headerBackground: Colors.LightPurple,
+            // tabBarStyle: {
+            //   position: "absolute",
+            //   borderTopLeftRadius: 16,
+            //   borderTopRightRadius: 16,
+            //   backgroundColor: Colors.TabBarColor,
+            //   // height:56,
+            //   justifyContent: "center",
+            //   alignItems: "center",
+            // },
+            // tabBarHideOnKeyboard: true,
+            // headerShown: false,
+            // tabBarIconStyle: {
+            //   justifyContent: "center",
+            //   alignItems: "center",
+            // },
+          }
+        }
       >
         <Tab.Screen
           name="Home"
@@ -98,13 +101,7 @@ const Navigation = () => {
       <BottomSheetModalProvider>
         <NavigationContainer>
           <Stack.Navigator>
-            <Stack.Screen
-              name="HomeTab"
-              component={MyTabs}
-              options={{
-                headerShown: false,
-              }}
-            />
+            <Stack.Screen name="HomeTab" component={MyTabs} options={{}} />
             <Stack.Screen
               name="DetailScreen"
               component={DetailScreen}
