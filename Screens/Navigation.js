@@ -23,28 +23,25 @@ const Navigation = () => {
   const MyTabs = () => {
     return (
       <Tab.Navigator
-        screenOptions={
-          {
-            // tabBarActiveTintColor: Colors.Rose,
-            // tabBarInactiveTintColor: Colors.Grey,
-            // headerBackground: Colors.LightPurple,
-            // tabBarStyle: {
-            //   position: "absolute",
-            //   borderTopLeftRadius: 16,
-            //   borderTopRightRadius: 16,
-            //   backgroundColor: Colors.TabBarColor,
-            //   // height:56,
-            //   justifyContent: "center",
-            //   alignItems: "center",
-            // },
-            // tabBarHideOnKeyboard: true,
-            // headerShown: false,
-            // tabBarIconStyle: {
-            //   justifyContent: "center",
-            //   alignItems: "center",
-            // },
-          }
-        }
+        tabBarPosition="bottom"
+        screenOptions={{
+          tabBarContentContainerStyle: {
+            backgroundColor: Colors.LightPurple,
+          },
+          tabBarIndicatorStyle: { height: 0 },
+          tabBarActiveTintColor: Colors.Rose,
+          tabBarInactiveTintColor: Colors.Grey,
+          tabBarItemStyle: {
+            height: 55,
+          },
+          tabBarIconStyle: {
+            justifyContent: "center",
+            alignItems: "center",
+          },
+          tabBarLabelStyle: {
+            fontSize: 10,
+          },
+        }}
       >
         <Tab.Screen
           name="Home"
@@ -53,9 +50,6 @@ const Navigation = () => {
             tabBarIcon: ({ size, color }) => (
               <IconButton icon="home" color={color} size={size} disabled />
             ),
-            tabBarIconStyle: {
-              textAlign: "center",
-            },
           }}
         />
         <Tab.Screen
@@ -65,9 +59,6 @@ const Navigation = () => {
             tabBarIcon: ({ size, color }) => (
               <IconButton icon="compass" color={color} size={size} disabled />
             ),
-            tabBarIconStyle: {
-              paddingLeft: 8,
-            },
           }}
         />
         <Tab.Screen
@@ -101,7 +92,13 @@ const Navigation = () => {
       <BottomSheetModalProvider>
         <NavigationContainer>
           <Stack.Navigator>
-            <Stack.Screen name="HomeTab" component={MyTabs} options={{}} />
+            <Stack.Screen
+              name="HomeTab"
+              component={MyTabs}
+              options={{
+                headerShown: false,
+              }}
+            />
             <Stack.Screen
               name="DetailScreen"
               component={DetailScreen}
