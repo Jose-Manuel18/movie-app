@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   textInput: {
+    flex: 1,
     color: Colors.TextColor,
   },
 

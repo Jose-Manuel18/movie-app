@@ -83,7 +83,6 @@ const SearchAPI = () => {
               />
             );
           } else {
-            console.log("no movies");
           }
         }}
       />

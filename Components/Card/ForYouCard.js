@@ -2,20 +2,30 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
 import { Colors } from "../Utils/Colors";
 import ReusableText from "../ReusableText";
+import { useRecoilValueLoadable } from "recoil";
+import { GenreState } from "../../State/GenreState";
+import { TrendingState } from "../../State/TrendingState";
 
 const ForYouCard = ({ movie }) => {
-  
+  const { state: genreState, contents: genreContents } =
+    useRecoilValueLoadable(GenreState);
+  const { state: trendingState, contents: trendingContents } =
+    useRecoilValueLoadable(TrendingState);
+
+  if (genreState === "hasError " || genreState === "loading") return null;
+  if (trendingState === "hasError " || trendingState === "loading") return null;
+  const results = trendingContents.results;
+  console.log(trendingContents);
   return (
     <View style={styles.container}>
       <Image
         source={{
-          uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+          uri: `https://image.tmdb.org/t/p/w500${results.poster_path}`,
         }}
         style={styles.cardImage}
       />
-      <ReusableText>{movie.title || movie.name}</ReusableText>
-      <ReusableText>{movie.genre}</ReusableText>
-      <Text>ForYouCard</Text>
+      <ReusableText>{results.title || results.name}</ReusableText>
+      <ReusableText>{genreContents.name}</ReusableText>
     </View>
   );
 };
