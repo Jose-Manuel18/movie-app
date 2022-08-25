@@ -48,23 +48,6 @@ const SearchCard = ({ movie, onPressFunction }) => {
               />
               <Text style={styles.genreText}>{movie.vote_average / 2}</Text>
             </View>
-            {/* <FlatList
-              data={genero}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item, index }) => {
-                return (
-                  <View key={index}>
-                    <Text>
-                      {item.id == movie.genre_ids ? (
-                        <Text>{item}</Text>
-                      ) : (
-                        <Text>no</Text>
-                      )}
-                    </Text>
-                  </View>
-                );
-              }}
-            /> */}
           </View>
         </View>
       </TouchableOpacity>

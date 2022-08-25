@@ -55,7 +55,6 @@ const SearchAPI = () => {
     ).then((res) => res.json())
   );
   if (error || isLoading) return null;
-  // const array3 = filteredDataSource.results?.concat(data)
 
   return (
     <View style={styles.container}>
@@ -67,7 +66,6 @@ const SearchAPI = () => {
       <FlatList
         data={filteredDataSource.results}
         keyExtractor={(item) => item.id}
-        // ItemSeparatorComponent={ItemSeparatorView}
         renderItem={({ item }) => {
           if (filteredDataSource.results) {
             return (

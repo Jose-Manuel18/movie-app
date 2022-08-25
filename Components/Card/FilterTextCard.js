@@ -3,7 +3,6 @@ import React from "react";
 import { Colors } from "../Utils/Colors";
 
 const FilterTextCard = ({ genre, onPress, isSelected }) => {
-  console.log(genre);
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -20,10 +19,10 @@ export default FilterTextCard;
 
 const styles = StyleSheet.create({
   container: {
-    height: "100%",
+    paddingHorizontal: 8,
+    height: 30,
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 8,
   },
   buttonSelected: {
     backgroundColor: Colors.Rose,

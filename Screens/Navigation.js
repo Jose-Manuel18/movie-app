@@ -27,16 +27,16 @@ const Navigation = () => {
         screenOptions={{
           tabBarContentContainerStyle: {
             backgroundColor: Colors.LightPurple,
+            borderRadius: 17,
           },
           tabBarIndicatorStyle: { height: 0 },
           tabBarActiveTintColor: Colors.Rose,
           tabBarInactiveTintColor: Colors.Grey,
-          tabBarItemStyle: {
-            height: 55,
-          },
           tabBarIconStyle: {
             justifyContent: "center",
             alignItems: "center",
+            height: 25,
+            borderRadius: 16,
           },
           tabBarLabelStyle: {
             fontSize: 10,
@@ -48,7 +48,7 @@ const Navigation = () => {
           component={HomeScreen}
           options={{
             tabBarIcon: ({ size, color }) => (
-              <IconButton icon="home" color={color} size={size} disabled />
+              <IconButton icon="home" color={color} size={24} disabled />
             ),
           }}
         />
@@ -57,7 +57,7 @@ const Navigation = () => {
           component={ExploreScreen}
           options={{
             tabBarIcon: ({ size, color }) => (
-              <IconButton icon="compass" color={color} size={size} disabled />
+              <IconButton icon="compass" color={color} size={24} disabled />
             ),
           }}
         />
@@ -66,7 +66,7 @@ const Navigation = () => {
           component={LikeScreen}
           options={{
             tabBarIcon: ({ size, color }) => (
-              <IconButton icon="heart" color={color} size={size} disabled />
+              <IconButton icon="heart" color={color} size={24} disabled />
             ),
           }}
         />
@@ -78,7 +78,7 @@ const Navigation = () => {
               <IconButton
                 icon="person-sharp"
                 color={color}
-                size={size}
+                size={24}
                 disabled
               />
             ),

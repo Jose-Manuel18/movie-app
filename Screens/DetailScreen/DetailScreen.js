@@ -1,10 +1,8 @@
 import { StyleSheet, View, Text, TouchableWithoutFeedback } from "react-native";
-import React, { useCallback, useRef, useMemo,  } from "react";
+import React, { useCallback, useRef, useMemo } from "react";
 import DetailsCard from "./DetailsCard";
 import { Colors } from "../../Components/Utils/Colors";
-import BottomSheet, {
-  useBottomSheetTimingConfigs,
-} from "@gorhom/bottom-sheet";
+import BottomSheet, { useBottomSheetTimingConfigs } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
 import { Easing } from "react-native-reanimated";
 
@@ -12,7 +10,7 @@ const DetailScreen = ({ route }) => {
   const navigation = useNavigation();
   const movieDetails = route.params.movieDetails;
   const sheetRef = useRef(null);
-  const snapPoints = useMemo(() => ["40%"], []);
+  const snapPoints = useMemo(() => ["30%"], []);
   const handleSnapPress = useCallback((index) => {
     sheetRef.current?.snapToIndex(index);
   }, []);
@@ -21,8 +19,6 @@ const DetailScreen = ({ route }) => {
     duration: 200,
     easing: Easing.linear,
   });
-
-
 
   return (
     <TouchableWithoutFeedback
@@ -49,7 +45,6 @@ const DetailScreen = ({ route }) => {
       >
         <View style={styles.contentContainer}>
           <DetailsCard movie={movieDetails} />
-          
         </View>
         {/* <BottomSheetFlatList
           data={movieDetails}
