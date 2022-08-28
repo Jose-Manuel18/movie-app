@@ -11,13 +11,11 @@ import IconButton from "./IconButton";
 import { useNavigation } from "@react-navigation/native";
 import { Colors } from "./Utils/Colors";
 
-const SearchBar = ({ value, onChangeText, deleteText }) => {
+const SearchBar = ({ value, onChangeText, deleteText, inputRef }) => {
   const { navigate } = useNavigation();
-  const searchButton = () => {
-    console.log("Pressed!");
-  };
-  const FilterButton = () => {
-    console.log("Pressed!");
+  const closeButton = () => {
+    inputRef.current.focus();
+    inputRef.current.clear();
   };
 
   return (
@@ -31,25 +29,23 @@ const SearchBar = ({ value, onChangeText, deleteText }) => {
             placeholder="Search"
             placeholderTextColor="#ffffff"
             autoFocus={true}
+            ref={inputRef}
           />
           <View style={styles.searchIconContainer}>
-            <IconButton
-              icon="close-sharp"
-              color="#ffffff"
-              size={18}
-              onPressFunction={deleteText}
-            />
+            <TouchableOpacity onPress={() => inputRef.current.clearText()}>
+              <IconButton
+                icon="close-sharp"
+                color="#ffffff"
+                size={18}
+                onPress={closeButton}
+              />
+            </TouchableOpacity>
           </View>
         </View>
         <View style={styles.spacing}></View>
         <TouchableOpacity>
           <View style={styles.filterContainer}>
-            <IconButton
-              icon="filter-sharp"
-              color="#ffffff"
-              size={24}
-              onPressFunction={FilterButton}
-            />
+            <IconButton icon="filter-sharp" color="#ffffff" size={24} />
           </View>
         </TouchableOpacity>
       </View>

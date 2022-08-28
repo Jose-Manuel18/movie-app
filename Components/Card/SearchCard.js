@@ -46,7 +46,9 @@ const SearchCard = ({ movie, onPressFunction }) => {
                 ratingContainerStyle={styles.rating}
                 showRating={false}
               />
-              <Text style={styles.genreText}>{movie.vote_average / 2}</Text>
+              <Text style={styles.genreText}>
+                {movie.vote_average / 2 + "/5"}
+              </Text>
             </View>
           </View>
         </View>

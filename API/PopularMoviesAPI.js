@@ -12,11 +12,9 @@ const MoviesAPI = () => {
 
   if (error || isLoading) return null;
 
-
   return (
     <View>
       <CarouselImages info={data.results} />
-      
     </View>
   );
 };

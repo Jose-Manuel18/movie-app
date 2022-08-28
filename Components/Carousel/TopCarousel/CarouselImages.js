@@ -5,15 +5,14 @@ import { useNavigation } from "@react-navigation/native";
 import { take } from "lodash";
 
 const CarouselImages = ({ info }) => {
-  
   const { navigate } = useNavigation();
-  const { width: viewportWidth, height: viewportHeight } =
-    Dimensions.get("window");
-  const SLIDE_WIDTH = Math.round(viewportWidth / 2.6);
-  const ITEM_HORIZONTAL_MARGIN = 5;
-  const ITEM_WIDTH = SLIDE_WIDTH + ITEM_HORIZONTAL_MARGIN * 2;
-  const SLIDER_WIDTH = viewportWidth;
-  let RandomNumber = Math.floor(Math.random() * 4) + 1;
+  // const { width: viewportWidth, height: viewportHeight } =
+  //   Dimensions.get("window");
+  // const SLIDE_WIDTH = Math.round(viewportWidth / 2.6);
+  // const ITEM_HORIZONTAL_MARGIN = 5;
+  // const ITEM_WIDTH = SLIDE_WIDTH + ITEM_HORIZONTAL_MARGIN * 2;
+  // const SLIDER_WIDTH = viewportWidth;
+  // let RandomNumber = Math.floor(Math.random() * 4) + 1;
 
   return (
     <View>
@@ -30,7 +29,6 @@ const CarouselImages = ({ info }) => {
                   navigate("DetailScreen", {
                     movies: info,
                     movieDetails: item,
-                   
                   });
                 }}
                 movie={item}

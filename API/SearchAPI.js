@@ -1,5 +1,12 @@
-import { StyleSheet, View, TextInput, FlatList, Text } from "react-native";
-import React, { useState, useEffect } from "react";
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  FlatList,
+  Text,
+  Keyboard,
+} from "react-native";
+import React, { useState, useEffect, useRef } from "react";
 import SearchBar from "../Components/SearchBar";
 import SearchCard from "../Components/Card/SearchCard";
 import { useNavigation } from "@react-navigation/native";
@@ -17,7 +24,7 @@ const SearchAPI = () => {
   const [search, setSearch] = useState("");
   const [newData, setNewData] = useState([]);
   const [filteredDataSource, setFilteredDataSource] = useState([]);
-  const [allGenres, setAllGenres] = useState([]);
+  const inputRef = useRef();
 
   useEffect(() => {
     const timeOut = setTimeout(
@@ -49,19 +56,13 @@ const SearchAPI = () => {
     }
   };
 
-  const { isLoading, error, data } = useQuery(["genreAPI"], () =>
-    fetch(
-      "https://api.themoviedb.org/3/genre/movie/list?api_key=a24edf480d427f5cb8cb54efb9ee9007&languages=en-US"
-    ).then((res) => res.json())
-  );
-  if (error || isLoading) return null;
-
   return (
     <View style={styles.container}>
       <SearchBar
         value={search}
         onChangeText={(text) => searchFilterFunction(text)}
         deleteText={() => setSearch("")}
+        inputRef={inputRef}
       />
       <FlatList
         data={filteredDataSource.results}
@@ -71,11 +72,9 @@ const SearchAPI = () => {
             return (
               <SearchCard
                 movie={item}
-                genero={data.genres}
                 onPressFunction={() => {
                   navigate("DetailScreen", {
                     movieDetails: item,
-                    genero: data.genres,
                   });
                 }}
               />

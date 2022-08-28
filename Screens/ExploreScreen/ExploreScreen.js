@@ -1,28 +1,28 @@
 import { StyleSheet, View, Text, FlatList } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Colors } from "../../Components/Utils/Colors";
 import SearchButton from "../../Components/SearchBarButton/SearchButton";
 import { useRecoilValueLoadable } from "recoil";
-import { TrendingState } from "../../State/TrendingState";
 import { GenreState } from "../../State/GenreState";
 import FilterTextCard from "../../Components/Card/FilterTextCard";
 import ExploreMovieCard from "../../Components/Card/ExploreMovieCard";
 import { useNavigation } from "@react-navigation/native";
 import { NowPlayingState } from "../../State/NowPlayingState";
+import { take } from "lodash";
+
 const ExploreScreen = () => {
   const { navigate } = useNavigation();
+  const [selected, setSelected] = useState(null);
   const { state, contents } = useRecoilValueLoadable(NowPlayingState);
-  if (state === "hasError" || state === "loading") return null;
 
   const { state: genreState, contents: genreContents } =
     useRecoilValueLoadable(GenreState);
-
-  const [selected, setSelected] = useState(null);
-
-  const currentMovie = contents.results.filter((movies) =>
-    movies.genre_ids.includes(selected)
+  const currentMovie = contents?.results?.filter((movies) =>
+    movies?.genre_ids.includes(selected)
   );
 
+  if (state === "hasError" || state === "loading") return null;
+  if (genreState === "hasError" || genreState === "loading") return null;
   return (
     <View style={styles.container}>
       <SearchButton />
@@ -47,7 +47,7 @@ const ExploreScreen = () => {
           }}
         />
         <FlatList
-          data={currentMovie}
+          data={take(currentMovie, 3)}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => {
             return (
@@ -62,10 +62,6 @@ const ExploreScreen = () => {
             );
           }}
         />
-
-        {/* <Text style={styles.movieText}>
-          {(currentMovie || []).map((movies) => movies.title)}
-        </Text> */}
       </View>
     </View>
   );
