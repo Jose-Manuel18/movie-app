@@ -1,8 +1,12 @@
 import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import React from "react";
 import IconButton from "../../Components/IconButton";
+import { isLiked } from "../../Atom/isLiked";
+import { useRecoilState } from "recoil";
 
 const DetailsCard = ({ movie, size }) => {
+  const [Liked, setLiked] = useRecoilState(isLiked);
+
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
@@ -20,14 +24,7 @@ const DetailsCard = ({ movie, size }) => {
           <Text style={styles.overviewText}>{movie.overview}</Text>
           <Text>{movie.release_date}</Text>
         </View>
-        <IconButton
-          onPress={() => {
-            console.log("Pressed!");
-          }}
-          icon="heart-outline"
-          size={size}
-          color="white"
-        />
+        <IconButton onPress={() => {}} />
       </View>
     </View>
   );

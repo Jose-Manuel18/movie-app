@@ -2,13 +2,14 @@ import { StyleSheet, View, Text, FlatList } from "react-native";
 import React, { useState } from "react";
 import { Colors } from "../../Components/Utils/Colors";
 import SearchButton from "../../Components/SearchBarButton/SearchButton";
-import { useRecoilValueLoadable } from "recoil";
+import { useRecoilState, useRecoilValueLoadable } from "recoil";
 import { GenreState } from "../../State/GenreState";
 import FilterTextCard from "../../Components/Card/FilterTextCard";
 import ExploreMovieCard from "../../Components/Card/ExploreMovieCard";
 import { useNavigation } from "@react-navigation/native";
 import { NowPlayingState } from "../../State/NowPlayingState";
 import { take } from "lodash";
+import { isLiked } from "../../Atom/isLiked";
 
 const ExploreScreen = () => {
   const { navigate } = useNavigation();
