@@ -1,11 +1,8 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 import React from "react";
-import ImagedCardView from "react-native-imaged-card-view";
 const ExploreMovieCard = ({ onPress, movie }) => {
   // movie?.forEach((index) => console.log(index));
-  for (const index of movie) {
-    console.log(index);
-  }
+
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onPress}>
