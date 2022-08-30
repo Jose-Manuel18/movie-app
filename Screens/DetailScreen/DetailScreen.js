@@ -1,17 +1,15 @@
 import { StyleSheet, View, Text, TouchableWithoutFeedback } from "react-native";
-import React, { useCallback, useRef, useMemo } from "react";
+import React, { useCallback, useRef, useMemo, useState } from "react";
 import DetailsCard from "./DetailsCard";
 import { Colors } from "../../Components/Utils/Colors";
 import BottomSheet, { useBottomSheetTimingConfigs } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
 import { Easing } from "react-native-reanimated";
 import { isLiked } from "../../Atom/isLiked";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import IconButton from "../../Components/IconButton";
 
 const DetailScreen = ({ route }) => {
-  const [liked, setLiked] = useRecoilState(isLiked);
-  console.log(liked);
   const navigation = useNavigation();
   const movieDetails = route.params.movieDetails;
   const sheetRef = useRef(null);
@@ -50,14 +48,6 @@ const DetailScreen = ({ route }) => {
       >
         <View style={styles.contentContainer}>
           <DetailsCard movie={movieDetails} />
-          <IconButton
-            icon="heart"
-            color="white"
-            size={23}
-            onPress={() => {
-              movieDetails === liked ? setLiked([""]) : setLiked(movieDetails);
-            }}
-          />
         </View>
       </BottomSheet>
     </TouchableWithoutFeedback>

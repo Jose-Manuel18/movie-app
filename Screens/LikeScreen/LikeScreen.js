@@ -8,13 +8,13 @@ import {
 } from "react-native";
 import React from "react";
 import { Colors } from "../../Components/Utils/Colors";
-import SearchButton from "../../Components/SearchBarButton/SearchButton";
-import { GenreState } from "../../State/GenreState";
-import { useRecoilState, useRecoilValueLoadable } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { isLiked } from "../../Atom/isLiked";
 import SearchCard from "../../Components/Card/SearchCard";
+import { useNavigation } from "@react-navigation/native";
 const LikeScreen = () => {
-  const likedMovie = useRecoilState(isLiked);
+  const likedMovie = useRecoilValue(isLiked);
+  const { navigate } = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
@@ -22,9 +22,19 @@ const LikeScreen = () => {
           data={likedMovie}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => {
-            return <SearchCard movie={item} />;
+            return (
+              <SearchCard
+                movie={item}
+                onPress={() => {
+                  return navigate("DetailScreen", { movieDetails: item });
+                }}
+              />
+            );
           }}
         />
+        {/* {likedMovie.map((movie) => {
+          return <Text key={movie.id}>{movie.title || movie.name}</Text>;
+        })} */}
       </View>
     </View>
   );
@@ -36,8 +46,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.DarkPurple,
+    paddingTop: 50,
   },
   innerContainer: {
-    paddingTop: 50,
+    // backgroundColor: "white",
   },
 });

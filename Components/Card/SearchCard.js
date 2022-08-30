@@ -12,7 +12,7 @@ import { AirbnbRating } from "@rneui/themed";
 import { useRecoilValueLoadable } from "recoil";
 import { GenreState } from "../../State/GenreState";
 
-const SearchCard = ({ movie, onPressFunction }) => {
+const SearchCard = ({ movie, onPress }) => {
   const { state, contents } = useRecoilValueLoadable(GenreState);
   if (state === "hasError" || state === "loading") return null;
   const currentGenre = contents.genres?.filter((genre) =>
@@ -21,7 +21,7 @@ const SearchCard = ({ movie, onPressFunction }) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={onPressFunction}>
+      <TouchableOpacity onPress={onPress}>
         <View style={styles.innerContainer}>
           <View style={styles.trendingCardImageContainer}>
             <Image
@@ -47,7 +47,7 @@ const SearchCard = ({ movie, onPressFunction }) => {
                 showRating={false}
               />
               <Text style={styles.genreText}>
-                {movie.vote_average / 2 + "/5"}
+                {movie.vote_average / 2 + ".5"}
               </Text>
             </View>
           </View>

@@ -1,11 +1,24 @@
 import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import IconButton from "../../Components/IconButton";
-import { isLiked } from "../../Atom/isLiked";
-import { useRecoilState } from "recoil";
+import { isLiked, likedState } from "../../Atom/isLiked";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { TouchableOpacity } from "react-native";
 
-const DetailsCard = ({ movie, size }) => {
-  const [Liked, setLiked] = useRecoilState(isLiked);
+const DetailsCard = ({ movie, size, onPress }) => {
+  const setIsLiked = useSetRecoilState(isLiked);
+  const buttonLiked = useSetRecoilState(likedState);
+  const buttonHandler = useRecoilValue(likedState);
+  const likedMovie = useRecoilValue(isLiked);
+  // console.log(likedMovie !== movie);
+  // console.log(movie.title == likedMovie.title);
+
+  const likeHandler = () => {
+    movie === likedMovie
+      ? setIsLiked()
+      : setIsLiked((movies) => [...movies, movie]);
+    buttonLiked(!buttonHandler);
+  };
 
   return (
     <View style={styles.container}>
@@ -24,7 +37,14 @@ const DetailsCard = ({ movie, size }) => {
           <Text style={styles.overviewText}>{movie.overview}</Text>
           <Text>{movie.release_date}</Text>
         </View>
-        <IconButton onPress={() => {}} />
+        <TouchableOpacity onPress={likeHandler} style={styles.buttonContainer}>
+          <IconButton
+            icon={buttonHandler ? "heart" : "heart-outline"}
+            color="white"
+            size={24}
+            disabled
+          />
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -64,5 +84,8 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: "normal",
     color: "#ffffff",
+  },
+  buttonContainer: {
+    width: 25,
   },
 });
