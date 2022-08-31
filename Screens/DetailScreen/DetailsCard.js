@@ -9,16 +9,19 @@ const DetailsCard = ({ movie, size, onPress }) => {
   const setIsLiked = useSetRecoilState(isLiked);
   const buttonLiked = useSetRecoilState(likedState);
   const buttonHandler = useRecoilValue(likedState);
-  const likedMovie = useRecoilValue(isLiked);
-  // console.log(likedMovie !== movie);
-  // console.log(movie.title == likedMovie.title);
+  const [deleteLike, setDeleteLike] = useRecoilState(isLiked);
+  const index = deleteLike.findIndex((listItem) => listItem === movie);
 
-  const likeHandler = () => {
-    movie === likedMovie
-      ? setIsLiked()
-      : setIsLiked((movies) => [...movies, movie]);
-    buttonLiked(!buttonHandler);
+  const deleteItem = () => {
+    const newList = removeItemAtIndex(deleteLike, index);
+    setDeleteLike(newList);
   };
+  const removeItemAtIndex = (arr, index) => {
+    return [...arr.slice(0, index), ...arr.slice(index + 1)];
+  };
+
+  console.log(index);
+  console.log(buttonHandler);
 
   return (
     <View style={styles.container}>
@@ -37,9 +40,16 @@ const DetailsCard = ({ movie, size, onPress }) => {
           <Text style={styles.overviewText}>{movie.overview}</Text>
           <Text>{movie.release_date}</Text>
         </View>
-        <TouchableOpacity onPress={likeHandler} style={styles.buttonContainer}>
+        <TouchableOpacity
+          onPress={() => {
+            index >= 0
+              ? deleteItem()
+              : setIsLiked((movies) => [...movies, movie]);
+          }}
+          style={styles.buttonContainer}
+        >
           <IconButton
-            icon={buttonHandler ? "heart" : "heart-outline"}
+            icon={buttonHandler ? "checkmark" : "add-sharp"}
             color="white"
             size={24}
             disabled
@@ -87,5 +97,10 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: 25,
+    height: 25,
+    // backgroundColor: "#ffffff",
+  },
+  deleteButton: {
+    backgroundColor: "white",
   },
 });

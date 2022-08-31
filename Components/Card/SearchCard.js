@@ -61,15 +61,14 @@ export default SearchCard;
 
 const styles = StyleSheet.create({
   container: {
-    shadowColor: "#000",
+    shadowColor: "#000000",
     shadowOffset: {
       width: 0,
-      height: 8,
+      height: 3,
     },
-    shadowOpacity: 0.46,
-    shadowRadius: 11.14,
-
-    elevation: 17,
+    shadowOpacity: 0.17,
+    shadowRadius: 3.05,
+    elevation: 4,
     justifyContent: "space-between",
     backgroundColor: Colors.LightPurple,
     marginVertical: 10,

@@ -1,17 +1,8 @@
-import {
-  StyleSheet,
-  View,
-  TextInput,
-  FlatList,
-  Text,
-  Keyboard,
-} from "react-native";
+import { StyleSheet, View, FlatList } from "react-native";
 import React, { useState, useEffect, useRef } from "react";
 import SearchBar from "../Components/SearchBar";
 import SearchCard from "../Components/Card/SearchCard";
 import { useNavigation } from "@react-navigation/native";
-import { useQuery } from "@tanstack/react-query";
-import { GenreState } from "../State/GenreState";
 
 const SearchAPI = () => {
   // const { isLoading, error, data } = useQuery(["multiSearch"], () =>
@@ -72,7 +63,7 @@ const SearchAPI = () => {
             return (
               <SearchCard
                 movie={item}
-                onPressFunction={() => {
+                onPress={() => {
                   navigate("DetailScreen", {
                     movieDetails: item,
                   });
