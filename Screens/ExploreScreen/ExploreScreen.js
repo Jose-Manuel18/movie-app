@@ -15,7 +15,7 @@ const ExploreScreen = () => {
   const { navigate } = useNavigation();
   const [selected, setSelected] = useState(null);
   const { state, contents } = useRecoilValueLoadable(NowPlayingState);
-
+  const [explore, setExplore] = useState([]);
   const { state: genreState, contents: genreContents } =
     useRecoilValueLoadable(GenreState);
   const currentMovie = contents?.results?.filter((movies) =>
@@ -24,6 +24,7 @@ const ExploreScreen = () => {
 
   if (state === "hasError" || state === "loading") return null;
   if (genreState === "hasError" || genreState === "loading") return null;
+  const index = contents.results[0] && currentMovie[0];
   return (
     <View style={styles.container}>
       <SearchButton />
@@ -48,12 +49,17 @@ const ExploreScreen = () => {
           }}
         />
         <FlatList
-          data={take(currentMovie, 3)}
+          data={
+            currentMovie.length === 0
+              ? take(contents.results, 3)
+              : take(currentMovie, 3)
+          }
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => {
             return (
               <ExploreMovieCard
                 movie={item}
+                index={contents.results[0] && currentMovie[0]}
                 onPress={() => {
                   navigate("DetailScreen", {
                     movieDetails: item,

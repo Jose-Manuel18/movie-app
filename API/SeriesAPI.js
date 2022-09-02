@@ -20,7 +20,7 @@ const SeriesAPI = () => {
 export default SeriesAPI;
 
 const styles = StyleSheet.create({
-  container:{
-    paddingBottom:60,
+  container: {
+    paddingBottom: 30,
   },
 });

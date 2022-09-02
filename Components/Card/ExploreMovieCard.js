@@ -1,6 +1,13 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 import React, { useState } from "react";
-const ExploreMovieCard = ({ onPress, movie }) => {
+import { useRecoilState, useRecoilValueLoadable } from "recoil";
+import { NowPlayingState } from "../../State/NowPlayingState";
+const ExploreMovieCard = ({ onPress, movie, index }) => {
+  const { state, contents } = useRecoilValueLoadable(NowPlayingState);
+
+  if (state === "hasError" || state === "loading") return null;
+
+  console.log(index);
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onPress}>
@@ -9,7 +16,7 @@ const ExploreMovieCard = ({ onPress, movie }) => {
             source={{
               uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
             }}
-            style={styles.trendingCardImage}
+            style={[index ? styles.bigImage : styles.trendingCardImage]}
           />
         </View>
       </TouchableOpacity>
@@ -22,6 +29,10 @@ export default ExploreMovieCard;
 const styles = StyleSheet.create({
   container: {},
   trendingCardImageContainer: {},
+  bigImage: {
+    width: 200,
+    height: 200,
+  },
   trendingCardImage: {
     borderTopLeftRadius: 16,
     borderBottomLeftRadius: 16,

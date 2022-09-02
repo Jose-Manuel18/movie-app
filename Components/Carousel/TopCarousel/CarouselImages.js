@@ -1,22 +1,26 @@
 import { Dimensions, FlatList, StyleSheet, View } from "react-native";
-import React from "react";
+import React, { useRef, useState } from "react";
 import CardImage from "../Cards/CardImage";
 import { useNavigation } from "@react-navigation/native";
 import { take } from "lodash";
+import { Colors } from "../../Utils/Colors";
+
+import Carousel, { Pagination } from "react-native-snap-carousel";
 
 const CarouselImages = ({ info }) => {
   const { navigate } = useNavigation();
-  // const { width: viewportWidth, height: viewportHeight } =
-  //   Dimensions.get("window");
-  // const SLIDE_WIDTH = Math.round(viewportWidth / 2.6);
-  // const ITEM_HORIZONTAL_MARGIN = 5;
-  // const ITEM_WIDTH = SLIDE_WIDTH + ITEM_HORIZONTAL_MARGIN * 2;
-  // const SLIDER_WIDTH = viewportWidth;
-  // let RandomNumber = Math.floor(Math.random() * 4) + 1;
-
+  const [index, setIndex] = useState(0);
+  const { width: viewportWidth, height: viewportHeight } =
+    Dimensions.get("window");
+  const SLIDE_WIDTH = Math.round(viewportWidth / 2.8);
+  const ITEM_HORIZONTAL_MARGIN = 5;
+  const ITEM_WIDTH = SLIDE_WIDTH + ITEM_HORIZONTAL_MARGIN * 0.9;
+  const SLIDER_WIDTH = viewportWidth;
+  let RandomNumber = Math.floor(Math.random() * 4) + 1;
+  const isCarousel = useRef();
   return (
     <View>
-      <FlatList
+      {/* <FlatList
         data={take(info, 10)}
         keyExtractor={(item) => item.id}
         horizontal={true}
@@ -36,9 +40,8 @@ const CarouselImages = ({ info }) => {
             </View>
           );
         }}
-      />
-      {/* <Carousel
-        initialNumToRender={3}
+      /> */}
+      <Carousel
         layout="default"
         data={take(info, 5)}
         initialScrollIndex={RandomNumber}
@@ -47,24 +50,24 @@ const CarouselImages = ({ info }) => {
         activeSlideAlignment={"center"}
         contentContainerCustomStyle={{
           overflow: "hidden",
-          width: 170 * info.length,
+          width: 60 * info.length,
         }}
         onSnapToItem={(index) => setIndex(index)}
+        useScrollView={true}
         ref={isCarousel}
         // autoplayInterval={500}
         // autoplay={true}
-        // inactiveSlideScale={1}
-        // inactiveSlideOpacity={1}
+        inactiveSlideScale={0.6}
+        inactiveSlideOpacity={0.5}
         renderItem={({ item }) => {
           return (
             <CardImage
-              onPressFunction={() => {
+              movie={item}
+              onPress={() => {
                 navigate("DetailScreen", {
-                  movies: info,
-                  movieDetails: item.id,
+                  movieDetails: item,
                 });
               }}
-              movie={item}
             />
           );
         }}
@@ -74,10 +77,10 @@ const CarouselImages = ({ info }) => {
         activeDotIndex={index}
         carouselRef={isCarousel}
         dotStyle={{
-          width: 10,
+          width: 4,
           height: 10,
-          borderRadius: 5,
-          marginHorizontal: 8,
+          borderRadius: 16,
+          paddingHorizontal: 10,
           backgroundColor: Colors.Rose,
         }}
         tappableDots={true}
@@ -87,7 +90,7 @@ const CarouselImages = ({ info }) => {
         }}
         // inactiveDotOpacity={0.4}
         inactiveDotScale={0.6}
-      /> */}
+      />
     </View>
   );
 };

@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { Colors } from "../Utils/Colors";
-import { AirbnbRating } from "@rneui/themed";
+
 import { useRecoilValueLoadable } from "recoil";
 import { GenreState } from "../../State/GenreState";
 
@@ -38,14 +38,6 @@ const SearchCard = ({ movie, onPress }) => {
               {(currentGenre || []).map((genre) => genre.name).join(", ")}.
             </Text>
             <View style={styles.ratingContainer}>
-              <AirbnbRating
-                reviewSize={0}
-                isDisabled={true}
-                size={10}
-                defaultRating={movie.vote_average / 2}
-                ratingContainerStyle={styles.rating}
-                showRating={false}
-              />
               <Text style={styles.genreText}>
                 {movie.vote_average / 2 + ".5"}
               </Text>

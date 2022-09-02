@@ -1,8 +1,7 @@
-import { StyleSheet, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, View } from "react-native";
+import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import TrendingCarousel from '../Components/Carousel/TrendingCarousel/TrendingCarousel';
-
+import TrendingCarousel from "../Components/Carousel/TrendingCarousel/TrendingCarousel";
 
 const TopRatedMoviesAPI = () => {
   const { isLoading, error, data } = useQuery(["topRatedMovies"], () =>
@@ -13,12 +12,16 @@ const TopRatedMoviesAPI = () => {
 
   if (error || isLoading) return null;
   return (
-    <View>
+    <View style={styles.container}>
       <TrendingCarousel info={data.results} />
     </View>
-  )
-}
+  );
+};
 
-export default TopRatedMoviesAPI
+export default TopRatedMoviesAPI;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    paddingBottom: 30,
+  },
+});

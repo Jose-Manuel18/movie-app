@@ -1,10 +1,10 @@
 import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 
-const CardImage = ({ movie, onPressFunction }) => {
+const CardImage = ({ movie, onPress }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={onPressFunction}>
+      <TouchableOpacity onPress={onPress}>
         <View style={styles.imageContainer}>
           <Image
             source={{

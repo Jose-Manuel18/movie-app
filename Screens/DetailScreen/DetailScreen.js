@@ -1,19 +1,18 @@
 import { StyleSheet, View, Text, TouchableWithoutFeedback } from "react-native";
-import React, { useCallback, useRef, useMemo, useState } from "react";
+import React, { useCallback, useRef, useMemo } from "react";
 import DetailsCard from "./DetailsCard";
 import { Colors } from "../../Components/Utils/Colors";
 import BottomSheet, { useBottomSheetTimingConfigs } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
 import { Easing } from "react-native-reanimated";
-import { isLiked } from "../../Atom/isLiked";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import IconButton from "../../Components/IconButton";
+import { TouchableOpacity } from "react-native";
+import { opacity } from "react-native-redash";
 
 const DetailScreen = ({ route }) => {
   const navigation = useNavigation();
   const movieDetails = route.params.movieDetails;
   const sheetRef = useRef(null);
-  const snapPoints = useMemo(() => ["30%"], []);
+  const snapPoints = useMemo(() => ["30%", "50%"], []);
   const handleSnapPress = useCallback((index) => {
     sheetRef.current?.snapToIndex(index);
   }, []);
@@ -37,12 +36,21 @@ const DetailScreen = ({ route }) => {
         onChange={handleSnapPress}
         animateOnMount={true}
         index={0}
+        backdropComponent={() => {
+          return (
+            <TouchableOpacity
+              style={{ flex: 1 }}
+              onPress={() => navigation.goBack()}
+            />
+          );
+        }}
+        backgroundComponent={() => (
+          <View style={{ flex: 1, backgroundColor: Colors.DarkPurple }} />
+        )}
         enablePanDownToClose={true}
         animationConfigs={timingConfig}
-        // backdropComponent={CustomBackdrop}
-        onClose={() => {
-          navigation.goBack();
-        }}
+        enableOverDrag={true}
+        onClose={() => navigation.goBack()}
         handleStyle={styles.handleStyle}
         handleIndicatorStyle={styles.handleIndicatorStyle}
       >
@@ -59,7 +67,7 @@ export default DetailScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#transparent",
+    backgroundColor: "transparent",
   },
   contentContainer: {
     flex: 1,
@@ -72,8 +80,5 @@ const styles = StyleSheet.create({
   },
   handleIndicatorStyle: {
     backgroundColor: "white",
-  },
-  backDrop: {
-    backgroundColor: "red",
   },
 });

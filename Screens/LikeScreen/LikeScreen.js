@@ -32,9 +32,6 @@ const LikeScreen = () => {
             );
           }}
         />
-        {/* {likedMovie.map((movie) => {
-          return <Text key={movie.id}>{movie.title || movie.name}</Text>;
-        })} */}
       </View>
     </View>
   );

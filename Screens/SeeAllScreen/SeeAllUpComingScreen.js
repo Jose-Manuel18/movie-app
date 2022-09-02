@@ -4,7 +4,9 @@ import { Colors } from "../../Components/Utils/Colors";
 import { useRecoilValueLoadable } from "recoil";
 import { UpComingState } from "../../State/UpComingMovieState";
 import SeeAllCard from "../../Components/Card/SeeAllCard";
+import { useNavigation } from "@react-navigation/native";
 const SeeAllUpcoming = () => {
+  const { navigate } = useNavigation();
   const { state, contents } = useRecoilValueLoadable(UpComingState);
   if (state === "hasError" || state === "loading") return null;
   return (

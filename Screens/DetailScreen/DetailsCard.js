@@ -7,7 +7,6 @@ import { TouchableOpacity } from "react-native";
 
 const DetailsCard = ({ movie, size, onPress }) => {
   const setIsLiked = useSetRecoilState(isLiked);
-  const buttonLiked = useSetRecoilState(likedState);
   const buttonHandler = useRecoilValue(likedState);
   const [deleteLike, setDeleteLike] = useRecoilState(isLiked);
   const index = deleteLike.findIndex((listItem) => listItem === movie);
@@ -19,9 +18,6 @@ const DetailsCard = ({ movie, size, onPress }) => {
   const removeItemAtIndex = (arr, index) => {
     return [...arr.slice(0, index), ...arr.slice(index + 1)];
   };
-
-  console.log(index);
-  console.log(buttonHandler);
 
   return (
     <View style={styles.container}>
@@ -49,7 +45,7 @@ const DetailsCard = ({ movie, size, onPress }) => {
           style={styles.buttonContainer}
         >
           <IconButton
-            icon={buttonHandler ? "checkmark" : "add-sharp"}
+            icon={index >= 0 ? "heart" : "heart-outline"}
             color="white"
             size={24}
             disabled

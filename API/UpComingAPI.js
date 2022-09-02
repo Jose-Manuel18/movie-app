@@ -3,7 +3,7 @@ import React from "react";
 import { UpComingState } from "../State/UpComingMovieState";
 import { useRecoilValueLoadable } from "recoil";
 import { useNavigation } from "@react-navigation/native";
-import UpComingCard from "../Components/Carousel/Cards/UpComingCard";
+import UpComingCard from "./../Components/Card/UpComingCard";
 import { take } from "lodash";
 const UpComingAPI = () => {
   const { navigate } = useNavigation();
@@ -34,5 +34,7 @@ const UpComingAPI = () => {
 export default UpComingAPI;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    paddingBottom: 20,
+  },
 });
