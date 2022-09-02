@@ -1,9 +1,9 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 
-const SeeAllButton = ({ onPressFunction }) => {
+const SeeAllButton = ({ onPress }) => {
   return (
-    <TouchableOpacity onPress={onPressFunction}>
+    <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
         <Text style={styles.text}>See All</Text>
       </View>

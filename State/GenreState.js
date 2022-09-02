@@ -1,5 +1,3 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
 import { selector } from "recoil";
 
 export const GenreState = selector({
@@ -10,5 +8,3 @@ export const GenreState = selector({
     ).then((res) => res.json());
   },
 });
-//test
-const styles = StyleSheet.create({});

@@ -16,6 +16,7 @@ import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import SeeAllSeriesScreen from "./SeeAllScreen/SeeAllSeriesScreen";
 import SeeAllTrendingScreen from "./SeeAllScreen/SeeAllTrendingScreen";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import SeeAllUpComing from "./SeeAllScreen/SeeAllUpComing";
 const Tab = createMaterialTopTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -121,7 +122,7 @@ const Navigation = () => {
               name="SeeAllSeriesScreen"
               component={SeeAllSeriesScreen}
               options={{
-                headerShown: false,
+                headerShown: true,
                 presentation: "transparentModal",
                 animation: "fade",
               }}
@@ -130,7 +131,16 @@ const Navigation = () => {
               name="SeeAllTrendingScreen"
               component={SeeAllTrendingScreen}
               options={{
-                headerShown: false,
+                headerShown: true,
+                presentation: "transparentModal",
+                animation: "fade",
+              }}
+            />
+            <Stack.Screen
+              name="SeeAllUpComing"
+              component={SeeAllUpComing}
+              options={{
+                headerShown: true,
                 presentation: "transparentModal",
                 animation: "fade",
               }}

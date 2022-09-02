@@ -1,24 +1,24 @@
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import React from "react";
-import { Colors } from "../../Components/Utils/Colors";
-import { TrendingState } from "../../State/TrendingState";
+import { UpComingState } from "../State/UpComingMovieState";
 import { useRecoilValueLoadable } from "recoil";
-import SeeAllCard from "../../Components/Card/SeeAllCard";
 import { useNavigation } from "@react-navigation/native";
-
-const SeeAllTrendingScreen = () => {
+import UpComingCard from "../Components/Carousel/Cards/UpComingCard";
+import { take } from "lodash";
+const UpComingAPI = () => {
   const { navigate } = useNavigation();
-  const { state, contents } = useRecoilValueLoadable(TrendingState);
+  const { state, contents } = useRecoilValueLoadable(UpComingState);
   if (state === "hasError" || state === "loading") return null;
   return (
     <View style={styles.container}>
       <FlatList
-        data={contents.results}
+        data={take(contents.results, 10)}
         keyExtractor={(item) => item.id}
-        numColumns={3}
+        showsHorizontalScrollIndicator={false}
+        horizontal={true}
         renderItem={({ item }) => {
           return (
-            <SeeAllCard
+            <UpComingCard
               movie={item}
               onPress={() => {
                 navigate("DetailScreen", { movieDetails: item });
@@ -31,13 +31,8 @@ const SeeAllTrendingScreen = () => {
   );
 };
 
-export default SeeAllTrendingScreen;
+export default UpComingAPI;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.DarkPurple,
-
-    paddingHorizontal: 18,
-  },
+  container: {},
 });

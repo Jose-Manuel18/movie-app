@@ -1,14 +1,11 @@
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import React from "react";
 import { Colors } from "../../Components/Utils/Colors";
-import { TrendingState } from "../../State/TrendingState";
 import { useRecoilValueLoadable } from "recoil";
+import { UpComingState } from "../../State/UpComingMovieState";
 import SeeAllCard from "../../Components/Card/SeeAllCard";
-import { useNavigation } from "@react-navigation/native";
-
-const SeeAllTrendingScreen = () => {
-  const { navigate } = useNavigation();
-  const { state, contents } = useRecoilValueLoadable(TrendingState);
+const SeeAllUpcoming = () => {
+  const { state, contents } = useRecoilValueLoadable(UpComingState);
   if (state === "hasError" || state === "loading") return null;
   return (
     <View style={styles.container}>
@@ -31,13 +28,13 @@ const SeeAllTrendingScreen = () => {
   );
 };
 
-export default SeeAllTrendingScreen;
+export default SeeAllUpcoming;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.DarkPurple,
-
+    paddingTop: 50,
     paddingHorizontal: 18,
   },
 });

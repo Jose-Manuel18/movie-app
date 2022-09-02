@@ -23,7 +23,7 @@ const TrendingCarousel = ({ info }) => {
         renderItem={({ item }) => {
           return (
             <TrendingCard
-              onPressFunction={() => {
+              onPress={() => {
                 navigate("DetailScreen", {
                   movieDetails: item,
                 });

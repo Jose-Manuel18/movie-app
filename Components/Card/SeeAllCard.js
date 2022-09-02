@@ -1,10 +1,10 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 
-const SeeAllCard = ({ movie, onPressFunction }) => {
+const SeeAllCard = ({ movie, onPress }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.touchableOpacity} onPress={onPressFunction}>
+      <TouchableOpacity style={styles.touchableOpacity} onPress={onPress}>
         <View style={styles.trendingCardImageContainer}>
           <Image
             source={{
@@ -25,21 +25,21 @@ export default SeeAllCard;
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 20,
+    flex: 1,
+    paddingTop: 18,
   },
-  touchableOpacity:{
+  touchableOpacity: {
+    // backgroundColor: "white",
     alignItems: "center",
   },
   trendingCardImageContainer: {
-    paddingHorizontal: 8,
-    justifyContent: "center",
+    // paddingHorizontal: 8,
   },
   trendingCardImage: {
     borderRadius: 16,
-    maxHeight: "100%",
-    maxWidth: "100%",
-    width: 100,
-    height: 100,
+    resizeMode: "stretch",
+    width: 110,
+    height: 155,
   },
   textContainer: {
     maxWidth: 100,

@@ -1,8 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 const ExploreMovieCard = ({ onPress, movie }) => {
-  // movie?.forEach((index) => console.log(index));
-
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onPress}>

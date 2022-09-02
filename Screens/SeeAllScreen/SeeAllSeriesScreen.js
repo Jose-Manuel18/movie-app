@@ -19,7 +19,7 @@ const SeeAllSeriesScreen = () => {
           return (
             <SeeAllCard
               movie={item}
-              onPressFunction={() => {
+              onPress={() => {
                 navigate("DetailScreen", { movieDetails: item });
               }}
             />
@@ -37,6 +37,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.DarkPurple,
     paddingTop: 50,
-    paddingHorizontal: 20,
+    paddingHorizontal: 18,
   },
 });

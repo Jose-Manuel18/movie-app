@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 
-const TrendingCard = ({ movie, onPress }) => {
+const UpComingCard = ({ movie, onPress }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onPress}>
@@ -23,7 +23,7 @@ const TrendingCard = ({ movie, onPress }) => {
   );
 };
 
-export default TrendingCard;
+export default UpComingCard;
 
 const styles = StyleSheet.create({
   container: {

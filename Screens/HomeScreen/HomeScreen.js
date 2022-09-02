@@ -8,6 +8,7 @@ import TopRatedMoviesAPI from "../../API/TrendingMoviesAPI";
 import SeriesAPI from "../../API/SeriesAPI";
 import SearchButton from "../../Components/SearchBarButton/SearchButton";
 import { useNavigation } from "@react-navigation/native";
+import UpComingAPI from "../../API/UpComingAPI";
 
 const HomeScreen = () => {
   const { navigate } = useNavigation();
@@ -29,12 +30,21 @@ const HomeScreen = () => {
         <View style={styles.headerContainer}>
           <ReusableText modo="bigText">Series</ReusableText>
           <SeeAllButton
-            onPressFunction={() => {
+            onPress={() => {
               navigate("SeeAllSeriesScreen");
             }}
           />
         </View>
         <SeriesAPI />
+        <View style={styles.headerContainer}>
+          <ReusableText modo="bigText">Up Coming</ReusableText>
+          <SeeAllButton
+            onPress={() => {
+              navigate("SeeAllUpComing");
+            }}
+          />
+        </View>
+        <UpComingAPI />
       </ScrollView>
     </View>
   );

@@ -11,7 +11,7 @@ const SeriesCarousel = ({ info }) => {
   const ITEM_WIDTH = SLIDE_WIDTH + ITEM_HORIZONTAL_MARGIN * 2;
   const SLIDER_WIDTH = viewportWidth;
   let RandomNumber = Math.floor(Math.random() * 9) + 1;
-  const navigation = useNavigation();
+  const { navigate } = useNavigation();
   return (
     <View>
       <FlatList
@@ -22,8 +22,8 @@ const SeriesCarousel = ({ info }) => {
         renderItem={({ item }) => {
           return (
             <SeriesCard
-              onPressFunction={() => {
-                navigation.navigate("DetailScreen", {
+              onPress={() => {
+                navigate("DetailScreen", {
                   movieDetails: item,
                 });
               }}

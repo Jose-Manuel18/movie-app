@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 import React from "react";
 
-const SeriesCard = ({ onPressFunction, movie }) => {
+const SeriesCard = ({ onPress, movie }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={onPressFunction}>
+      <TouchableOpacity onPress={onPress}>
         <View style={styles.trendingCardImageContainer}>
           <Image
             source={{
@@ -14,7 +14,7 @@ const SeriesCard = ({ onPressFunction, movie }) => {
           />
         </View>
         <View style={styles.textContainer}>
-          <Text style={styles.text}>{movie.name}</Text>
+          <Text style={styles.text}>{movie.name || movie.title}</Text>
         </View>
       </TouchableOpacity>
     </View>
