@@ -2,12 +2,10 @@ import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 import React, { useState } from "react";
 import { useRecoilState, useRecoilValueLoadable } from "recoil";
 import { NowPlayingState } from "../../State/NowPlayingState";
-const ExploreMovieCard = ({ onPress, movie, index }) => {
+const ExploreMovieCard = ({ onPress, movie, indexContent, indexCurrent }) => {
   const { state, contents } = useRecoilValueLoadable(NowPlayingState);
-
   if (state === "hasError" || state === "loading") return null;
-
-  console.log(index);
+  console.log(indexContent);
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onPress}>
@@ -16,7 +14,10 @@ const ExploreMovieCard = ({ onPress, movie, index }) => {
             source={{
               uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
             }}
-            style={[index ? styles.bigImage : styles.trendingCardImage]}
+            style={[
+              indexCurrent ? styles.bigImage : styles.smallImage,
+              styles.sharedStyle,
+            ]}
           />
         </View>
       </TouchableOpacity>
@@ -27,17 +28,24 @@ const ExploreMovieCard = ({ onPress, movie, index }) => {
 export default ExploreMovieCard;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+    paddingTop: 12,
+    paddingHorizontal: 13,
+    backgroundColor: "white",
+  },
   trendingCardImageContainer: {},
   bigImage: {
-    width: 200,
-    height: 200,
+    resizeMode: "stretch",
+    width: 240,
+    height: 370,
+    borderRadius: 16,
   },
-  trendingCardImage: {
-    borderTopLeftRadius: 16,
-    borderBottomLeftRadius: 16,
+  smallImage: {
+    borderRadius: 16,
     resizeMode: "stretch",
     width: 80,
     height: 110,
   },
+  sharedStyle: {},
 });

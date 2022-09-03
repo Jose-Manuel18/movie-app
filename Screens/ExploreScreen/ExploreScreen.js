@@ -10,21 +10,25 @@ import { useNavigation } from "@react-navigation/native";
 import { NowPlayingState } from "../../State/NowPlayingState";
 import { take } from "lodash";
 import { isLiked } from "../../Atom/isLiked";
+import { log } from "react-native-reanimated";
 
 const ExploreScreen = () => {
   const { navigate } = useNavigation();
   const [selected, setSelected] = useState(null);
   const { state, contents } = useRecoilValueLoadable(NowPlayingState);
-  const [explore, setExplore] = useState([]);
   const { state: genreState, contents: genreContents } =
     useRecoilValueLoadable(GenreState);
+
   const currentMovie = contents?.results?.filter((movies) =>
     movies?.genre_ids.includes(selected)
   );
-
+  const contentsCopy = [...contents?.results];
+  const currentMovieCopy = [...currentMovie];
+  const index = contentsCopy.shift();
+  const indexCurrent = currentMovieCopy.shift();
+  console.log(indexCurrent);
   if (state === "hasError" || state === "loading") return null;
   if (genreState === "hasError" || genreState === "loading") return null;
-  const index = contents.results[0] && currentMovie[0];
   return (
     <View style={styles.container}>
       <SearchButton />
@@ -38,6 +42,8 @@ const ExploreScreen = () => {
             return (
               <FilterTextCard
                 genre={item}
+                indexContent={index}
+                indexCurrent={indexCurrent}
                 isSelected={selected === item.id}
                 onPress={() =>
                   item.id === selected
@@ -51,7 +57,7 @@ const ExploreScreen = () => {
         <FlatList
           data={
             currentMovie.length === 0
-              ? take(contents.results, 3)
+              ? take(contents?.results, 3)
               : take(currentMovie, 3)
           }
           keyExtractor={(item) => item.id}
@@ -59,7 +65,6 @@ const ExploreScreen = () => {
             return (
               <ExploreMovieCard
                 movie={item}
-                index={contents.results[0] && currentMovie[0]}
                 onPress={() => {
                   navigate("DetailScreen", {
                     movieDetails: item,
@@ -83,7 +88,7 @@ const styles = StyleSheet.create({
     paddingTop: 60,
   },
   filterContainer: {
-    paddingHorizontal: 14,
+    paddingHorizontal: 8,
   },
   movieText: {
     color: "white",

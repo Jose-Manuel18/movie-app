@@ -1,5 +1,5 @@
 import "./assets/Windows Batch/ignoreWarnign";
-import { SafeAreaView, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import Navigation from "./Screens/Navigation";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RecoilRoot } from "recoil";
