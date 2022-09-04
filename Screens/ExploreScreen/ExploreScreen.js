@@ -1,4 +1,11 @@
-import { StyleSheet, View, Text, FlatList } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  FlatList,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import React, { useState } from "react";
 import { Colors } from "../../Components/Utils/Colors";
 import SearchButton from "../../Components/SearchBarButton/SearchButton";
@@ -9,8 +16,6 @@ import ExploreMovieCard from "../../Components/Card/ExploreMovieCard";
 import { useNavigation } from "@react-navigation/native";
 import { NowPlayingState } from "../../State/NowPlayingState";
 import { take } from "lodash";
-import { isLiked } from "../../Atom/isLiked";
-import { log } from "react-native-reanimated";
 
 const ExploreScreen = () => {
   const { navigate } = useNavigation();
@@ -22,11 +27,10 @@ const ExploreScreen = () => {
   const currentMovie = contents?.results?.filter((movies) =>
     movies?.genre_ids.includes(selected)
   );
-  const contentsCopy = [...contents?.results];
-  const currentMovieCopy = [...currentMovie];
-  const index = contentsCopy.shift();
-  const indexCurrent = currentMovieCopy.shift();
-  console.log(indexCurrent);
+  // const index = contents?.results?.indexOf((movies) => movies === currentMovie);
+  const index = contents?.results[0];
+  const indexCurrent = currentMovie[0];
+  console.log(index.id === contents.results[0].id);
   if (state === "hasError" || state === "loading") return null;
   if (genreState === "hasError" || genreState === "loading") return null;
   return (
@@ -42,8 +46,6 @@ const ExploreScreen = () => {
             return (
               <FilterTextCard
                 genre={item}
-                indexContent={index}
-                indexCurrent={indexCurrent}
                 isSelected={selected === item.id}
                 onPress={() =>
                   item.id === selected
@@ -54,26 +56,38 @@ const ExploreScreen = () => {
             );
           }}
         />
-        <FlatList
-          data={
-            currentMovie.length === 0
-              ? take(contents?.results, 3)
-              : take(currentMovie, 3)
-          }
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => {
-            return (
-              <ExploreMovieCard
-                movie={item}
-                onPress={() => {
-                  navigate("DetailScreen", {
-                    movieDetails: item,
-                  });
-                }}
-              />
-            );
-          }}
-        />
+        <View style={styles.imageContainer}>
+          <Image
+            style={styles.bigImage}
+            source={{
+              uri:
+                currentMovie.length === 0
+                  ? `https://image.tmdb.org/t/p/w500${contents.results[0].poster_path}`
+                  : `https://image.tmdb.org/t/p/w500${currentMovie[0].poster_path}`,
+            }}
+          />
+          <View style={styles.smallerImageContainer}>
+            <Image
+              style={styles.smallerImage}
+              source={{
+                uri:
+                  currentMovie.length === 0
+                    ? `https://image.tmdb.org/t/p/w500${contents.results[1].poster_path}`
+                    : `https://image.tmdb.org/t/p/w500${currentMovie[1].poster_path}`,
+              }}
+            />
+            <View style={{ height: 8 }} />
+            <Image
+              style={styles.smallerImage}
+              source={{
+                uri:
+                  currentMovie.length === 0
+                    ? `https://image.tmdb.org/t/p/w500${contents.results[2].poster_path}`
+                    : `https://image.tmdb.org/t/p/w500${currentMovie[2].poster_path}`,
+              }}
+            />
+          </View>
+        </View>
       </View>
     </View>
   );
@@ -92,5 +106,30 @@ const styles = StyleSheet.create({
   },
   movieText: {
     color: "white",
+  },
+
+  imageContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 18,
+    paddingTop: 14,
+  },
+  bigImage: {
+    resizeMode: "stretch",
+    width: 210,
+    height: 350,
+    borderRadius: 16,
+  },
+  smallerImageContainer: {
+    flex: 1,
+    flexDirection: "column",
+    paddingLeft: 12,
+  },
+  smallerImage: {
+    resizeMode: "stretch",
+    width: 120,
+    height: 170,
+    borderRadius: 12,
   },
 });

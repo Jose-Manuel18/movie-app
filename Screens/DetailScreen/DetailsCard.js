@@ -46,7 +46,7 @@ const DetailsCard = ({ movie, size, onPress }) => {
         >
           <IconButton
             icon={index >= 0 ? "heart" : "heart-outline"}
-            color="white"
+            color="red"
             size={24}
             disabled
           />

@@ -18,6 +18,7 @@ const ForYouCard = ({ movie }) => {
   console.log(trendingContents);
   return (
     <View style={styles.container}>
+      <Text style={{ fontSize: 30, color: Colors.TextColor }}>For You</Text>
       <Image
         source={{
           uri: `https://image.tmdb.org/t/p/w500${results.poster_path}`,

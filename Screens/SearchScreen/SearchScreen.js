@@ -5,13 +5,12 @@ import SearchBar from "../../Components/SearchBar";
 import SearchCard from "../../Components/Card/SearchCard";
 import { useNavigation } from "@react-navigation/native";
 import SearchAPI from "../../API/SearchAPI";
-import BottomSheetTest from "../BottomSheetTest";
 import GenreAPI from "../../API/GenreAPI";
 
 const SearchScreen = () => {
   return (
     <View style={styles.container}>
-      <SearchAPI/>
+      <SearchAPI />
     </View>
   );
 };

@@ -2,24 +2,63 @@ import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 import React, { useState } from "react";
 import { useRecoilState, useRecoilValueLoadable } from "recoil";
 import { NowPlayingState } from "../../State/NowPlayingState";
-const ExploreMovieCard = ({ onPress, movie, indexContent, indexCurrent }) => {
+import { Col, Row, Grid } from "react-native-easy-grid";
+const ExploreMovieCard = ({ onPress, movie }) => {
   const { state, contents } = useRecoilValueLoadable(NowPlayingState);
   if (state === "hasError" || state === "loading") return null;
-  console.log(indexContent);
+
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onPress}>
-        <View style={styles.trendingCardImageContainer}>
-          <Image
-            source={{
-              uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
-            }}
-            style={[
-              indexCurrent ? styles.bigImage : styles.smallImage,
-              styles.sharedStyle,
-            ]}
-          />
-        </View>
+        <Grid>
+          <Col>
+            <View style={styles.trendingCardImageContainer}>
+              <Image
+                source={{
+                  uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+                }}
+                style={[
+                  // indexCurrent ?
+                  styles.bigImage,
+                  //  : styles.smallImage,
+                  // styles.sharedStyle,
+                ]}
+              />
+            </View>
+          </Col>
+          <Col>
+            <Row>
+              <View style={styles.trendingCardImageContainer}>
+                <Image
+                  source={{
+                    uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+                  }}
+                  style={[
+                    // indexCurrent ?
+                    styles.bigImage,
+                    //  : styles.smallImage,
+                    // styles.sharedStyle,
+                  ]}
+                />
+              </View>
+            </Row>
+            <Row>
+              <View style={styles.trendingCardImageContainer}>
+                <Image
+                  source={{
+                    uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+                  }}
+                  style={[
+                    // indexCurrent ?
+                    styles.bigImage,
+                    //  : styles.smallImage,
+                    // styles.sharedStyle,
+                  ]}
+                />
+              </View>
+            </Row>
+          </Col>
+        </Grid>
       </TouchableOpacity>
     </View>
   );
@@ -32,13 +71,12 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 12,
     paddingHorizontal: 13,
-    backgroundColor: "white",
   },
   trendingCardImageContainer: {},
   bigImage: {
     resizeMode: "stretch",
-    width: 240,
-    height: 370,
+    width: 200,
+    height: 300,
     borderRadius: 16,
   },
   smallImage: {
