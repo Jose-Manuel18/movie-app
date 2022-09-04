@@ -15,11 +15,12 @@ import { useNavigation } from "@react-navigation/native";
 const LikeScreen = () => {
   const likedMovie = useRecoilValue(isLiked);
   const { navigate } = useNavigation();
+  const sortedMovie = [...likedMovie].sort((a, b) => a < b);
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
         <FlatList
-          data={likedMovie}
+          data={sortedMovie}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => {
             return (
