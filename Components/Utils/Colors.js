@@ -4,5 +4,6 @@ export const Colors = {
   Grey: "#999999",
   Rose: "#F958B6",
   TabBarColor: "#313153",
-  TextColor:"#ffffff",
+  TextColor: "#ffffff",
+  StarColor: "#E7B842",
 };
