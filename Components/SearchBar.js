@@ -13,30 +13,33 @@ import { Colors } from "./Utils/Colors";
 
 const SearchBar = ({ value, onChangeText, deleteText, inputRef }) => {
   const { navigate } = useNavigation();
-  const closeButton = () => {
-    inputRef.current.focus();
+  function closeButton() {
     inputRef.current.clear();
-  };
+    inputRef.current.focus();
+  }
 
   return (
     <View style={styles.container}>
       <View style={styles.searchBarOuterContainer}>
         <View style={styles.searchBarContainer}>
           <TextInput
-            value={value}
-            onChangeText={onChangeText}
             style={styles.textInput}
             placeholder="Search"
             placeholderTextColor="#ffffff"
+            value={value}
+            onChangeText={onChangeText}
+            clearTextOnFocus={true}
             autoFocus={true}
             ref={inputRef}
           />
           <View style={styles.searchIconContainer}>
-            <TouchableOpacity onPress={() => inputRef.current.clearText()}>
+            <TouchableOpacity
+            // onPress={() => inputRef.current.clear()}
+            >
               <IconButton
                 icon="close-sharp"
                 color="#ffffff"
-                size={18}
+                size={24}
                 onPress={closeButton}
               />
             </TouchableOpacity>

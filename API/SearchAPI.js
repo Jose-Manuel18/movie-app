@@ -15,7 +15,7 @@ const SearchAPI = () => {
   const [search, setSearch] = useState("");
   const [newData, setNewData] = useState([]);
   const [filteredDataSource, setFilteredDataSource] = useState([]);
-  const inputRef = useRef();
+  const inputRef = useRef(null);
 
   useEffect(() => {
     const timeOut = setTimeout(

@@ -8,3 +8,8 @@ export const likedState = atom({
   key: "likedState",
   default: false,
 });
+
+export const keyboardRef = atom({
+  key: "keyboardRef",
+  default: null,
+});
