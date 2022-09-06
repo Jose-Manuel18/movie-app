@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     paddingHorizontal: 14,
     backgroundColor: "white",
-    paddingVertical: 15,
+    paddingVertical: 16,
     shadowColor: "#000000",
     shadowOffset: {
       width: 0,

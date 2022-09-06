@@ -16,12 +16,12 @@ const ForYou = () => {
   if (genreState === "hasError " || genreState === "loading") return null;
   if (state === "hasError " || state === "loading") return null;
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.text}>For You</Text>
       <FlatList
         data={take(contents.results, 10)}
         keyExtractor={(item) => item.id}
-        scrollEnabled={false}
+        showsVerticalScrollIndicator={false}
         renderItem={({ item }) => {
           return (
             <ForYouCard
@@ -40,9 +40,14 @@ const ForYou = () => {
 export default ForYou;
 
 const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 20,
+  },
   text: {
+    paddingTop: 24,
+    paddingBottom: 8,
     color: Colors.TextColor,
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
   },
 });

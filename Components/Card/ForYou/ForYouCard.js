@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import React from "react";
 import { Colors } from "../../Utils/Colors";
 import ReusableText from "../../ReusableText";
@@ -20,16 +27,14 @@ const ForYouCard = ({ movie, onPress }) => {
   );
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={onPress}>
-        <View style={styles.innerContainer}>
-          <View style={styles.trendingCardImageContainer}>
-            <Image
-              source={{
-                uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
-              }}
-              style={styles.trendingCardImage}
-            />
-          </View>
+      <ScrollView>
+        <TouchableOpacity style={styles.innerContainer} onPress={onPress}>
+          <Image
+            source={{
+              uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+            }}
+            style={styles.trendingCardImage}
+          />
           <View style={{ width: 30 }}></View>
           <View style={styles.contentContainer}>
             <Text style={styles.text}>{movie.title || movie.name}</Text>
@@ -37,22 +42,22 @@ const ForYouCard = ({ movie, onPress }) => {
               {(currentGenre || []).map((genre) => genre.name).join(", ")}.
             </Text>
             <View style={styles.ratingContainer}>
+              <Rating
+                rated={movie.vote_average / 2}
+                totalCount={5}
+                ratingColor={Colors.StarColor}
+                size={14}
+                readonly
+                icon="ios-star"
+                direction="row"
+              />
               <Text style={styles.genreText}>
-                <Rating
-                  rated={movie.vote_average / 2}
-                  totalCount={5}
-                  ratingColor={Colors.StarColor}
-                  size={14}
-                  readonly
-                  icon="ios-star"
-                  direction="row"
-                />
                 {movie.vote_average / 2 + "/5"}
               </Text>
             </View>
           </View>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 };
@@ -61,6 +66,14 @@ export default ForYouCard;
 
 const styles = StyleSheet.create({
   container: {
+    justifyContent: "space-between",
+    paddingTop: 10,
+    paddingBottom: 8,
+  },
+  innerContainer: {
+    flexDirection: "row",
+    backgroundColor: Colors.LightPurple,
+    borderRadius: 16,
     shadowColor: "#000000",
     shadowOffset: {
       width: 0,
@@ -69,16 +82,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.17,
     shadowRadius: 3.05,
     elevation: 4,
-    justifyContent: "space-between",
-    backgroundColor: Colors.LightPurple,
-    marginVertical: 10,
-    marginHorizontal: 20,
-    borderRadius: 16,
   },
-  innerContainer: {
-    flexDirection: "row",
-  },
-  trendingCardImageContainer: {},
   trendingCardImage: {
     borderTopLeftRadius: 16,
     borderBottomLeftRadius: 16,
@@ -108,7 +112,6 @@ const styles = StyleSheet.create({
   },
   ratingContainer: {
     flexDirection: "row",
-    paddingLeft: 0,
   },
   rating: {
     paddingRight: 10,

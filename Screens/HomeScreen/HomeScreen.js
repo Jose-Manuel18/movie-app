@@ -15,13 +15,13 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
+      <SearchButton />
       <ScrollView>
-        <SearchButton />
         <MoviesAPI />
         <View style={styles.headerContainer}>
           <ReusableText modo="bigText">Trending</ReusableText>
           <SeeAllButton
-            onPressFunction={() => {
+            onPress={() => {
               navigate("SeeAllTrendingScreen");
             }}
           />
