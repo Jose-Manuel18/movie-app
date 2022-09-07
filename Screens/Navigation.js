@@ -27,6 +27,7 @@ const Navigation = () => {
       <Tab.Navigator
         tabBarPosition="bottom"
         screenOptions={{
+          tabBarPressColor: "transparent",
           tabBarContentContainerStyle: {
             backgroundColor: Colors.LightPurple,
             borderRadius: 17,

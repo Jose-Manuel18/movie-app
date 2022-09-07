@@ -8,9 +8,10 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { Colors } from "../Utils/Colors";
-
 import { useRecoilValueLoadable } from "recoil";
 import { GenreState } from "../../State/GenreState";
+import { Rating } from "react-native-rating-element";
+import { functions } from "lodash";
 
 const SearchCard = ({ movie, onPress }) => {
   const { state, contents } = useRecoilValueLoadable(GenreState);
@@ -39,7 +40,18 @@ const SearchCard = ({ movie, onPress }) => {
             </Text>
             <View style={styles.ratingContainer}>
               <Text style={styles.genreText}>
-                {movie.vote_average / 2 + ".5"}
+                <Rating
+                  rated={movie.vote_average / 2}
+                  totalCount={5}
+                  ratingColor={Colors.StarColor}
+                  size={14}
+                  readonly
+                  icon="ios-star"
+                  direction="row"
+                />
+                <Text style={styles.genreText}>
+                  {movie.vote_average + "/10"}
+                </Text>
               </Text>
             </View>
           </View>

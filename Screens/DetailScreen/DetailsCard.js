@@ -4,6 +4,7 @@ import IconButton from "../../Components/IconButton";
 import { isLiked, likedState } from "../../Atom/isLiked";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { TouchableOpacity } from "react-native";
+import { Colors } from "../../Components/Utils/Colors";
 
 const DetailsCard = ({ movie, size, onPress }) => {
   const setIsLiked = useSetRecoilState(isLiked);
@@ -46,7 +47,7 @@ const DetailsCard = ({ movie, size, onPress }) => {
         >
           <IconButton
             icon={index >= 0 ? "heart" : "heart-outline"}
-            color="red"
+            color={Colors.LightPurple}
             size={24}
             disabled
           />
@@ -71,10 +72,9 @@ const styles = StyleSheet.create({
   },
   imageContainer: { flex: 1 },
   cardImage: {
-    flex: 1,
-    resizeMode: "contain",
-    width: 150,
-    height: 175,
+    resizeMode: "stretch",
+    width: 140,
+    height: 200,
     borderRadius: 16,
   },
   textContainer: {

@@ -48,6 +48,7 @@ const CarouselImages = ({ info }) => {
         sliderWidth={SLIDER_WIDTH}
         itemWidth={ITEM_WIDTH}
         activeSlideAlignment={"center"}
+        scrollEndDragDebounceValue={2}
         contentContainerCustomStyle={{
           overflow: "hidden",
           width: 60 * info.length,
