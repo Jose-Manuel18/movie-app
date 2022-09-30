@@ -7,7 +7,7 @@ import { take } from "lodash";
 const TrendingCarousel = ({ info }) => {
   const { navigate } = useNavigation();
   return (
-    <View>
+    <View onTouchMove={(e) => e.stopPropagation()}>
       <FlatList
         data={take(info, 10)}
         keyExtractor={(item) => item.id}

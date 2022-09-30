@@ -19,7 +19,11 @@ const CarouselImages = ({ info }) => {
   let RandomNumber = Math.floor(Math.random() * 4) + 1;
   const isCarousel = useRef();
   return (
-    <View>
+    <View
+      onTouchMove={(e) => {
+        e.stopPropagation();
+      }}
+    >
       {/* <FlatList
         data={take(info, 10)}
         keyExtractor={(item) => item.id}
