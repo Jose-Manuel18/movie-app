@@ -1,14 +1,14 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
-import React from "react";
-import { Colors } from "../../Components/Utils/Colors";
-import { useRecoilValueLoadable } from "recoil";
-import { SeriesState } from "../../State/SeriesState";
-import SeeAllCard from "../../Components/Card/SeeAllCard";
-import { useNavigation } from "@react-navigation/native";
+import { FlatList, StyleSheet, Text, View } from 'react-native'
+import React from 'react'
+import { Colors } from '../../Components/Utils/Colors'
+import { useRecoilValueLoadable } from 'recoil'
+import { SeriesState } from '../../State/SeriesState'
+import SeeAllCard from '../../Components/Card/SeeAllCard'
+import { useNavigation } from '@react-navigation/native'
 const SeeAllSeriesScreen = () => {
-  const { navigate } = useNavigation();
-  const { state, contents } = useRecoilValueLoadable(SeriesState);
-  if (state === "hasError" || state === "loading") return null;
+  const { navigate } = useNavigation()
+  const { state, contents } = useRecoilValueLoadable(SeriesState)
+  if (state === 'hasError' || state === 'loading') return null
   return (
     <View style={styles.container}>
       <FlatList
@@ -20,17 +20,17 @@ const SeeAllSeriesScreen = () => {
             <SeeAllCard
               movie={item}
               onPress={() => {
-                navigate("DetailScreen", { movieDetails: item });
+                navigate('DetailScreen', { movieDetails: item })
               }}
             />
-          );
+          )
         }}
       />
     </View>
-  );
-};
+  )
+}
 
-export default SeeAllSeriesScreen;
+export default SeeAllSeriesScreen
 
 const styles = StyleSheet.create({
   container: {
@@ -39,4 +39,4 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     paddingHorizontal: 18,
   },
-});
+})

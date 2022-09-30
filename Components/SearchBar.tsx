@@ -5,42 +5,55 @@ import {
   TextInput,
   TouchableOpacity,
   Pressable,
-} from "react-native";
-import React from "react";
-import IconButton from "./IconButton";
-import { useNavigation } from "@react-navigation/native";
-import { Colors } from "./Utils/Colors";
+} from 'react-native'
+import React, { RefObject, useEffect } from 'react'
+import IconButton from './IconButton'
+import { useNavigation } from '@react-navigation/native'
+import { Colors } from './Utils/Colors'
 
-const SearchBar = ({ value, onChangeText, deleteText, inputRef }) => {
-  const { navigate } = useNavigation();
-  function closeButton() {
-    inputRef.current.clear();
-    inputRef.current.focus();
-  }
-
+const SearchBar = ({
+  value,
+  onChangeText,
+  inputRef,
+}: {
+  value: string
+  onChangeText: (text: string) => void
+  inputRef: RefObject<any>
+}) => {
+  const { navigate } = useNavigation()
+  // function closeButton() {
+  //   inputRef.current.clear()
+  //   inputRef.current.focus()
+  // }
+  // useEffect(() => {
+  //   if (inputRef.current) {
+  //     inputRef.current.focus()
+  //   }
+  // }, [])
   return (
     <View style={styles.container}>
       <View style={styles.searchBarOuterContainer}>
         <View style={styles.searchBarContainer}>
           <TextInput
             style={styles.textInput}
-            placeholder="Search"
-            placeholderTextColor="#ffffff"
+            placeholder='Search'
+            placeholderTextColor='#ffffff'
             value={value}
             onChangeText={onChangeText}
-            clearTextOnFocus={true}
             autoFocus={true}
-            ref={inputRef}
+            // clearTextOnFocus={true}
+            // ref={inputRef}
           />
           <View style={styles.searchIconContainer}>
             <TouchableOpacity
             // onPress={() => inputRef.current.clear()}
             >
               <IconButton
-                icon="close-sharp"
-                color="#ffffff"
+                icon='close-sharp'
+                color='#ffffff'
                 size={24}
-                onPress={closeButton}
+                onPress={() => {}}
+                disabled={undefined}
               />
             </TouchableOpacity>
           </View>
@@ -48,15 +61,21 @@ const SearchBar = ({ value, onChangeText, deleteText, inputRef }) => {
         <View style={styles.spacing}></View>
         <TouchableOpacity>
           <View style={styles.filterContainer}>
-            <IconButton icon="filter-sharp" color="#ffffff" size={24} />
+            <IconButton
+              icon='filter-sharp'
+              color='#ffffff'
+              size={24}
+              onPress={undefined}
+              disabled={undefined}
+            />
           </View>
         </TouchableOpacity>
       </View>
     </View>
-  );
-};
+  )
+}
 
-export default SearchBar;
+export default SearchBar
 
 const styles = StyleSheet.create({
   container: {
@@ -64,13 +83,12 @@ const styles = StyleSheet.create({
     paddingBottom: 25,
   },
   searchBarOuterContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   searchBarContainer: {
     flex: 1,
     paddingHorizontal: 14.5,
-    backgroundColor: "white",
-    shadowColor: "#000000",
+    shadowColor: '#000000',
     shadowOffset: {
       width: 0,
       height: 3,
@@ -81,8 +99,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.LightPurple,
     borderRadius: 18,
     color: Colors.TextColor,
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   textInput: {
     flex: 1,
@@ -90,8 +108,8 @@ const styles = StyleSheet.create({
   },
 
   searchIconContainer: {
-    justifyContent: "center",
-    alignContent: "center",
+    justifyContent: 'center',
+    alignContent: 'center',
   },
   spacing: {
     width: 15,
@@ -99,10 +117,10 @@ const styles = StyleSheet.create({
   filterContainer: {
     padding: 12,
     paddingLeft: 11,
-    justifyContent: "center",
-    alignItems: "center",
-    alignContent: "center",
-    shadowColor: "#000000",
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignContent: 'center',
+    shadowColor: '#000000',
     shadowOffset: {
       width: 0,
       height: 3,
@@ -114,4 +132,4 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.LightPurple,
     borderRadius: 14,
   },
-});
+})

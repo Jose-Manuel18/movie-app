@@ -1,8 +1,8 @@
-import { StyleSheet, View, FlatList } from "react-native";
-import React, { useState, useEffect, useRef } from "react";
-import SearchBar from "../Components/SearchBar";
-import SearchCard from "../Components/Card/SearchCard";
-import { useNavigation } from "@react-navigation/native";
+import { StyleSheet, View, FlatList } from 'react-native'
+import React, { useState, useEffect, useRef } from 'react'
+import SearchBar from '../Components/SearchBar'
+import SearchCard from '../Components/Card/SearchCard'
+import { useNavigation } from '@react-navigation/native'
 
 const SearchAPI = () => {
   // const { isLoading, error, data } = useQuery(["multiSearch"], () =>
@@ -11,11 +11,11 @@ const SearchAPI = () => {
   // ).then((res) => res.json())
 
   // if (error || isLoading) return null;
-  const { navigate } = useNavigation();
-  const [search, setSearch] = useState("");
-  const [newData, setNewData] = useState([]);
-  const [filteredDataSource, setFilteredDataSource] = useState([]);
-  const inputRef = useRef(null);
+  const { navigate } = useNavigation()
+  const [search, setSearch] = useState('')
+  const [newData, setNewData] = useState([])
+  const [filteredDataSource, setFilteredDataSource] = useState([])
+  const inputRef = useRef(null)
 
   useEffect(() => {
     const timeOut = setTimeout(
@@ -25,34 +25,34 @@ const SearchAPI = () => {
         )
           .then((response) => response.json())
           .then((responseJson) => {
-            setFilteredDataSource(responseJson);
-            setNewData(responseJson);
+            setFilteredDataSource(responseJson)
+            setNewData(responseJson)
           })
           .catch((error) => {
-            console.error(error);
+            console.error(error)
           }),
       500
-    );
+    )
     return () => {
-      clearTimeout(timeOut);
-    };
-  }, [search]);
+      clearTimeout(timeOut)
+    }
+  }, [search])
 
   const searchFilterFunction = (text) => {
     if (text) {
-      setSearch(text);
+      setSearch(text)
     } else {
-      setFilteredDataSource(newData);
-      setSearch(text);
+      setFilteredDataSource(newData)
+      setSearch(text)
     }
-  };
+  }
 
   return (
     <View style={styles.container}>
       <SearchBar
         value={search}
         onChangeText={(text) => searchFilterFunction(text)}
-        deleteText={() => setSearch("")}
+        deleteText={() => setSearch('')}
         inputRef={inputRef}
       />
       <FlatList
@@ -64,20 +64,20 @@ const SearchAPI = () => {
               <SearchCard
                 movie={item}
                 onPress={() => {
-                  navigate("DetailScreen", {
+                  navigate('DetailScreen', {
                     movieDetails: item,
-                  });
+                  })
                 }}
               />
-            );
+            )
           } else {
           }
         }}
       />
     </View>
-  );
-};
+  )
+}
 
-export default SearchAPI;
+export default SearchAPI
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({})

@@ -1,5 +1,5 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React from 'react'
 
 const SeeAllCard = ({ movie, onPress }) => {
   return (
@@ -18,36 +18,36 @@ const SeeAllCard = ({ movie, onPress }) => {
         </View>
       </TouchableOpacity>
     </View>
-  );
-};
+  )
+}
 
-export default SeeAllCard;
+export default SeeAllCard
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 18,
+    paddingTop: 22,
   },
   touchableOpacity: {
     // backgroundColor: "white",
-    alignItems: "center",
+    alignItems: 'center',
   },
   trendingCardImageContainer: {
     // paddingHorizontal: 8,
   },
   trendingCardImage: {
     borderRadius: 16,
-    resizeMode: "stretch",
+    resizeMode: 'stretch',
     width: 110,
     height: 155,
   },
   textContainer: {
     maxWidth: 100,
-    flexDirection: "column",
+    flexDirection: 'column',
   },
   text: {
-    textAlign: "center",
+    textAlign: 'center',
     paddingTop: 8,
-    color: "white",
+    color: 'white',
   },
-});
+})

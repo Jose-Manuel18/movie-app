@@ -1,24 +1,24 @@
-import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
-import React, { useState } from "react";
-import IconButton from "../../Components/IconButton";
-import { isLiked, likedState } from "../../Atom/isLiked";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { TouchableOpacity } from "react-native";
-import { Colors } from "../../Components/Utils/Colors";
+import { StyleSheet, Text, View, Image, Dimensions } from 'react-native'
+import React, { useState } from 'react'
+import IconButton from '../../Components/IconButton'
+import { isLiked, likedState } from '../../Atom/isLiked'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { TouchableOpacity } from 'react-native'
+import { Colors } from '../../Components/Utils/Colors'
 
 const DetailsCard = ({ movie, size, onPress }) => {
-  const setIsLiked = useSetRecoilState(isLiked);
-  const buttonHandler = useRecoilValue(likedState);
-  const [deleteLike, setDeleteLike] = useRecoilState(isLiked);
-  const index = deleteLike.findIndex((listItem) => listItem === movie);
+  const setIsLiked = useSetRecoilState(isLiked)
+  const buttonHandler = useRecoilValue(likedState)
+  const [deleteLike, setDeleteLike] = useRecoilState(isLiked)
+  const index = deleteLike.findIndex((listItem) => listItem === movie)
 
   const deleteItem = () => {
-    const newList = removeItemAtIndex(deleteLike, index);
-    setDeleteLike(newList);
-  };
+    const newList = removeItemAtIndex(deleteLike, index)
+    setDeleteLike(newList)
+  }
   const removeItemAtIndex = (arr, index) => {
-    return [...arr.slice(0, index), ...arr.slice(index + 1)];
-  };
+    return [...arr.slice(0, index), ...arr.slice(index + 1)]
+  }
 
   return (
     <View style={styles.container}>
@@ -35,30 +35,29 @@ const DetailsCard = ({ movie, size, onPress }) => {
         <View style={styles.textContainer}>
           <Text style={styles.titleText}>{movie.title || movie.name}</Text>
           <Text style={styles.overviewText}>{movie.overview}</Text>
-          <Text>{movie.release_date}</Text>
         </View>
         <TouchableOpacity
           onPress={() => {
             index >= 0
               ? deleteItem()
-              : setIsLiked((movies) => [...movies, movie]);
+              : setIsLiked((movies) => [...movies, movie])
           }}
           style={styles.buttonContainer}
         >
           <IconButton
-            icon={index >= 0 ? "heart" : "heart-outline"}
-            color={Colors.LightPurple}
+            icon={index >= 0 ? 'heart' : 'heart-outline'}
+            color='#8e55ac'
             size={24}
             disabled
           />
         </TouchableOpacity>
       </View>
     </View>
-  );
-};
+  )
+}
 
-export default DetailsCard;
-const { width } = Dimensions.get("window").width;
+export default DetailsCard
+const { width } = Dimensions.get('window').width
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -68,28 +67,28 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     flex: 1,
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   imageContainer: { flex: 1 },
   cardImage: {
-    resizeMode: "stretch",
+    resizeMode: 'stretch',
     width: 140,
     height: 200,
     borderRadius: 16,
   },
   textContainer: {
     flex: 2,
-    flexDirection: "column",
+    flexDirection: 'column',
   },
   titleText: {
     fontSize: 18,
-    fontWeight: "bold",
-    color: "#ffffff",
+    fontWeight: 'bold',
+    color: '#ffffff',
   },
   overviewText: {
     fontSize: 13,
-    fontWeight: "normal",
-    color: "#ffffff",
+    fontWeight: 'normal',
+    color: '#ffffff',
   },
   buttonContainer: {
     width: 25,
@@ -97,6 +96,6 @@ const styles = StyleSheet.create({
     // backgroundColor: "#ffffff",
   },
   deleteButton: {
-    backgroundColor: "white",
+    backgroundColor: 'white',
   },
-});
+})

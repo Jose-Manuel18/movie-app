@@ -5,29 +5,29 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
-} from "react-native";
-import React from "react";
-import { Colors } from "../../Utils/Colors";
-import ReusableText from "../../ReusableText";
-import { useRecoilValueLoadable } from "recoil";
-import { GenreState } from "../../../State/GenreState";
-import { TrendingState } from "../../../State/TrendingState";
-import { Rating } from "react-native-rating-element";
+} from 'react-native'
+import React from 'react'
+import { Colors } from '../../Utils/Colors'
+import ReusableText from '../../ReusableText'
+import { useRecoilValueLoadable } from 'recoil'
+import { GenreState } from '../../../State/GenreState'
+import { TrendingState } from '../../../State/TrendingState'
+import { Rating } from 'react-native-rating-element'
 
 const ForYouCard = ({ movie, onPress }) => {
   const { state: genreState, contents: genreContents } =
-    useRecoilValueLoadable(GenreState);
-  const { state, contents } = useRecoilValueLoadable(TrendingState);
+    useRecoilValueLoadable(GenreState)
+  const { state, contents } = useRecoilValueLoadable(TrendingState)
 
-  if (genreState === "hasError " || genreState === "loading") return null;
-  if (state === "hasError " || state === "loading") return null;
-  const results = contents.results;
+  if (genreState === 'hasError ' || genreState === 'loading') return null
+  if (state === 'hasError ' || state === 'loading') return null
+  const results = contents.results
   const currentGenre = genreContents.genres?.filter((genre) =>
     movie?.genre_ids?.includes(genre.id)
-  );
+  )
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView style={styles.ScrollView}>
         <TouchableOpacity style={styles.innerContainer} onPress={onPress}>
           <Image
             source={{
@@ -39,7 +39,7 @@ const ForYouCard = ({ movie, onPress }) => {
           <View style={styles.contentContainer}>
             <Text style={styles.text}>{movie.title || movie.name}</Text>
             <Text style={styles.genreText}>
-              {(currentGenre || []).map((genre) => genre.name).join(", ")}.
+              {(currentGenre || []).map((genre) => genre.name).join(', ')}.
             </Text>
             <View style={styles.ratingContainer}>
               <Rating
@@ -48,33 +48,36 @@ const ForYouCard = ({ movie, onPress }) => {
                 ratingColor={Colors.StarColor}
                 size={14}
                 readonly
-                icon="ios-star"
-                direction="row"
+                icon='ios-star'
+                direction='row'
               />
+
               <Text style={styles.genreText}>
-                {movie.vote_average / 2 + "/5"}
+                {movie.vote_average / 2 + '/5'}
               </Text>
             </View>
           </View>
         </TouchableOpacity>
       </ScrollView>
     </View>
-  );
-};
+  )
+}
 
-export default ForYouCard;
+export default ForYouCard
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "space-between",
+    flex: 1,
+    justifyContent: 'space-between',
     paddingTop: 10,
     paddingBottom: 8,
   },
   innerContainer: {
-    flexDirection: "row",
+    flex: 1,
+    flexDirection: 'row',
     backgroundColor: Colors.LightPurple,
     borderRadius: 16,
-    shadowColor: "#000000",
+    shadowColor: '#000000',
     shadowOffset: {
       width: 0,
       height: 3,
@@ -86,7 +89,7 @@ const styles = StyleSheet.create({
   trendingCardImage: {
     borderTopLeftRadius: 16,
     borderBottomLeftRadius: 16,
-    resizeMode: "stretch",
+    resizeMode: 'stretch',
     width: 80,
     height: 110,
   },
@@ -94,26 +97,26 @@ const styles = StyleSheet.create({
     flex: 1,
     maxWidth: 200,
     paddingLeft: 30,
-    justifyContent: "center",
-    alignItems: "flex-start",
+    justifyContent: 'center',
+    alignItems: 'flex-start',
   },
   text: {
     paddingTop: 8,
-    color: "white",
-    textAlign: "left",
-    flexDirection: "row",
+    color: 'white',
+    textAlign: 'left',
+    flexDirection: 'row',
     fontSize: 15,
     paddingLeft: 2,
   },
   genreText: {
-    color: "white",
+    color: 'white',
     fontSize: 12,
     paddingLeft: 3,
   },
   ratingContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   rating: {
     paddingRight: 10,
   },
-});
+})
