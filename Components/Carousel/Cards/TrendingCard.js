@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import React from "react";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+import React from 'react'
 
 const TrendingCard = ({ movie, onPress }) => {
   return (
@@ -20,15 +20,15 @@ const TrendingCard = ({ movie, onPress }) => {
         </View>
       </TouchableOpacity>
     </View>
-  );
-};
+  )
+}
 
-export default TrendingCard;
+export default TrendingCard
 
 const styles = StyleSheet.create({
   container: {
     paddingTop: 20,
-    alignItems: "center",
+    alignItems: 'center',
   },
   trendingCardImageContainer: {
     paddingHorizontal: 8,
@@ -36,18 +36,18 @@ const styles = StyleSheet.create({
   },
   trendingCardImage: {
     borderRadius: 16,
-    resizeMode: "contain",
+    resizeMode: 'contain',
     width: 100,
     height: 100,
   },
   textContainer: {
     maxHeight: 150,
     maxWidth: 100,
-    flexDirection: "column",
+    flexDirection: 'column',
   },
   text: {
     paddingTop: 8,
-    color: "white",
-    textAlign: "center",
+    color: 'white',
+    textAlign: 'center',
   },
-});
+})

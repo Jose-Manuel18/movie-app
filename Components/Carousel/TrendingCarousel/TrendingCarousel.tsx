@@ -1,13 +1,14 @@
-import { Dimensions, FlatList, StyleSheet, Text, View } from "react-native";
-import React from "react";
-import TrendingCard from "../Cards/TrendingCard";
-import { useNavigation } from "@react-navigation/native";
-import { take } from "lodash";
+import { Dimensions, FlatList, StyleSheet, Text, View } from 'react-native'
+import React, { Fragment } from 'react'
+import TrendingCard from '../Cards/TrendingCard'
+import { useNavigation } from '@react-navigation/native'
+import { take } from 'lodash'
 
-const TrendingCarousel = ({ info }) => {
-  const { navigate } = useNavigation();
+function TrendingCarousel({ info }: { info: object }) {
+  const { navigate } = useNavigation()
+
   return (
-    <View onTouchMove={(e) => e.stopPropagation()}>
+    <>
       <FlatList
         data={take(info, 10)}
         keyExtractor={(item) => item.id}
@@ -17,19 +18,19 @@ const TrendingCarousel = ({ info }) => {
           return (
             <TrendingCard
               onPress={() => {
-                navigate("DetailScreen", {
+                navigate('DetailScreen', {
                   movieDetails: item,
-                });
+                })
               }}
               movie={item}
             />
-          );
+          )
         }}
       />
-    </View>
-  );
-};
+    </>
+  )
+}
 
-export default TrendingCarousel;
+export default TrendingCarousel
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({})

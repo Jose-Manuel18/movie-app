@@ -27,27 +27,25 @@ function HomeScreen() {
   `
 
   return (
-    <ScrollView>
-      <StyledView>
-        <SearchButton />
-        <MoviesAPI />
-        <StyledHeader>
-          <ReusableText modo='bigText'>Trending</ReusableText>
-          <SeeAllButton onPress={() => navigate('SeeAllTrendingScreen')} />
-        </StyledHeader>
-        <TopRatedMoviesAPI />
-        <StyledHeader>
-          <ReusableText modo='bigText'>Series</ReusableText>
-          <SeeAllButton onPress={() => navigate('SeeAllSeriesScreen')} />
-        </StyledHeader>
-        <SeriesAPI />
-        <StyledHeader>
-          <ReusableText modo='bigText'>Up Coming</ReusableText>
-          <SeeAllButton onPress={() => navigate('SeeAllUpComing')} />
-        </StyledHeader>
-        <UpComingAPI />
-      </StyledView>
-    </ScrollView>
+    <StyledView>
+      <SearchButton />
+      <MoviesAPI />
+      <StyledHeader>
+        <ReusableText modo='bigText'>Trending</ReusableText>
+        <SeeAllButton onPress={() => navigate('SeeAllTrendingScreen')} />
+      </StyledHeader>
+      <TopRatedMoviesAPI />
+      <StyledHeader>
+        <ReusableText modo='bigText'>Series</ReusableText>
+        <SeeAllButton onPress={() => navigate('SeeAllSeriesScreen')} />
+      </StyledHeader>
+      <SeriesAPI />
+      <StyledHeader>
+        <ReusableText modo='bigText'>Up Coming</ReusableText>
+        <SeeAllButton onPress={() => navigate('SeeAllUpComing')} />
+      </StyledHeader>
+      <UpComingAPI />
+    </StyledView>
   )
 }
 

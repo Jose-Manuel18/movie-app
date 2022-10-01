@@ -1,5 +1,5 @@
 import './assets/Windows Batch/ignoreWarnign'
-import Navigation from './Screens/Navigation'
+import Navigation from './Screens/Navigation/Navigation'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { RecoilRoot } from 'recoil'
 import { ScrollView, StatusBar } from 'react-native'
