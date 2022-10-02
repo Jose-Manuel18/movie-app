@@ -53,7 +53,7 @@ const SearchBar = ({
                 color='#ffffff'
                 size={24}
                 onPress={() => {}}
-                disabled={undefined}
+                disabled
               />
             </TouchableOpacity>
           </View>
@@ -65,8 +65,7 @@ const SearchBar = ({
               icon='filter-sharp'
               color='#ffffff'
               size={24}
-              onPress={undefined}
-              disabled={undefined}
+              disabled
             />
           </View>
         </TouchableOpacity>

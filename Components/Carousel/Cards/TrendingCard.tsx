@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
-
-const TrendingCard = ({ movie, onPress }) => {
+import { CarouselParamList } from '../Types/types'
+const TrendingCard = ({ movie, onPress }: CarouselParamList) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onPress}>

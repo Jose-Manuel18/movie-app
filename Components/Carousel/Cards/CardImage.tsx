@@ -1,7 +1,7 @@
-import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
-import React from "react";
-
-const CardImage = ({ movie, onPress }) => {
+import { StyleSheet, View, Image, TouchableOpacity } from 'react-native'
+import React from 'react'
+import { CarouselParamList } from '../Types/types'
+const CardImage = ({ movie, onPress }: CarouselParamList) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onPress}>
@@ -15,21 +15,21 @@ const CardImage = ({ movie, onPress }) => {
         </View>
       </TouchableOpacity>
     </View>
-  );
-};
-export default CardImage;
+  )
+}
+export default CardImage
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
+    alignItems: 'center',
   },
   imageContainer: {
     paddingHorizontal: 8,
   },
   cardImage: {
-    resizeMode: "stretch",
+    resizeMode: 'stretch',
     width: 175,
     height: 250,
     borderRadius: 16,
   },
-});
+})

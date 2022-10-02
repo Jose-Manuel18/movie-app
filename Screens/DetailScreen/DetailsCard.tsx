@@ -5,33 +5,28 @@ import {
   Image,
   Dimensions,
   GestureResponderEvent,
-} from "react-native";
-import React, { useState } from "react";
-import IconButton from "../../Components/IconButton";
-import { isLiked, likedState } from "../../Atom/isLiked";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { TouchableOpacity } from "react-native";
-import { Colors } from "../../Components/Utils/Colors";
+} from 'react-native'
+import React, { useState } from 'react'
+import IconButton from '../../Components/IconButton'
+import { isLiked, likedState } from '../../Atom/isLiked'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { TouchableOpacity } from 'react-native'
+import { CarouselParamList } from '../../Components/Carousel/Types/types'
+import { Colors } from '../../Components/Utils/Colors'
+import { movieTypes } from '../../Components/Carousel/Types/types'
+const DetailsCard = ({ movie, size, onPress }: CarouselParamList) => {
+  const setIsLiked = useSetRecoilState(isLiked)
+  const buttonHandler = useRecoilValue(likedState)
+  const [deleteLike, setDeleteLike] = useRecoilState<movieTypes>(isLiked)
+  const index = deleteLike.findIndex((listItem) => listItem === movie)
 
-interface DetailsCardProps {
-  movie: string;
-  size: number;
-  onPress(event: GestureResponderEvent): void;
-}
-
-const DetailsCard = ({ movie, size, onPress }: DetailsCardProps) => {
-  const setIsLiked = useSetRecoilState(isLiked);
-  const buttonHandler = useRecoilValue(likedState);
-  const [deleteLike, setDeleteLike] = useRecoilState(isLiked);
-  const index = deleteLike.findIndex((listItem) => listItem === movie);
-
+  const removeItemAtIndex = (arr: string, index: number) => {
+    return [...arr.slice(0, index), ...arr.slice(index + 1)]
+  }
   const deleteItem = () => {
-    const newList = removeItemAtIndex(deleteLike, index);
-    setDeleteLike(newList);
-  };
-  const removeItemAtIndex = (arr, index) => {
-    return [...arr.slice(0, index), ...arr.slice(index + 1)];
-  };
+    const newList = removeItemAtIndex(deleteLike, index)
+    setDeleteLike(newList)
+  }
 
   return (
     <View style={styles.container}>
@@ -53,24 +48,24 @@ const DetailsCard = ({ movie, size, onPress }: DetailsCardProps) => {
           onPress={() => {
             index >= 0
               ? deleteItem()
-              : setIsLiked((movies) => [...movies, movie]);
+              : setIsLiked((movies) => [...movies, movie])
           }}
           style={styles.buttonContainer}
         >
           <IconButton
-            icon={index >= 0 ? "heart" : "heart-outline"}
-            color="#8e55ac"
+            icon={index >= 0 ? 'heart' : 'heart-outline'}
+            color='#8e55ac'
             size={24}
             disabled
           />
         </TouchableOpacity>
       </View>
     </View>
-  );
-};
+  )
+}
 
-export default DetailsCard;
-const { width } = Dimensions.get("window").width;
+export default DetailsCard
+const { width } = Dimensions.get('window').width
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -80,28 +75,28 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     flex: 1,
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   imageContainer: { flex: 1 },
   cardImage: {
-    resizeMode: "stretch",
+    resizeMode: 'stretch',
     width: 140,
     height: 200,
     borderRadius: 16,
   },
   textContainer: {
     flex: 2,
-    flexDirection: "column",
+    flexDirection: 'column',
   },
   titleText: {
     fontSize: 18,
-    fontWeight: "bold",
-    color: "#ffffff",
+    fontWeight: 'bold',
+    color: '#ffffff',
   },
   overviewText: {
     fontSize: 13,
-    fontWeight: "normal",
-    color: "#ffffff",
+    fontWeight: 'normal',
+    color: '#ffffff',
   },
   buttonContainer: {
     width: 25,
@@ -109,6 +104,6 @@ const styles = StyleSheet.create({
     // backgroundColor: "#ffffff",
   },
   deleteButton: {
-    backgroundColor: "white",
+    backgroundColor: 'white',
   },
-});
+})

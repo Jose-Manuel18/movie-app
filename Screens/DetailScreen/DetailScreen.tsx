@@ -21,7 +21,6 @@ const DetailScreen = ({ route }) => {
     duration: 200,
     easing: Easing.linear,
   })
-  console.log(movieDetails)
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -36,6 +35,12 @@ const DetailScreen = ({ route }) => {
         onChange={handleSnapPress}
         animateOnMount={true}
         index={0}
+        enablePanDownToClose={true}
+        animationConfigs={timingConfig}
+        enableOverDrag={true}
+        onClose={() => navigation.goBack()}
+        handleStyle={styles.handleStyle}
+        handleIndicatorStyle={styles.handleIndicatorStyle}
         backdropComponent={() => {
           return (
             <TouchableOpacity
@@ -47,12 +52,6 @@ const DetailScreen = ({ route }) => {
         backgroundComponent={() => (
           <View style={{ flex: 1, backgroundColor: Colors.DarkPurple }} />
         )}
-        enablePanDownToClose={true}
-        animationConfigs={timingConfig}
-        enableOverDrag={true}
-        onClose={() => navigation.goBack()}
-        handleStyle={styles.handleStyle}
-        handleIndicatorStyle={styles.handleIndicatorStyle}
       >
         <View style={styles.contentContainer}>
           <DetailsCard movie={movieDetails} />
