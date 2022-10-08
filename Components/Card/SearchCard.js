@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native'
-import React, { useState } from 'react'
+import * as react from 'react'
 import { Colors } from '../Utils/Colors'
 import { useRecoilValueLoadable } from 'recoil'
 import { GenreState } from '../../State/GenreState'

@@ -3,14 +3,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import SearchBar from '../Components/SearchBar'
 import SearchCard from '../Components/Card/SearchCard'
 import { useNavigation } from '@react-navigation/native'
-
 const SearchAPI = () => {
-  // const { isLoading, error, data } = useQuery(["multiSearch"], () =>
-  // fetch(
-  //   "https://api.themoviedb.org/3/search/multi?api_key=a24edf480d427f5cb8cb54efb9ee9007&languages=en-US"
-  // ).then((res) => res.json())
-
-  // if (error || isLoading) return null;
   const { navigate } = useNavigation()
   const [search, setSearch] = useState('')
   const [newData, setNewData] = useState([])
@@ -21,7 +14,7 @@ const SearchAPI = () => {
     const timeOut = setTimeout(
       () =>
         fetch(
-          `https://api.themoviedb.org/3/search/multi?&api_key=a24edf480d427f5cb8cb54efb9ee9007&query=${search}&languages=en-US`
+          `https://api.themoviedb.org/3/search/multi?&api_key=${process.env.MOVIE_DB_KEY}&query=${search}&languages=en-US`
         )
           .then((response) => response.json())
           .then((responseJson) => {

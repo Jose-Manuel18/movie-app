@@ -1,16 +1,16 @@
 import { Dimensions, View } from 'react-native'
-import React, { LegacyRef, useRef, useState } from 'react'
-import CardImage from '../Cards/CardImage'
+import React, { useRef, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { take } from 'lodash'
 import { Colors } from '../../Utils/Colors'
 import Carousel, { Pagination } from 'react-native-snap-carousel'
 import {
-  CarouselParamList,
   CarouselPropertiesList,
   movieTypes,
+  CarouselParamList,
 } from '../Types/types'
-const CarouselImages = ({ info }: { info: CarouselParamList }) => {
+import { BigCard } from '../Index'
+export const CarouselImages = ({ info }: { info: CarouselPropertiesList }) => {
   const { navigate } = useNavigation()
   const [index, setIndex] = useState(0)
   const { width: viewportWidth } = Dimensions.get('window')
@@ -18,41 +18,38 @@ const CarouselImages = ({ info }: { info: CarouselParamList }) => {
   const ITEM_HORIZONTAL_MARGIN = 5
   const ITEM_WIDTH = SLIDE_WIDTH + ITEM_HORIZONTAL_MARGIN * 0.9
   const SLIDER_WIDTH = viewportWidth
-  let RandomNumber = Math.floor(Math.random() * 4) + 1
+  // let RandomNumber = Math.floor(Math.random() * 4) + 1
   const isCarousel = useRef(null)
-
+  const renderItem = ({ item }: { item: movieTypes }) => {
+    return (
+      <BigCard
+        movie={item}
+        onPress={() => {
+          navigate('DetailScreen', {
+            movieDetails: item,
+          })
+        }}
+      />
+    )
+  }
   return (
     <View onTouchMove={(e) => e.stopPropagation()}>
       <Carousel
         layout='default'
         data={take(info, 5)}
-        initialScrollIndex={RandomNumber}
         sliderWidth={SLIDER_WIDTH}
         itemWidth={ITEM_WIDTH}
-        scroll
         contentContainerCustomStyle={{
           overflow: 'hidden',
-          width: 60 * info.length,
+          width: 51 * info.length,
         }}
         onSnapToItem={(index) => setIndex(index)}
-        snapToStart={true}
         ref={isCarousel}
         // autoplayInterval={500}
         // autoplay={true}
         inactiveSlideScale={0.6}
         inactiveSlideOpacity={0.5}
-        renderItem={({ item }) => {
-          return (
-            <CardImage
-              movie={item}
-              onPress={() => {
-                navigate('DetailScreen', {
-                  movieDetails: item,
-                })
-              }}
-            />
-          )
-        }}
+        renderItem={renderItem}
       />
       <Pagination
         dotsLength={5}
@@ -76,5 +73,3 @@ const CarouselImages = ({ info }: { info: CarouselParamList }) => {
     </View>
   )
 }
-
-export default CarouselImages

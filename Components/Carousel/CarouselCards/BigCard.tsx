@@ -1,7 +1,7 @@
 import { StyleSheet, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { CarouselParamList } from '../Types/types'
-const CardImage = ({ movie, onPress }: CarouselParamList) => {
+export const BigCard = ({ movie, onPress }: CarouselParamList) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onPress}>
@@ -17,7 +17,6 @@ const CardImage = ({ movie, onPress }: CarouselParamList) => {
     </View>
   )
 }
-export default CardImage
 
 const styles = StyleSheet.create({
   container: {

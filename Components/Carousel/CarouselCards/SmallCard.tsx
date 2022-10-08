@@ -1,17 +1,19 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import React from "react";
-
-const UpComingCard = ({ movie, onPress }) => {
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+import React from 'react'
+import { SmallCardProps } from '../Types/types'
+export const SmallCard = ({ movie, onPress }: SmallCardProps) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onPress}>
         <View>
           <View style={styles.trendingCardImageContainer}>
             <Image
+              resizeMethod='auto'
+              resizeMode='contain'
               source={{
                 uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
               }}
-              style={styles.trendingCardImage}
+              style={styles.fitImage}
             />
           </View>
           <View style={styles.textContainer}>
@@ -20,34 +22,34 @@ const UpComingCard = ({ movie, onPress }) => {
         </View>
       </TouchableOpacity>
     </View>
-  );
-};
-
-export default UpComingCard;
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     paddingTop: 20,
-    alignItems: "center",
+    alignItems: 'center',
   },
   trendingCardImageContainer: {
     paddingHorizontal: 8,
     paddingBottom: 10,
   },
-  trendingCardImage: {
+  fitImage: {
     borderRadius: 16,
-    resizeMode: "contain",
     width: 100,
     height: 100,
   },
   textContainer: {
     maxHeight: 150,
     maxWidth: 100,
-    flexDirection: "column",
+    flexDirection: 'column',
+
+    paddingLeft: 16,
   },
   text: {
     paddingTop: 8,
-    color: "white",
-    textAlign: "center",
+    color: 'white',
+    textAlign: 'center',
   },
-});
+})

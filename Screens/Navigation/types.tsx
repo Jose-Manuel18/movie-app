@@ -1,10 +1,11 @@
+import { movieTypes } from '../../Components/Carousel/Types/types'
 export type RootStackParamList = {
   Home: undefined
   Explore: undefined
   Like: undefined
   Account: undefined
   HomeTab: undefined
-  DetailScreen: { movieDetails: object }
+  DetailScreen: { movieDetails: movieTypes }
   SearchScreen: undefined
   SeeAllSeriesScreen: undefined
   SeeAllTrendingScreen: undefined

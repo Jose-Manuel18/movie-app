@@ -1,9 +1,3 @@
-import {
-  GestureResponderEvent,
-  ScrollView,
-  StyleSheet,
-  View,
-} from 'react-native'
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -12,7 +6,6 @@ import ExploreScreen from '../ExploreScreen/ExploreScreen'
 import LikeScreen from '../LikeScreen/LikeScreen'
 import AccountScreen from '../AccountScreen/AccountScreen'
 import IconButton from '../../Components/IconButton'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Colors } from '../../Components/Utils/Colors'
 import DetailScreen from '../DetailScreen/DetailScreen'
 import SearchScreen from '../SearchScreen/SearchScreen'
@@ -22,9 +15,7 @@ import SeeAllSeriesScreen from '../SeeAllScreen/SeeAllSeriesScreen'
 import SeeAllTrendingScreen from '../SeeAllScreen/SeeAllTrendingScreen'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import SeeAllUpComingScreen from '../SeeAllScreen/SeeAllUpComingScreen'
-
 import type { RootStackParamList } from './types'
-
 const Tab = createMaterialTopTabNavigator<RootStackParamList>()
 const Stack = createNativeStackNavigator<RootStackParamList>()
 function Navigation() {
@@ -33,10 +24,11 @@ function Navigation() {
       <Tab.Navigator
         tabBarPosition='bottom'
         screenOptions={{
-          tabBarPressColor: 'transparent',
+          tabBarPressOpacity: 0,
           tabBarContentContainerStyle: {
             backgroundColor: Colors.LightPurple,
-            borderRadius: 17,
+            borderTopLeftRadius: 16,
+            borderTopRightRadius: 16,
           },
           tabBarIndicatorStyle: { height: 0 },
           tabBarActiveTintColor: Colors.Rose,
@@ -49,6 +41,7 @@ function Navigation() {
           },
           tabBarLabelStyle: {
             fontSize: 10,
+            fontWeight: 'bold',
           },
         }}
       >
@@ -161,5 +154,3 @@ function Navigation() {
 }
 
 export default Navigation
-
-const styles = StyleSheet.create({})

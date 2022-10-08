@@ -1,39 +1,31 @@
-import {
-  StyleSheet,
-  View,
-  Text,
-  FlatList,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native'
+import { StyleSheet, View, FlatList, ScrollView, Text } from 'react-native'
 import React, { useState } from 'react'
 import { Colors } from '../../Components/Utils/Colors'
 import SearchButton from '../../Components/SearchBarButton/SearchButton'
-import { useRecoilState, useRecoilValueLoadable } from 'recoil'
+import { useRecoilValueLoadable } from 'recoil'
 import { GenreState } from '../../State/GenreState'
 import FilterTextCard from '../../Components/Card/FilterTextCard'
-import ExploreMovieCard from '../../Components/Card/ExploreMovieCard'
-import { useNavigation } from '@react-navigation/native'
 import { NowPlayingState } from '../../State/NowPlayingState'
-import { take } from 'lodash'
-import ForYouCard from '../../Components/Card/ForYou/ForYouCard'
 import ForYou from '../../Components/Card/ForYou/ForYou'
 import ExploreImages from './ExploreImages'
-
+import { take } from 'lodash'
+import { selectedState } from './type'
 const ExploreScreen = () => {
-  const { navigate } = useNavigation()
-  const [selected, setSelected] = useState(null)
+  const [selected, setSelected] = useState<selectedState | null>(null)
   const { state, contents } = useRecoilValueLoadable(NowPlayingState)
   const { state: genreState, contents: genreContents } =
     useRecoilValueLoadable(GenreState)
 
   const currentMovie = contents?.results?.filter(
-    (movies: { genre_ids: null[] }) => movies?.genre_ids.includes(selected)
+    (movies: { genre_ids: (selectedState | null)[] }) =>
+      movies?.genre_ids.includes(selected)
   )
 
   if (state === 'hasError' || state === 'loading') return null
   if (genreState === 'hasError' || genreState === 'loading') return null
+  console.log(`selected ${selected}`)
+  console.log(currentMovie[0])
+
   return (
     <ScrollView style={styles.container}>
       <SearchButton />
@@ -57,10 +49,21 @@ const ExploreScreen = () => {
             )
           }}
         />
-        <ExploreImages
-          currentMovie={currentMovie}
-          contents={contents.results}
+
+        <FlatList
+          data={
+            selected === null
+              ? take(contents.results, 3)
+              : take(currentMovie, 3)
+          }
+          keyExtractor={(item) => item.id}
+          renderItem={({ item, index }) => {
+            return <ExploreImages index={index} item={item} />
+          }}
         />
+        {selected !== null && currentMovie.length === 0 ? (
+          <Text>Nothing to see here</Text>
+        ) : null}
       </View>
       <ForYou />
       <View style={{ height: 30 }} />

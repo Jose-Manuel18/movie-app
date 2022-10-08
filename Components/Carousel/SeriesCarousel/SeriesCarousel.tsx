@@ -1,18 +1,18 @@
 import { FlatList, View } from 'react-native'
-import { SmallCard } from '../CarouselCards/SmallCard'
+import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { take } from 'lodash'
 import { movieTypes } from '../Types/types'
-export function TrendingCarousel({ info }: { info: movieTypes }) {
+import { SmallCard } from '../Index'
+export const SeriesCarousel = ({ info }: { info: movieTypes }) => {
   const { navigate } = useNavigation()
-
   return (
-    <View onTouchMove={(e) => e.stopPropagation()}>
+    <View>
       <FlatList
         data={take(info, 10)}
+        showsHorizontalScrollIndicator={false}
         keyExtractor={(item) => item.id}
         horizontal={true}
-        showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => {
           return (
             <SmallCard
