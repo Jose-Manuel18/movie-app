@@ -1,7 +1,7 @@
 import { Image, StyleSheet, View } from 'react-native'
 import React from 'react'
 import { ExploreImageParam } from './type'
-const ExploreImages = ({ item, index }: ExploreImageParam) => {
+export const ExploreImages = ({ item, index }: ExploreImageParam) => {
   return (
     <View style={styles.imageContainer}>
       <Image
@@ -13,8 +13,6 @@ const ExploreImages = ({ item, index }: ExploreImageParam) => {
     </View>
   )
 }
-
-export default ExploreImages
 
 const styles = StyleSheet.create({
   imageContainer: {

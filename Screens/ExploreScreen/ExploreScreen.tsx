@@ -7,10 +7,10 @@ import { GenreState } from '../../State/GenreState'
 import FilterTextCard from '../../Components/Card/FilterTextCard'
 import { NowPlayingState } from '../../State/NowPlayingState'
 import ForYou from '../../Components/Card/ForYou/ForYou'
-import ExploreImages from './ExploreImages'
+import { ExploreImages } from '../Index/index'
 import { take } from 'lodash'
 import { selectedState } from './type'
-const ExploreScreen = () => {
+export const ExploreScreen = () => {
   const [selected, setSelected] = useState<selectedState | null>(null)
   const { state, contents } = useRecoilValueLoadable(NowPlayingState)
   const { state: genreState, contents: genreContents } =
@@ -72,8 +72,6 @@ const ExploreScreen = () => {
     </ScrollView>
   )
 }
-
-export default ExploreScreen
 
 const styles = StyleSheet.create({
   container: {

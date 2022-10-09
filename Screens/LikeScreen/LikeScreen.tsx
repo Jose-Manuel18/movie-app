@@ -1,21 +1,15 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  FlatList,
-} from "react-native";
-import React from "react";
-import { Colors } from "../../Components/Utils/Colors";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { isLiked } from "../../Atom/isLiked";
-import SearchCard from "../../Components/Card/SearchCard";
-import { useNavigation } from "@react-navigation/native";
-const LikeScreen = () => {
-  const likedMovie = useRecoilValue(isLiked);
-  const { navigate } = useNavigation();
-  const sortedMovie = [...likedMovie].sort((a, b) => a < b);
+import { StyleSheet, View, FlatList } from 'react-native'
+import React from 'react'
+import { Colors } from '../../Components/Utils/Colors'
+import { useRecoilValue } from 'recoil'
+import { isLiked } from '../../Atom/isLiked'
+import SearchCard from '../../Components/Card/SearchCard'
+import { useNavigation } from '@react-navigation/native'
+import { isLikedProps } from '../../Atom/isLiked'
+export const LikeScreen = () => {
+  const likedMovie = useRecoilValue(isLiked)
+  const { navigate } = useNavigation()
+  const sortedMovie = [...likedMovie].sort((a, b) => a < b)
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
@@ -27,18 +21,16 @@ const LikeScreen = () => {
               <SearchCard
                 movie={item}
                 onPress={() => {
-                  return navigate("DetailScreen", { movieDetails: item });
+                  return navigate('DetailScreen', { movieDetails: item })
                 }}
               />
-            );
+            )
           }}
         />
       </View>
     </View>
-  );
-};
-
-export default LikeScreen;
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -49,4 +41,4 @@ const styles = StyleSheet.create({
   innerContainer: {
     // backgroundColor: "white",
   },
-});
+})

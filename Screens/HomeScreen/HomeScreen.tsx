@@ -11,7 +11,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { Colors } from '../../Components/Utils/Colors'
 import { ScrollView } from 'react-native'
 import { SeeAllButton } from '../../Components/Carousel/Index'
-function HomeScreen() {
+export function HomeScreen() {
   const { navigate } = useNavigation()
   const { top } = useSafeAreaInsets()
   const StyledView = styled.View`
@@ -47,5 +47,3 @@ function HomeScreen() {
     </ScrollView>
   )
 }
-
-export default HomeScreen
