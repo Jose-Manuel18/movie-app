@@ -1,21 +1,14 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  FlatList,
-} from 'react-native'
-import * as react from 'react'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+import React from 'react'
 import { Colors } from '../Utils/Colors'
 import { useRecoilValueLoadable } from 'recoil'
 import { GenreState } from '../../State/GenreState'
 import { Rating } from 'react-native-rating-element'
-
-const SearchCard = ({ movie, onPress }) => {
+import { seriesCardProps } from '../Carousel/SeriesCarousel/types'
+const SearchCard = ({ movie, onPress }: seriesCardProps) => {
   const { state, contents } = useRecoilValueLoadable(GenreState)
   if (state === 'hasError' || state === 'loading') return null
-  const currentGenre = contents.genres?.filter((genre) =>
+  const currentGenre = contents.genres?.filter((genre: { id: number }) =>
     movie?.genre_ids?.includes(genre.id)
   )
 
@@ -35,7 +28,10 @@ const SearchCard = ({ movie, onPress }) => {
           <View style={styles.contentContainer}>
             <Text style={styles.genreText}>{movie.title || movie.name}</Text>
             <Text style={styles.voteText}>
-              {(currentGenre || []).map((genre) => genre.name).join(', ')}.
+              {(currentGenre || [])
+                .map((genre: { name: string }) => genre.name)
+                .join(', ')}
+              .
             </Text>
             <View style={styles.ratingContainer}>
               <Rating

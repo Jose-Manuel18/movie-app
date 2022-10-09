@@ -1,35 +1,14 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  Pressable,
-} from 'react-native'
-import React, { RefObject, useEffect } from 'react'
+import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native'
+import React from 'react'
 import IconButton from './IconButton'
-import { useNavigation } from '@react-navigation/native'
 import { Colors } from './Utils/Colors'
-
 const SearchBar = ({
   value,
   onChangeText,
-  inputRef,
 }: {
   value: string
   onChangeText: (text: string) => void
-  inputRef: RefObject<any>
 }) => {
-  const { navigate } = useNavigation()
-  // function closeButton() {
-  //   inputRef.current.clear()
-  //   inputRef.current.focus()
-  // }
-  // useEffect(() => {
-  //   if (inputRef.current) {
-  //     inputRef.current.focus()
-  //   }
-  // }, [])
   return (
     <View style={styles.container}>
       <View style={styles.searchBarOuterContainer}>
@@ -41,13 +20,9 @@ const SearchBar = ({
             value={value}
             onChangeText={onChangeText}
             autoFocus={true}
-            // clearTextOnFocus={true}
-            // ref={inputRef}
           />
           <View style={styles.searchIconContainer}>
-            <TouchableOpacity
-            // onPress={() => inputRef.current.clear()}
-            >
+            <TouchableOpacity>
               <IconButton
                 icon='close-sharp'
                 color='#ffffff'

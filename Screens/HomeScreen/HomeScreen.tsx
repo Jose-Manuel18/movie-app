@@ -24,8 +24,8 @@ function HomeScreen() {
     align-items: center;
   `
   return (
-    <StyledView>
-      <ScrollView>
+    <ScrollView>
+      <StyledView>
         <SearchButton />
         <MoviesAPI />
         <StyledHeader>
@@ -43,8 +43,8 @@ function HomeScreen() {
           <SeeAllButton onPress={() => navigate('SeeAllUpComing')} />
         </StyledHeader>
         <UpComingAPI />
-      </ScrollView>
-    </StyledView>
+      </StyledView>
+    </ScrollView>
   )
 }
 

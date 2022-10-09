@@ -31,6 +31,7 @@ const ExploreScreen = () => {
       <SearchButton />
       <View style={styles.filterContainer}>
         <FlatList
+          nestedScrollEnabled={true}
           data={genreContents.genres}
           keyExtractor={(item) => item.id}
           horizontal={true}
@@ -51,6 +52,7 @@ const ExploreScreen = () => {
         />
 
         <FlatList
+          nestedScrollEnabled={true}
           data={
             selected === null
               ? take(contents.results, 3)

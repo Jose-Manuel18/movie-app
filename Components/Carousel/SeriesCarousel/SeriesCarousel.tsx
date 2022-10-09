@@ -2,9 +2,9 @@ import { FlatList, View } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { take } from 'lodash'
-import { movieTypes } from '../Types/types'
+import { CarouselPropertiesList } from '../Types/types'
 import { SmallCard } from '../Index'
-export const SeriesCarousel = ({ info }: { info: movieTypes }) => {
+export const SeriesCarousel = ({ info }: { info: CarouselPropertiesList }) => {
   const { navigate } = useNavigation()
   return (
     <View>

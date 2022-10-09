@@ -4,11 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import { take } from 'lodash'
 import { Colors } from '../../Utils/Colors'
 import Carousel, { Pagination } from 'react-native-snap-carousel'
-import {
-  CarouselPropertiesList,
-  movieTypes,
-  CarouselParamList,
-} from '../Types/types'
+import { CarouselPropertiesList, movieTypes } from '../Types/types'
 import { BigCard } from '../Index'
 export const CarouselImages = ({ info }: { info: CarouselPropertiesList }) => {
   const { navigate } = useNavigation()
@@ -43,7 +39,7 @@ export const CarouselImages = ({ info }: { info: CarouselPropertiesList }) => {
           overflow: 'hidden',
           width: 51 * info.length,
         }}
-        onSnapToItem={(index) => setIndex(index)}
+        onSnapToItem={(index: React.SetStateAction<number>) => setIndex(index)}
         ref={isCarousel}
         // autoplayInterval={500}
         // autoplay={true}
