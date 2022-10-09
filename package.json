@@ -20,6 +20,8 @@
     "@react-navigation/native": "^6.0.11",
     "@react-navigation/native-stack": "^6.7.0",
     "@reduxjs/toolkit": "^1.8.3",
+    "@rneui/base": "^4.0.0-rc.6",
+    "@rneui/themed": "^4.0.0-rc.6",
     "@shopify/flash-list": "^1.2.1",
     "@tanstack/react-query": "^4.0.10",
     "@types/react-native-snap-carousel": "^3.8.5",
