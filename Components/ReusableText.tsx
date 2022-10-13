@@ -1,13 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-
+interface props {
+  children:string
+  modo:string
+}
 const ReusableText = ({
   children,
   modo,
-}: {
-  children: string
-  modo: string
-}) => {
+}: props) => {
   return (
     <View style={styles.container}>
       <Text
@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
   texto: {
+
     color: 'white',
     fontWeight: 'bold',
   },
