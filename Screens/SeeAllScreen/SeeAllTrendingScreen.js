@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { StyleSheet, Text, View, FlatList, SafeAreaView } from 'react-native'
 import React from 'react'
 import { Colors } from '../../Components/Utils/Colors'
 import { TrendingState } from '../../State/TrendingState'
@@ -11,7 +11,7 @@ const SeeAllTrendingScreen = () => {
   const { state, contents } = useRecoilValueLoadable(TrendingState)
   if (state === 'hasError' || state === 'loading') return null
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <FlatList
         data={contents.results}
         keyExtractor={(item) => item.id}
@@ -27,7 +27,7 @@ const SeeAllTrendingScreen = () => {
           )
         }}
       />
-    </View>
+    </SafeAreaView>
   )
 }
 
@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.DarkPurple,
-    paddingTop: 50,
     paddingHorizontal: 18,
   },
 })

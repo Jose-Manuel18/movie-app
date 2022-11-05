@@ -1,4 +1,11 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  SafeAreaView,
+} from 'react-native'
 import React from 'react'
 
 const SeeAllCard = ({ movie, onPress }) => {
@@ -26,16 +33,12 @@ export default SeeAllCard
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 22,
     paddingBottom: 22,
   },
   touchableOpacity: {
-    // backgroundColor: "white",
     alignItems: 'center',
   },
-  trendingCardImageContainer: {
-    // paddingHorizontal: 8,
-  },
+  trendingCardImageContainer: {},
   trendingCardImage: {
     borderRadius: 16,
     resizeMode: 'stretch',

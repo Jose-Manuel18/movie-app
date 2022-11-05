@@ -25,3 +25,8 @@ export interface SmallCardProps {
   movie: movieTypes
   onPress?(event: GestureResponderEvent): void
 }
+export interface searchProps {
+  results: readonly any[] | null | undefined
+  newData: movieTypes
+  filteredDataSource: movieTypes
+}

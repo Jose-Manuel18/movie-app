@@ -12,38 +12,43 @@ import { Colors } from '../../Components/Utils/Colors'
 import { ScrollView } from 'react-native'
 import { SeeAllButton } from '../../Components/Carousel/Index'
 export function HomeScreen() {
-  const { navigate } = useNavigation()
-  const { top } = useSafeAreaInsets()
-  const StyledView = styled.View`
-    padding-top: ${top + 5};
-    background-color: ${Colors.DarkPurple};
-  `
-  const StyledHeader = styled.View`
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  `
-  return (
-    <ScrollView>
-      <StyledView>
-        <SearchButton />
-        <MoviesAPI />
-        <StyledHeader>
-          <ReusableText modo='bigText'>Trending</ReusableText>
-          <SeeAllButton onPress={() => navigate('SeeAllTrendingScreen')} />
-        </StyledHeader>
-        <TopRatedMoviesAPI />
-        <StyledHeader>
-          <ReusableText modo='bigText'>Series</ReusableText>
-          <SeeAllButton onPress={() => navigate('SeeAllSeriesScreen')} />
-        </StyledHeader>
-        <SeriesAPI />
-        <StyledHeader>
-          <ReusableText modo='bigText'>Up Coming</ReusableText>
-          <SeeAllButton onPress={() => navigate('SeeAllUpComing')} />
-        </StyledHeader>
-        <UpComingAPI />
-      </StyledView>
-    </ScrollView>
-  )
+    const { navigate } = useNavigation()
+    const { top } = useSafeAreaInsets()
+    const StyledView = styled.View`
+        padding-top: ${top};
+        background-color: ${Colors.DarkPurple};
+    `
+    const StyledHeader = styled.View`
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    `
+    return (
+        <StyledView>
+            <ScrollView nestedScrollEnabled={true}>
+                <SearchButton />
+                <MoviesAPI />
+                <StyledHeader>
+                    <ReusableText modo="bigText">Trending</ReusableText>
+                    <SeeAllButton
+                        onPress={() => navigate('SeeAllTrendingScreen')}
+                    />
+                </StyledHeader>
+                <TopRatedMoviesAPI />
+                <StyledHeader>
+                    <ReusableText modo="bigText">Series</ReusableText>
+                    <SeeAllButton
+                        onPress={() => navigate('SeeAllSeriesScreen')}
+                    />
+                </StyledHeader>
+                <SeriesAPI />
+                <StyledHeader>
+                    <ReusableText modo="bigText">Up Coming</ReusableText>
+                    <SeeAllButton onPress={() => navigate('SeeAllUpComing')} />
+                </StyledHeader>
+                <UpComingAPI />
+            </ScrollView>
+        </StyledView>
+    )
 }
+
