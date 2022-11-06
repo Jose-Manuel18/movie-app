@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList, ScrollView, Text } from 'react-native'
+import { FlatList, Text } from 'react-native'
 import React, { useState } from 'react'
 import { Colors } from '../../Components/Utils/Colors'
 import SearchButton from '../../Components/SearchBarButton/SearchButton'
@@ -10,7 +10,10 @@ import ForYou from '../../Components/Card/ForYou/ForYou'
 import { ExploreImages } from '../Index/index'
 import { take } from 'lodash'
 import { selectedState } from './type'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import styled from 'styled-components/native'
 export const ExploreScreen = () => {
+    const { top } = useSafeAreaInsets()
     const [selected, setSelected] = useState<selectedState | null>(null)
     const { state, contents } = useRecoilValueLoadable(NowPlayingState)
     const { state: genreState, contents: genreContents } =
@@ -24,10 +27,19 @@ export const ExploreScreen = () => {
     if (state === 'hasError' || state === 'loading') return null
     if (genreState === 'hasError' || genreState === 'loading') return null
 
+    const ScrollView = styled.ScrollView`
+        flex: 1;
+        background-color: ${Colors.DarkPurple};
+        padding-top: ${top};
+    `
+    const View = styled.View`
+        padding: 0px 8px;
+    `
+
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView>
             <SearchButton />
-            <View style={styles.filterContainer}>
+            <View>
                 <FlatList
                     nestedScrollEnabled={true}
                     data={genreContents.genres}
@@ -48,14 +60,15 @@ export const ExploreScreen = () => {
                         )
                     }}
                 />
-
+                <View style={{ height: 20 }} />
                 <FlatList
-                    nestedScrollEnabled={true}
                     data={
                         selected === null
                             ? take(contents.results, 3)
                             : take(currentMovie, 3)
                     }
+                    horizontal={true}
+                    nestedScrollEnabled={true}
                     keyExtractor={(item) => item.id}
                     renderItem={({ item, index }) => {
                         return <ExploreImages index={index} item={item} />
@@ -71,13 +84,3 @@ export const ExploreScreen = () => {
     )
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: Colors.DarkPurple,
-        paddingTop: 60,
-    },
-    filterContainer: {
-        paddingHorizontal: 8,
-    },
-})

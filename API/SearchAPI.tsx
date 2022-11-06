@@ -4,6 +4,7 @@ import SearchBar from '../Components/SearchBar'
 import SearchCard from '../Components/Card/SearchCard'
 import { useNavigation } from '@react-navigation/native'
 import { searchProps } from '../Components/Carousel/Types/types'
+import { Goback } from '../Components/Buttons/Goback'
 const SearchAPI = () => {
     const { navigate } = useNavigation()
     const [search, setSearch] = useState('')
@@ -77,3 +78,4 @@ const SearchAPI = () => {
 }
 
 export default SearchAPI
+

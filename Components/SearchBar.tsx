@@ -1,7 +1,8 @@
-import { StyleSheet, View, TextInput, TouchableOpacity } from "react-native"
-import React from "react"
-import IconButton from "./IconButton"
-import { Colors } from "./Utils/Colors"
+import { StyleSheet, View, TextInput, TouchableOpacity } from 'react-native'
+import React from 'react'
+import IconButton from './IconButton'
+import { Colors } from './Utils/Colors'
+import { Goback } from './Buttons/Goback'
 const SearchBar = ({
     value,
     onChangeText,
@@ -18,6 +19,8 @@ const SearchBar = ({
     }
     return (
         <View style={styles.container}>
+            <Goback />
+            <View style={{ height: 20 }} />
             <View style={styles.searchBarOuterContainer}>
                 <View style={styles.searchBarContainer}>
                     <TextInput
@@ -65,12 +68,12 @@ const styles = StyleSheet.create({
         paddingBottom: 25,
     },
     searchBarOuterContainer: {
-        flexDirection: "row",
+        flexDirection: 'row',
     },
     searchBarContainer: {
         flex: 1,
         paddingHorizontal: 14.5,
-        shadowColor: "#000000",
+        shadowColor: '#000000',
         shadowOffset: {
             width: 0,
             height: 3,
@@ -81,8 +84,8 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.LightPurple,
         borderRadius: 18,
         color: Colors.TextColor,
-        flexDirection: "row",
-        justifyContent: "space-between",
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
     textInput: {
         flex: 1,
@@ -90,8 +93,8 @@ const styles = StyleSheet.create({
     },
 
     searchIconContainer: {
-        justifyContent: "center",
-        alignContent: "center",
+        justifyContent: 'center',
+        alignContent: 'center',
     },
     spacing: {
         width: 15,
@@ -99,10 +102,10 @@ const styles = StyleSheet.create({
     filterContainer: {
         padding: 12,
         paddingLeft: 11,
-        justifyContent: "center",
-        alignItems: "center",
-        alignContent: "center",
-        shadowColor: "#000000",
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignContent: 'center',
+        shadowColor: '#000000',
         shadowOffset: {
             width: 0,
             height: 3,
@@ -115,3 +118,4 @@ const styles = StyleSheet.create({
         borderRadius: 14,
     },
 })
+

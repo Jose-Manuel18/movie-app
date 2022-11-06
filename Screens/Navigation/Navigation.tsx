@@ -1,7 +1,8 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { HomeScreen, AccountScreen, LikeScreen, ExploreScreen } from '../Index'
+import { HomeScreen, AccountScreen, LikeScreen } from '../Index'
+import { ExploreScreen } from '../ExploreScreen/ExploreScreen'
 import IconButton from '../../Components/IconButton'
 import { Colors } from '../../Components/Utils/Colors'
 import DetailScreen from '../DetailScreen/DetailScreen'
@@ -13,7 +14,7 @@ import SeeAllTrendingScreen from '../SeeAllScreen/SeeAllTrendingScreen'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import SeeAllUpComingScreen from '../SeeAllScreen/SeeAllUpComingScreen'
 import type { RootStackParamList } from './NavigationTypes'
-import { ScrollView } from 'react-native'
+import { Goback } from '../../Components/Buttons/Goback'
 const Tab = createMaterialTopTabNavigator<RootStackParamList>()
 const Stack = createNativeStackNavigator<RootStackParamList>()
 function Navigation() {
@@ -130,8 +131,13 @@ function Navigation() {
                             name="SearchScreen"
                             component={SearchScreen}
                             options={{
+                                headerShown: false,
+                                headerStyle: {
+                                    backgroundColor: Colors.DarkPurple,
+                                },
                                 presentation: 'transparentModal',
                                 animation: 'fade',
+                                headerLeft: () => <Goback />,
                             }}
                         />
                         <Stack.Screen
@@ -139,7 +145,8 @@ function Navigation() {
                             component={SeeAllSeriesScreen}
                             options={{
                                 presentation: 'transparentModal',
-                                animation: 'fade',
+                                animation: 'slide_from_bottom',
+                                headerLeft: () => <Goback />,
                             }}
                         />
                         <Stack.Screen
@@ -147,14 +154,13 @@ function Navigation() {
                             component={SeeAllTrendingScreen}
                             options={{
                                 presentation: 'transparentModal',
-                                headerBackVisible: true,
-
                                 headerTitle: '',
                                 headerShadowVisible: false,
                                 headerStyle: {
                                     backgroundColor: Colors.DarkPurple,
                                 },
-                                animation: 'fade',
+                                animation: 'slide_from_bottom',
+                                headerLeft: () => <Goback />,
                             }}
                         />
                         <Stack.Screen
@@ -162,8 +168,8 @@ function Navigation() {
                             component={SeeAllUpComingScreen}
                             options={{
                                 presentation: 'transparentModal',
-                                headerBackVisible: true,
-                                animation: 'fade',
+                                animation: 'slide_from_bottom',
+                                headerLeft: () => <Goback />,
                             }}
                         />
                     </Stack.Navigator>

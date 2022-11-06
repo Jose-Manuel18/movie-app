@@ -14,7 +14,6 @@ export const CarouselImages = ({ info }: { info: CarouselPropertiesList }) => {
     const ITEM_HORIZONTAL_MARGIN = 5
     const ITEM_WIDTH = SLIDE_WIDTH + ITEM_HORIZONTAL_MARGIN * 0.9
     const SLIDER_WIDTH = viewportWidth
-    // let RandomNumber = Math.floor(Math.random() * 4) + 1
     const isCarousel = useRef(null)
     const renderItem = ({ item }: { item: movieTypes }) => {
         return (
