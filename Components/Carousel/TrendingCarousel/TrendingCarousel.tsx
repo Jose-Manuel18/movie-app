@@ -12,7 +12,6 @@ export function TrendingCarousel({ info }: { info: movieTypes }) {
                 data={take(info, 10)}
                 keyExtractor={(item) => item.id}
                 horizontal={true}
-                nestedScrollEnabled={true}
                 showsHorizontalScrollIndicator={false}
                 renderItem={({ item }) => {
                     return (

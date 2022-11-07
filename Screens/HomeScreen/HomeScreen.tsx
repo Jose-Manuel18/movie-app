@@ -14,41 +14,41 @@ import { SeeAllButton } from '../../Components/Carousel/Index'
 export function HomeScreen() {
     const { navigate } = useNavigation()
     const { top } = useSafeAreaInsets()
-    const StyledView = styled.View`
+    const View = styled.View`
         padding-top: ${top};
         background-color: ${Colors.DarkPurple};
     `
-    const StyledHeader = styled.View`
+    const Title = styled.View`
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
     `
     return (
-        <StyledView>
-            <ScrollView nestedScrollEnabled={true}>
+        <View>
+            <ScrollView>
                 <SearchButton />
                 <MoviesAPI />
-                <StyledHeader>
+                <Title>
                     <ReusableText modo="bigText">Trending</ReusableText>
                     <SeeAllButton
                         onPress={() => navigate('SeeAllTrendingScreen')}
                     />
-                </StyledHeader>
+                </Title>
                 <TopRatedMoviesAPI />
-                <StyledHeader>
+                <Title>
                     <ReusableText modo="bigText">Series</ReusableText>
                     <SeeAllButton
                         onPress={() => navigate('SeeAllSeriesScreen')}
                     />
-                </StyledHeader>
+                </Title>
                 <SeriesAPI />
-                <StyledHeader>
+                <Title>
                     <ReusableText modo="bigText">Up Coming</ReusableText>
                     <SeeAllButton onPress={() => navigate('SeeAllUpComing')} />
-                </StyledHeader>
+                </Title>
                 <UpComingAPI />
             </ScrollView>
-        </StyledView>
+        </View>
     )
 }
 
