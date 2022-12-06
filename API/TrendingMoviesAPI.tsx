@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { TrendingCarousel } from '../Components/Carousel/Index'
@@ -11,17 +11,11 @@ const TopRatedMoviesAPI = () => {
 
     if (error || isLoading) return null
     return (
-        <View style={styles.container}>
+        <View>
             <TrendingCarousel info={data.results} />
         </View>
     )
 }
 
 export default TopRatedMoviesAPI
-
-const styles = StyleSheet.create({
-    container: {
-        paddingBottom: 30,
-    },
-})
 

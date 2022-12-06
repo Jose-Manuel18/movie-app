@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { SeriesCarousel } from '../Components/Carousel/SeriesCarousel/SeriesCarousel'
@@ -11,17 +11,11 @@ const SeriesAPI = () => {
 
     if (error || isLoading) return null
     return (
-        <View style={styles.container}>
+        <View>
             <SeriesCarousel info={data.results} />
         </View>
     )
 }
 
 export default SeriesAPI
-
-const styles = StyleSheet.create({
-    container: {
-        paddingBottom: 30,
-    },
-})
 

@@ -1,7 +1,6 @@
 import { GestureResponderEvent, Pressable, View } from 'react-native'
 import React, { ComponentProps } from 'react'
 import { Ionicons } from '@expo/vector-icons'
-
 interface IconButtonProps {
     icon: ComponentProps<typeof Ionicons>['name']
     size: number

@@ -22,7 +22,6 @@ export default FilterTextCard
 
 const styles = StyleSheet.create({
     container: {
-        paddingHorizontal: 8,
         height: 30,
         alignItems: 'center',
         justifyContent: 'center',

@@ -15,6 +15,7 @@ export const CarouselImages = ({ info }: { info: CarouselPropertiesList }) => {
     const ITEM_WIDTH = SLIDE_WIDTH + ITEM_HORIZONTAL_MARGIN * 0.9
     const SLIDER_WIDTH = viewportWidth
     const isCarousel = useRef(null)
+
     const renderItem = ({ item }: { item: movieTypes }) => {
         return (
             <BigCard

@@ -23,7 +23,6 @@ export default ReusableText
 const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
-        paddingLeft: 20,
     },
     texto: {
         color: 'white',

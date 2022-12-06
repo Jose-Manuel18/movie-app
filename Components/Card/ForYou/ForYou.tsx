@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { FlatList, View } from 'react-native'
 import React from 'react'
 import { useRecoilValueLoadable } from 'recoil'
 import { GenreState } from '../../../State/GenreState'
@@ -7,50 +7,50 @@ import ForYouCard from './ForYouCard'
 import { Colors } from '../../Utils/Colors'
 import { take } from 'lodash'
 import { useNavigation } from '@react-navigation/native'
-
+import styled from 'styled-components/native'
+import { Block } from '../../Block'
 const ForYou = () => {
-    const { state: genreState, contents: genreContents } =
-        useRecoilValueLoadable(GenreState)
-    const { state, contents } = useRecoilValueLoadable(TrendingState)
-    const { navigate } = useNavigation()
-    if (genreState === 'hasError ' || genreState === 'loading') return null
-    if (state === 'hasError ' || state === 'loading') return null
-    return (
-        <View style={styles.container}>
-            <Text style={styles.text}>For You</Text>
-            <FlatList
-                scrollEnabled={false}
-                data={take(contents.results, 10)}
-                keyExtractor={(item) => item.id}
-                showsVerticalScrollIndicator={false}
-                renderItem={({ item }) => {
-                    return (
-                        <ForYouCard
-                            onPress={() => {
-                                navigate('DetailScreen', { movieDetails: item })
-                            }}
-                            movie={item}
-                        />
-                    )
-                }}
+  const { state: genreState, contents: genreContents } =
+    useRecoilValueLoadable(GenreState)
+  const { state, contents } = useRecoilValueLoadable(TrendingState)
+  const { navigate } = useNavigation()
+  if (genreState === 'hasError ' || genreState === 'loading') return null
+  if (state === 'hasError ' || state === 'loading') return null
+
+  return (
+    <Container>
+      <Text>For You</Text>
+      <Block size={24} />
+      <FlatList
+        scrollEnabled={false}
+        data={take(contents.results, 10)}
+        keyExtractor={(item) => item.id}
+        showsVerticalScrollIndicator={false}
+        ItemSeparatorComponent={() => <View style={{ padding: 8 }} />}
+        renderItem={({ item }) => {
+          return (
+            <ForYouCard
+              onPress={() => {
+                navigate('DetailScreen', { movieDetails: item })
+              }}
+              movie={item}
             />
-        </View>
-    )
+          )
+        }}
+      />
+    </Container>
+  )
 }
 
 export default ForYou
 
-const styles = StyleSheet.create({
-    container: {
-        paddingHorizontal: 20,
-        paddingBottom: 40,
-    },
-    text: {
-        paddingTop: 24,
-        paddingBottom: 8,
-        color: Colors.TextColor,
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
-})
+const Container = styled.View`
+  flex: 1;
+  padding: 16px;
+`
+const Text = styled.Text`
+  color: ${Colors.TextColor};
+  font-size: 20;
+  font-weight: bold;
+`
 

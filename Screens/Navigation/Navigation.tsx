@@ -27,12 +27,7 @@ function Navigation() {
                     tabBarStyle: {
                         backgroundColor: Colors.LightPurple,
                     },
-                    tabBarContentContainerStyle: {
-                        paddingBottom: 10,
-                        backgroundColor: Colors.LightPurple,
-                        borderTopLeftRadius: 16,
-                        borderTopRightRadius: 16,
-                    },
+
                     tabBarIndicatorStyle: { height: 0 },
                     tabBarActiveTintColor: Colors.Rose,
                     tabBarInactiveTintColor: Colors.Grey,
