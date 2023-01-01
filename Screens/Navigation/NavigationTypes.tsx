@@ -10,6 +10,8 @@ export type RootStackParamList = {
   SeeAllSeriesScreen: undefined
   SeeAllTrendingScreen: undefined
   SeeAllUpComing: undefined
+  Register: undefined
+  Login: undefined
 }
 
 declare global {
@@ -17,3 +19,4 @@ declare global {
     interface RootParamList extends RootStackParamList {}
   }
 }
+

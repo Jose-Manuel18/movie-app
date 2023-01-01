@@ -1,13 +1,7 @@
-const { getDefaultConfig } = require("@expo/metro-config");
-module.exports = {
-  transformer: {
-    getTransformOptions: function () {
-      return {
-        transform: {
-          experimentalImportSupport: false,
-          inlineRequires: false,
-        },
-      };
-    },
-  },
-};
+const { getDefaultConfig } = require('@expo/metro-config')
+const defaultConfig = getDefaultConfig(__dirname)
+
+defaultConfig.resolver.sourceExts.push('cjs')
+
+module.exports = defaultConfig
+

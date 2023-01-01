@@ -17,7 +17,7 @@ export function HomeScreen() {
   const View = styled.View`
     flex: 1;
     background-color: ${Colors.DarkPurple};
-    padding-top: ${top};
+    padding-top: ${top}px;
   `
   return (
     <View>
@@ -60,10 +60,4 @@ const TitleContainer = styled.View`
   justify-content: space-between;
   padding: 0px 20px;
 `
-// const Block = styled.View<{ gap: number }>`
-//     padding: ${(props) => props.gap}px;
-// `
-// const Spacer = styled.View`
-//     width: 100%;
-// `
 

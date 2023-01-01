@@ -1,6 +1,6 @@
 import { Colors } from '../Utils/Colors'
 import { useNavigation } from '@react-navigation/native'
-import IconButton from '../IconButton'
+import { IconButton } from '../IconButton'
 import styled from 'styled-components/native'
 const SearchButton = () => {
   const { navigate } = useNavigation()

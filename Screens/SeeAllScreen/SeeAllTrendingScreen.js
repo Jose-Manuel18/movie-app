@@ -5,11 +5,13 @@ import { TrendingState } from '../../State/TrendingState'
 import { useRecoilValueLoadable } from 'recoil'
 import SeeAllCard from '../../Components/Card/SeeAllCard'
 import { useNavigation } from '@react-navigation/native'
+import { Loading } from '../../Components/Loading'
 
 const SeeAllTrendingScreen = () => {
   const { navigate } = useNavigation()
   const { state, contents } = useRecoilValueLoadable(TrendingState)
-  if (state === 'hasError' || state === 'loading') return null
+  if (state === 'hasError') return null
+  if (state === 'loading') return <Loading />
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
@@ -40,3 +42,4 @@ const styles = StyleSheet.create({
     paddingHorizontal: 18,
   },
 })
+

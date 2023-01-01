@@ -1,40 +1,38 @@
 import React from "react";
-import { Colors } from "../Utils/Colors";
-import { useRecoilValueLoadable, useSetRecoilState } from "recoil";
-import { GenreState } from "../../State/GenreState";
 import { Rating } from "react-native-rating-element";
-import { seriesCardProps, GenreProps } from "../Carousel/SeriesCarousel/types";
 import styled from "styled-components/native";
-import { Block } from "../Block";
 import CardView from "react-native-cardview";
-import { Genre } from "../../State/UserState";
-const SearchCard = ({ movie, onPress }: seriesCardProps) => {
-  const setGenre = useSetRecoilState(Genre);
-  const { state, contents } = useRecoilValueLoadable(GenreState);
-  if (state === "hasError" || state === "loading") return null;
-  const GenreList: GenreProps[] = contents.genres;
-  const currentGenre: GenreProps[] = GenreList.filter((genre) =>
-    movie?.genre_ids?.includes(genre.id),
-  );
-
+import { Block } from "../../Components/Block";
+import { Float } from "react-native/Libraries/Types/CodegenTypes";
+import { GestureResponderEvent } from "react-native";
+import { Colors } from "../../Components/Utils/Colors";
+interface LikeCard {
+  title: String;
+  genre: String;
+  rating: Float;
+  poster: String;
+}
+interface LikeCardProps {
+  movie: LikeCard;
+  onPress?(event: GestureResponderEvent): void;
+}
+const SearchCard = ({ movie, onPress }: LikeCardProps) => {
   return (
     <CardView cardElevation={2} cardMaxElevation={2} cornerRadius={16}>
       <CardContainer onPress={onPress}>
         <Image
           resizeMode="stretch"
           source={{
-            uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+            uri: `https://image.tmdb.org/t/p/w500${movie.poster}`,
           }}
         />
         <Block width={16} />
         <TextContainer>
           <TText>{movie.title}</TText>
-          <Text>
-            {(currentGenre || []).map((genre) => genre.name).join(", ")}.
-          </Text>
+          <Text>{movie.genre}</Text>
           <RatingContainer>
             <Rating
-              rated={movie.vote_average / 2}
+              rated={movie.rating / 2}
               totalCount={5}
               ratingColor={Colors.StarColor}
               size={14}
@@ -42,7 +40,7 @@ const SearchCard = ({ movie, onPress }: seriesCardProps) => {
               icon="ios-star"
               direction="row"
             />
-            <Text>{movie.vote_average / 2 + "/5"}</Text>
+            <Text>{movie.rating / 2 + "/5"}</Text>
           </RatingContainer>
         </TextContainer>
       </CardContainer>
