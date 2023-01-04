@@ -9,12 +9,14 @@ import { selectedState } from "./type";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import styled from "styled-components/native";
 
-import { FlatList } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import FilterTextCard from "../../Components/Card/FilteredText/FilterTextCard";
 import { Loading } from "../../Components/Loading";
+import { movieData } from "../../Components/Carousel/SeriesCarousel/types";
+import { take } from "lodash";
 export const ExploreScreen = () => {
   const { top } = useSafeAreaInsets();
-  const View = styled.View`
+  const Container = styled.View`
     flex: 1;
     padding-top: ${top}px;
     background-color: ${Colors.DarkPurple};
@@ -28,11 +30,16 @@ export const ExploreScreen = () => {
     (movies: { genre_ids: (selectedState | null)[] }) =>
       movies?.genre_ids.includes(selected),
   );
+  if (
+    typeof currentMovie === "undefined" ||
+    typeof contents.results === "undefined"
+  ) {
+    return null;
+  }
+  const results = contents.results;
 
-  // if (state === "hasError" || genreState === "hasError") return null;
-  // if (state === "loading" || genreState === "loading") return <Loading />;
   return (
-    <View>
+    <Container>
       <ScrollView showsVerticalScrollIndicator={false}>
         <SearchButton />
         <Block size={16} />
@@ -58,68 +65,71 @@ export const ExploreScreen = () => {
           />
           <Block size={16} />
         </GenreHeader>
-        <BiggerPosterContainer>
-          <BigPoster
-            source={{
-              uri:
-                selected === null
-                  ? `https://image.tmdb.org/t/p/w500${contents?.results[0]?.poster_path}`
-                  : `https://image.tmdb.org/t/p/w500${currentMovie[0]?.poster_path}`,
+        <PosterContainer>
+          <FlatList
+            data={
+              selected === null
+                ? take(contents.results, 1)
+                : take(currentMovie, 1)
+            }
+            horizontal={true}
+            ListFooterComponent={() => (
+              <SmallPosterContainer>
+                <SmallerPoster
+                  source={{
+                    uri:
+                      selected === null
+                        ? `https://image.tmdb.org/t/p/w500${results[1].poster_path}`
+                        : `https://image.tmdb.org/t/p/w500${currentMovie[1]?.poster_path}`,
+                  }}
+                />
+                <Block size={8} />
+                <SmallerPoster
+                  source={{
+                    uri:
+                      selected === null
+                        ? `https://image.tmdb.org/t/p/w500${results[2].poster_path}`
+                        : `https://image.tmdb.org/t/p/w500${currentMovie[2]?.poster_path}`,
+                  }}
+                />
+              </SmallPosterContainer>
+            )}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => {
+              return (
+                <BigPosterContainer>
+                  <BigPoster
+                    source={{
+                      uri: `https://image.tmdb.org/t/p/w500${item.poster_path}`,
+                    }}
+                  />
+                </BigPosterContainer>
+              );
             }}
           />
-          <OuterContainer>
-            <MiddleContainer>
-              <SmallerPoster
-                source={{
-                  uri:
-                    selected === null
-                      ? `https://image.tmdb.org/t/p/w500${contents?.results[1]?.poster_path}`
-                      : `https://image.tmdb.org/t/p/w500${currentMovie[1]?.poster_path}`,
-                }}
-              />
-            </MiddleContainer>
-            <SmallPosterContainer>
-              <SmallerPoster
-                source={{
-                  uri:
-                    selected === null
-                      ? `https://image.tmdb.org/t/p/w500${contents?.results[2]?.poster_path}`
-                      : `https://image.tmdb.org/t/p/w500${currentMovie[2]?.poster_path}`,
-                }}
-              />
-            </SmallPosterContainer>
-          </OuterContainer>
-        </BiggerPosterContainer>
+        </PosterContainer>
+
         <ForYou />
       </ScrollView>
-    </View>
+    </Container>
   );
 };
 const ScrollView = styled.ScrollView``;
 
-const BiggerPosterContainer = styled.View`
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  flex-direction: row;
-  max-height: 300px;
-  padding: 0px 32px;
-  /* background-color: white; */
-`;
-const OuterContainer = styled.View`
-  justify-content: center;
-  align-items: center;
+const SmallPosterContainer = styled.View`
   flex: 1;
   flex-direction: column;
 `;
-const SmallPosterContainer = styled.View`
+const PosterContainer = styled.View`
   flex: 1;
-  padding: 8px 8px;
+  justify-content: center;
+  align-items: center;
 `;
-const MiddleContainer = styled.View`
+const BigPosterContainer = styled.View`
   flex: 1;
-  padding: 8px 8px;
+  padding-right: 16px;
 `;
+
 const BigPoster = styled.Image`
   height: 300px;
   width: 200px;
@@ -127,12 +137,12 @@ const BigPoster = styled.Image`
 `;
 const SmallerPoster = styled.Image`
   width: 100px;
-  height: 138px;
+  height: 145px;
   border-radius: 16px;
 `;
 const GenreHeader = styled.View`
   flex: 1;
 `;
-const Block = styled.View<{ size?: number; width?: number; flex?: boolean }>`
+const Block = styled.View<{ size?: number }>`
   height: ${(p) => p.size}px;
 `;

@@ -23,7 +23,7 @@ const ForYou = () => {
       <Block height={16} />
       <Text>For You</Text>
       <Block height={24} />
-      <FlatList
+      {/* <FlatList
         data={contents.results}
         keyExtractor={(item) => item.id}
         ItemSeparatorComponent={() => <Block height={16} />}
@@ -38,11 +38,11 @@ const ForYou = () => {
             />
           );
         }}
-      />
-      {/* {take(contents.results, 10).map((item: movieData, index) => {
+      /> */}
+      {take(contents.results, 10).map((item: movieData, index: number) => {
         return (
           <CardContainer key={item.id}>
-            <Block size={index === 0 ? 0 : 16} />
+            <Block height={index === 0 ? 0 : 16} />
             <SearchCard
               onPress={() => {
                 navigate("DetailScreen", { movieDetails: item });
@@ -51,7 +51,7 @@ const ForYou = () => {
             />
           </CardContainer>
         );
-      })} */}
+      })}
     </Container>
   );
 };
@@ -68,5 +68,8 @@ const Text = styled.Text`
   padding-left: 16px;
 `;
 const Block = styled.View<{ height?: number }>`
-  height: ${(p) => p.height}px;
+  height: ${(p) => p.height};
+`;
+const CardContainer = styled.View`
+  flex: 1;
 `;

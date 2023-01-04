@@ -68,9 +68,6 @@ const DetailsCard = ({ movie }: { movie: movieTypes }) => {
   if (error) console.log(error);
   if (deleteError) return null;
   if (errorFeed) return null;
-  // if (loading) return <Loading />;
-  // if (deleteLoading) return <Loading />;
-  // if (loadingFeed) return <Loading />;
 
   const allIds = map(likeData?.me?.likes, "movie_db_id");
   const filteredId = filter(
@@ -78,8 +75,7 @@ const DetailsCard = ({ movie }: { movie: movieTypes }) => {
     (ids: number) => ids === movie.id || movie.movie_db_id,
   );
   if (state === "hasError" || state === "loading") return null;
-  // console.log(data);
-  // console.log(includes(allIds, movie.movie_db_id));
+
   return (
     <Container>
       <RowContainer>
