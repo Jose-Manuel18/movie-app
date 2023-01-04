@@ -13,6 +13,7 @@ module.exports = function (api) {
       ],
       "relay",
       "react-native-reanimated/plugin",
+      "babel-plugin-styled-components",
     ],
   };
 };

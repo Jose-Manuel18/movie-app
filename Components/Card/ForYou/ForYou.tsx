@@ -6,7 +6,6 @@ import { Colors } from "../../Utils/Colors";
 import { take } from "lodash";
 import { useNavigation } from "@react-navigation/native";
 import styled from "styled-components/native";
-import { Block } from "../../Block";
 import { Loading } from "../../Loading";
 import SearchCard from "../SearchCard";
 import { movieData } from "../../Carousel/SeriesCarousel/types";
@@ -21,13 +20,13 @@ const ForYou = () => {
   if (state === "loading") return <Loading />;
   return (
     <Container>
-      <Block size={16} />
+      <Block height={16} />
       <Text>For You</Text>
-      <Block size={24} />
+      <Block height={24} />
       <FlatList
         data={contents.results}
         keyExtractor={(item) => item.id}
-        ItemSeparatorComponent={() => <Block size={16} />}
+        ItemSeparatorComponent={() => <Block height={16} />}
         scrollEnabled={false}
         renderItem={({ item }) => {
           return (
@@ -67,4 +66,7 @@ const Text = styled.Text`
   font-size: 20px;
   font-weight: bold;
   padding-left: 16px;
+`;
+const Block = styled.View<{ height?: number }>`
+  height: ${(p) => p.height}px;
 `;

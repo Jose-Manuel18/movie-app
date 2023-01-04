@@ -2,21 +2,55 @@ import React from "react";
 import { Rating } from "react-native-rating-element";
 import styled from "styled-components/native";
 import CardView from "react-native-cardview";
-import { Block } from "../../Components/Block";
-import { Float } from "react-native/Libraries/Types/CodegenTypes";
+
 import { GestureResponderEvent } from "react-native";
 import { Colors } from "../../Components/Utils/Colors";
+import { IconButton } from "../../Components/IconButton";
+import { gql, useMutation, useQuery } from "@apollo/client";
 interface LikeCard {
-  title: String;
-  genre: String;
-  rating: Float;
-  poster: String;
+  id: string;
+  title: string;
+  rating: number;
+  poster: string;
+  genre: string;
+  overview: string;
+  movie_db_id: number;
 }
 interface LikeCardProps {
   movie: LikeCard;
   onPress?(event: GestureResponderEvent): void;
 }
 const SearchCard = ({ movie, onPress }: LikeCardProps) => {
+  const ME = gql`
+    query Query {
+      me {
+        likes {
+          id
+          title
+          rating
+          poster
+          overview
+          movie_db_id
+        }
+      }
+    }
+  `;
+  const {
+    loading: loadingFeed,
+    error: errorFeed,
+    data: likeData,
+    refetch,
+  } = useQuery(ME);
+  const DELETE = gql`
+    mutation Mutation($movieDbId: Int!) {
+      deleteLikeByUser(movie_db_id: $movieDbId) {
+        id
+        movie_db_id
+      }
+    }
+  `;
+  const [deleteLike, { loading, error, data }] = useMutation(DELETE);
+
   return (
     <CardView cardElevation={2} cardMaxElevation={2} cornerRadius={16}>
       <CardContainer onPress={onPress}>
@@ -43,20 +77,35 @@ const SearchCard = ({ movie, onPress }: LikeCardProps) => {
             <Text>{movie.rating / 2 + "/5"}</Text>
           </RatingContainer>
         </TextContainer>
+
+        <ButtonContainer>
+          <IconButton
+            size={32}
+            color={Colors.Rose}
+            icon="close-circle"
+            onPress={async () => {
+              await deleteLike({
+                variables: {
+                  movieDbId: movie.movie_db_id,
+                },
+              });
+              refetch({ ME });
+            }}
+          />
+        </ButtonContainer>
+        <Block width={32} />
       </CardContainer>
     </CardView>
   );
 };
 
 export default SearchCard;
-const CardContainer = styled.TouchableOpacity`
+const CardContainer = styled.View`
   background-color: ${Colors.LightPurple};
   flex-direction: row;
   border-radius: 16px;
   overflow: hidden;
   margin: 0px 24px;
-
-  /* box-shadow: 0px 6px 5px 4px black; */
 `;
 const Image = styled.Image`
   width: 80px;
@@ -76,4 +125,10 @@ const TText = styled.Text`
 `;
 const Text = styled.Text`
   color: white;
+`;
+const Block = styled.View<{ width?: number }>`
+  width: ${(p) => p.width}px;
+`;
+const ButtonContainer = styled.View`
+  justify-content: center;
 `;

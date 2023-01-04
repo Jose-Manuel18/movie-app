@@ -45,16 +45,6 @@ const SearchBar = ({
           </View>
         </View>
         <View style={styles.spacing}></View>
-        <TouchableOpacity>
-          <View style={styles.filterContainer}>
-            <IconButton
-              icon="filter-sharp"
-              color="#ffffff"
-              size={24}
-              disabled
-            />
-          </View>
-        </TouchableOpacity>
       </View>
     </View>
   );
@@ -80,12 +70,13 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.17,
     shadowRadius: 3.05,
-    elevation: 4,
+    elevation: 1,
     backgroundColor: Colors.LightPurple,
     borderRadius: 18,
     color: Colors.TextColor,
     flexDirection: "row",
     justifyContent: "space-between",
+    height: 45,
   },
   textInput: {
     flex: 1,

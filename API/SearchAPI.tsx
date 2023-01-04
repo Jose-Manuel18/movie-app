@@ -4,7 +4,6 @@ import SearchBar from "../Components/SearchBar";
 import SearchCard from "../Components/Card/SearchCard";
 import { useNavigation } from "@react-navigation/native";
 import { searchProps } from "../Components/Carousel/Types/types";
-import { Block } from "../Components/Block";
 const SearchAPI = () => {
   const { navigate } = useNavigation();
   const [search, setSearch] = useState("");
@@ -55,7 +54,7 @@ const SearchAPI = () => {
       />
       <FlatList
         data={filteredDataSource.results}
-        ItemSeparatorComponent={() => <Block size={16} />}
+        ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => {
           return (

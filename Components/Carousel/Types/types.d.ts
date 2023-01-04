@@ -13,6 +13,7 @@ export interface CarouselPropertiesList {
 }
 
 export interface movieTypes {
+  movie_db_id: number | undefined;
   genre_ids?: number[];
   id?: number;
   title?: string;

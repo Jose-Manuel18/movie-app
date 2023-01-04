@@ -1,14 +1,21 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import {
+  CommonActions,
+  NavigationContainer,
+  useNavigation,
+} from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { HomeScreen, AccountScreen, LikeScreen } from "../Index";
+import { AccountScreen, HomeScreen, LikeScreen } from "../Index";
 import { ExploreScreen } from "../ExploreScreen/ExploreScreen";
 import { IconButton } from "../../Components/IconButton";
 import { Colors } from "../../Components/Utils/Colors";
 import DetailScreen from "../DetailScreen/DetailScreen";
 import SearchScreen from "../SearchScreen/SearchScreen";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import {
+  BottomSheetModalProvider,
+  TouchableOpacity,
+} from "@gorhom/bottom-sheet";
 import SeeAllSeriesScreen from "../SeeAllScreen/SeeAllSeriesScreen";
 import SeeAllTrendingScreen from "../SeeAllScreen/SeeAllTrendingScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -20,10 +27,12 @@ import { Login } from "../Login/Login";
 import { userState } from "../../State/UserState";
 import { useRecoilValue } from "recoil";
 import linking from "./LinkingConfiguration";
+
 const Tab = createBottomTabNavigator<RootStackParamList>();
 const Stack = createNativeStackNavigator<RootStackParamList>();
 function Navigation() {
   const user = useRecoilValue(userState);
+
   const MyTabs = () => {
     return (
       <Tab.Navigator
@@ -74,7 +83,7 @@ function Navigation() {
             ),
           }}
         />
-        <Tab.Screen
+        {/* <Tab.Screen
           name="Account"
           component={AccountScreen}
           options={{
@@ -87,7 +96,7 @@ function Navigation() {
               />
             ),
           }}
-        />
+        /> */}
       </Tab.Navigator>
     );
   };
@@ -111,7 +120,7 @@ function Navigation() {
                   options={{
                     headerShown: false,
                     presentation: "transparentModal",
-                    animation: "slide_from_bottom",
+                    animation: "fade",
                   }}
                 />
                 <Stack.Screen
@@ -132,6 +141,11 @@ function Navigation() {
                   component={SeeAllSeriesScreen}
                   options={{
                     presentation: "transparentModal",
+                    headerTitle: "",
+                    headerShadowVisible: false,
+                    headerStyle: {
+                      backgroundColor: Colors.DarkPurple,
+                    },
                     animation: "slide_from_bottom",
                     headerLeft: () => <Goback />,
                   }}
@@ -155,8 +169,22 @@ function Navigation() {
                   component={SeeAllUpComingScreen}
                   options={{
                     presentation: "transparentModal",
+                    headerTitle: "",
+                    headerShadowVisible: false,
+                    headerStyle: {
+                      backgroundColor: Colors.DarkPurple,
+                    },
                     animation: "slide_from_bottom",
                     headerLeft: () => <Goback />,
+                  }}
+                />
+                <Stack.Screen
+                  name="Account"
+                  component={AccountScreen}
+                  options={{
+                    headerShown: false,
+                    presentation: "transparentModal",
+                    animation: "fade",
                   }}
                 />
               </Stack.Group>
@@ -166,13 +194,19 @@ function Navigation() {
                   name="Register"
                   component={Form}
                   options={{
-                    headerShown: true,
+                    headerShown: false,
                   }}
                 />
                 <Stack.Screen
                   name="Login"
                   component={Login}
-                  options={{ headerShown: true, headerLeft: () => <Goback /> }}
+                  options={{
+                    headerShown: true,
+                    headerLeft: () => <Goback />,
+                    headerStyle: { backgroundColor: Colors.DarkPurple },
+                    headerShadowVisible: false,
+                    headerTitle: "",
+                  }}
                 />
               </Stack.Group>
             )}

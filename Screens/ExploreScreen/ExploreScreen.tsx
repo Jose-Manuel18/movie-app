@@ -8,7 +8,7 @@ import ForYou from "../../Components/Card/ForYou/ForYou";
 import { selectedState } from "./type";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import styled from "styled-components/native";
-import { Block } from "../../Components/Block";
+
 import { FlatList } from "react-native";
 import FilterTextCard from "../../Components/Card/FilteredText/FilterTextCard";
 import { Loading } from "../../Components/Loading";
@@ -16,7 +16,7 @@ export const ExploreScreen = () => {
   const { top } = useSafeAreaInsets();
   const View = styled.View`
     flex: 1;
-    padding-top: ${top};
+    padding-top: ${top}px;
     background-color: ${Colors.DarkPurple};
   `;
   const [selected, setSelected] = useState<selectedState | null>(null);
@@ -29,8 +29,8 @@ export const ExploreScreen = () => {
       movies?.genre_ids.includes(selected),
   );
 
-  if (state === "hasError" || genreState === "hasError") return null;
-  if (state === "loading" || genreState === "loading") return <Loading />;
+  // if (state === "hasError" || genreState === "hasError") return null;
+  // if (state === "loading" || genreState === "loading") return <Loading />;
   return (
     <View>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -41,8 +41,7 @@ export const ExploreScreen = () => {
             data={genreContents.genres}
             keyExtractor={(item) => item.id}
             horizontal={true}
-            showsHorizontalScrollIndicator={true}
-            ItemSeparatorComponent={() => <Block width={8} />}
+            showsHorizontalScrollIndicator={false}
             renderItem={({ item }) => {
               return (
                 <FilterTextCard
@@ -64,8 +63,8 @@ export const ExploreScreen = () => {
             source={{
               uri:
                 selected === null
-                  ? `https://image.tmdb.org/t/p/w500${contents.results[0].poster_path}`
-                  : `https://image.tmdb.org/t/p/w500${currentMovie[0].poster_path}`,
+                  ? `https://image.tmdb.org/t/p/w500${contents?.results[0]?.poster_path}`
+                  : `https://image.tmdb.org/t/p/w500${currentMovie[0]?.poster_path}`,
             }}
           />
           <OuterContainer>
@@ -74,8 +73,8 @@ export const ExploreScreen = () => {
                 source={{
                   uri:
                     selected === null
-                      ? `https://image.tmdb.org/t/p/w500${contents.results[1].poster_path}`
-                      : `https://image.tmdb.org/t/p/w500${currentMovie[1].poster_path}`,
+                      ? `https://image.tmdb.org/t/p/w500${contents?.results[1]?.poster_path}`
+                      : `https://image.tmdb.org/t/p/w500${currentMovie[1]?.poster_path}`,
                 }}
               />
             </MiddleContainer>
@@ -84,7 +83,7 @@ export const ExploreScreen = () => {
                 source={{
                   uri:
                     selected === null
-                      ? `https://image.tmdb.org/t/p/w500${contents.results[2].poster_path}`
+                      ? `https://image.tmdb.org/t/p/w500${contents?.results[2]?.poster_path}`
                       : `https://image.tmdb.org/t/p/w500${currentMovie[2]?.poster_path}`,
                 }}
               />
@@ -133,4 +132,7 @@ const SmallerPoster = styled.Image`
 `;
 const GenreHeader = styled.View`
   flex: 1;
+`;
+const Block = styled.View<{ size?: number; width?: number; flex?: boolean }>`
+  height: ${(p) => p.size}px;
 `;

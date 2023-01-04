@@ -5,7 +5,6 @@ import { GenreState } from "../../State/GenreState";
 import { Rating } from "react-native-rating-element";
 import { seriesCardProps, GenreProps } from "../Carousel/SeriesCarousel/types";
 import styled from "styled-components/native";
-import { Block } from "../Block";
 import CardView from "react-native-cardview";
 import { Genre } from "../../State/UserState";
 const SearchCard = ({ movie, onPress }: seriesCardProps) => {
@@ -78,4 +77,7 @@ const TText = styled.Text`
 `;
 const Text = styled.Text`
   color: white;
+`;
+const Block = styled.View<{ width: number }>`
+  width: ${(p) => p.width}px;
 `;

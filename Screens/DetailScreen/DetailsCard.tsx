@@ -1,14 +1,14 @@
-import { StyleSheet, Text, View, Image } from "react-native";
 import { IconButton } from "../../Components/IconButton";
-import { TouchableOpacity } from "react-native";
 import { movieTypes } from "../../Components/Carousel/Types/types";
 import { gql, useMutation, useQuery } from "@apollo/client";
-import { Loading } from "../../Components/Loading";
 import { Colors } from "../../Components/Utils/Colors";
-import { filter, includes, map } from "lodash";
+import { includes, map } from "lodash";
 import { GenreProps } from "../../Components/Carousel/SeriesCarousel/types";
 import { useRecoilValueLoadable } from "recoil";
 import { GenreState } from "../../State/GenreState";
+import styled from "styled-components/native";
+import CardView from "react-native-cardview";
+import { filter } from "lodash";
 const DetailsCard = ({ movie }: { movie: movieTypes }) => {
   const { state, contents } = useRecoilValueLoadable(GenreState);
 
@@ -26,6 +26,7 @@ const DetailsCard = ({ movie }: { movie: movieTypes }) => {
           title
           rating
           poster
+          overview
           movie_db_id
         }
       }
@@ -39,6 +40,7 @@ const DetailsCard = ({ movie }: { movie: movieTypes }) => {
         rating
         poster
         genre
+        overview
         movie_db_id
       }
     }
@@ -63,112 +65,126 @@ const DetailsCard = ({ movie }: { movie: movieTypes }) => {
     refetch,
   } = useQuery(ME);
   const [createLike, { loading, error, data }] = useMutation(LIKE);
-  if (error) {
-    console.log(error.message);
-  }
-  if (deleteError) {
-    console.log(deleteError.message);
-  }
-  if (errorFeed) {
-    console.log(errorFeed.message);
-  }
-  if (loading) return <Loading />;
+  if (error) console.log(error);
+  if (deleteError) return null;
+  if (errorFeed) return null;
+  // if (loading) return <Loading />;
+  // if (deleteLoading) return <Loading />;
+  // if (loadingFeed) return <Loading />;
 
   const allIds = map(likeData?.me?.likes, "movie_db_id");
-  const filteredId = filter(allIds, (ids: any) => ids === movie.id);
+  const filteredId = filter(
+    allIds,
+    (ids: number) => ids === movie.id || movie.movie_db_id,
+  );
   if (state === "hasError" || state === "loading") return null;
-  console.log(data);
+  // console.log(data);
+  // console.log(includes(allIds, movie.movie_db_id));
   return (
-    <View style={styles.container}>
-      <View style={styles.innerContainer}>
-        <View style={styles.imageContainer}>
-          <Image
+    <Container>
+      <RowContainer>
+        <CardView cardElevation={2} cardMaxElevation={2} cornerRadius={16}>
+          <Poster
             source={{
               uri: `https://image.tmdb.org/t/p/w500${
                 movie.poster_path || movie.poster
               }`,
             }}
-            style={styles.cardImage}
           />
-        </View>
-        <View style={{ width: 50 }}></View>
-        <View style={styles.textContainer}>
-          <Text style={styles.titleText}>{movie.title || movie.name}</Text>
-          <Text style={styles.overviewText}>{movie.overview}</Text>
-        </View>
-        <TouchableOpacity
-          onPress={async () => {
-            includes(allIds, movie.id)
-              ? await deleteLike({
-                  variables: {
-                    movieDbId: movie.id,
+        </CardView>
+        <BlockX width={16} />
+        <ColumnContainer>
+          <Title>{movie.title || movie.name}</Title>
+          <BlockY size={8} />
+          <Overview>{movie.overview}</Overview>
+        </ColumnContainer>
+      </RowContainer>
+      <BlockY size={16} />
+      <AddLike
+        onPress={async () => {
+          includes(allIds, movie.id)
+            ? await deleteLike({
+                variables: {
+                  movieDbId: movie.id,
+                },
+              })
+            : await createLike({
+                variables: {
+                  data: {
+                    title: movie.title || movie.name,
+                    poster: movie.poster_path,
+                    rating: movie.vote_average,
+                    movie_db_id: movie.id,
+                    overview: movie.overview,
+                    genre: moviesGenres.toString(),
                   },
-                })
-              : createLike({
-                  variables: {
-                    data: {
-                      title: movie.title || movie.name,
-                      poster: movie.poster_path,
-                      rating: movie.vote_average,
-                      movie_db_id: movie.id,
-                      genre: moviesGenres.toString(),
-                    },
-                  },
-                });
-            refetch({ ME });
-          }}
-          style={styles.buttonContainer}
-        >
-          <IconButton
-            icon={includes(allIds, movie.id) ? "heart" : "heart-outline"}
-            color={Colors.Rose}
-            size={24}
-            disabled
-          />
-        </TouchableOpacity>
-      </View>
-    </View>
+                },
+              });
+          refetch({ ME });
+        }}
+      >
+        <IconButton
+          icon={
+            includes(allIds, movie.id || movie.movie_db_id)
+              ? "heart-dislike"
+              : "heart"
+          }
+          color="black"
+          size={24}
+        />
+        <BlockX width={8} />
+        <LikeText>
+          {includes(allIds, movie.id) ? "Remove from Likes" : "Add to Likes"}
+        </LikeText>
+      </AddLike>
+    </Container>
   );
 };
 
 export default DetailsCard;
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 12,
-    paddingVertical: 12,
-  },
-  innerContainer: {
-    flex: 1,
-    flexDirection: "row",
-  },
-  imageContainer: { flex: 1 },
-  cardImage: {
-    resizeMode: "stretch",
-    width: 140,
-    height: 200,
-    borderRadius: 16,
-  },
-  textContainer: {
-    flex: 2,
-    flexDirection: "column",
-  },
-  titleText: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#ffffff",
-  },
-  overviewText: {
-    fontSize: 13,
-    fontWeight: "normal",
-    color: "#ffffff",
-  },
-  buttonContainer: {
-    width: 25,
-    height: 25,
-    // backgroundColor: "#ffffff",
-  },
-  deleteButton: {
-    backgroundColor: "white",
-  },
-});
+const Container = styled.View`
+  flex: 1;
+  padding: 0px 16px;
+`;
+
+const Poster = styled.Image`
+  width: 140px;
+  height: 200px;
+  border-radius: 16px;
+  border-width: 2px;
+`;
+const Title = styled.Text`
+  color: ${Colors.TextColor};
+  font-size: 18px;
+  font-weight: bold;
+`;
+const RowContainer = styled.View`
+  flex-direction: row;
+  flex: 1;
+`;
+const Overview = styled.Text`
+  color: ${Colors.TextColor};
+`;
+const ColumnContainer = styled.ScrollView`
+  flex-direction: column;
+  flex: 1;
+`;
+
+const AddLike = styled.TouchableOpacity`
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  background-color: ${Colors.Rose};
+  border-radius: 32px;
+  height: 32px;
+`;
+const LikeText = styled.Text`
+  color: black;
+  font-weight: bold;
+`;
+const BlockY = styled.View<{ size?: number }>`
+  height: ${(p) => p.size}px;
+`;
+const BlockX = styled.View<{ width?: number }>`
+  height: ${(p) => p.width}px;
+`;
