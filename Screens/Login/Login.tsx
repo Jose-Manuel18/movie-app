@@ -4,7 +4,6 @@ import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { auth } from "../../State/firebase";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useNavigation } from "@react-navigation/native";
 import { Auth, signInWithEmailAndPassword } from "firebase/auth";
 import { Colors } from "../../Components/Utils/Colors";
 import { IconButton } from "../../Components/IconButton";
@@ -25,7 +24,6 @@ const schema = z.object({
 });
 export function Login() {
   const userData = useSetRecoilState(userState);
-  const { navigate }: { navigate: any } = useNavigation();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const {
     control,
@@ -165,18 +163,12 @@ const InputContainer = styled.View`
   border-bottom-width: 1px;
   border-bottom-color: #dfdfdf;
 `;
-const Text = styled.Text`
-  color: white;
-`;
 //Error Text
 
 const EText = styled.Text`
   color: red;
 `;
 
-const Flex = styled.View`
-  flex: 1;
-`;
 const Block = styled.View<{ size?: number }>`
   height: ${(p) => p.size}px;
 `;

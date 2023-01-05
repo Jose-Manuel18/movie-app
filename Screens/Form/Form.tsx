@@ -54,35 +54,34 @@ export function Form() {
     }
   `;
 
-  const [registerUser, { loading, error, data }] = useMutation(SIGN_UP, {
-    async onCompleted() {
-      try {
-        await signInWithEmailAndPassword(auth, data.email, data.password).then(
-          (userCredentials) => {
-            const user = userCredentials.user;
-            userData(user);
-          },
-        );
-      } catch (error) {
-        setErrorMessage((error as Error).message);
-      }
-    },
-    onError(error) {
-      console.log(error);
-    },
-  });
+  const [registerUser, { loading, error, data: signUpData }] =
+    useMutation(SIGN_UP);
 
   if (error) {
     console.log(error.message);
   }
   if (loading) return <Loading />;
-  // console.log(data);
+  console.log(errorMessage);
   const onSubmit: SubmitHandler<FormProps> = async (data) => {
     await registerUser({
       variables: {
         name: data.name,
         email: data.email,
         password: data.password,
+      },
+      async onCompleted() {
+        try {
+          await signInWithEmailAndPassword(
+            auth,
+            data.email,
+            data.password,
+          ).then((userCredentials) => {
+            const user = userCredentials.user;
+            userData(user);
+          });
+        } catch (error) {
+          setErrorMessage((error as Error).message);
+        }
       },
     });
   };

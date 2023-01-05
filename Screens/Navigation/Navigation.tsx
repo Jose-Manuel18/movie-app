@@ -83,20 +83,6 @@ function Navigation() {
             ),
           }}
         />
-        {/* <Tab.Screen
-          name="Account"
-          component={AccountScreen}
-          options={{
-            tabBarIcon: ({ color }) => (
-              <IconButton
-                icon="person-sharp"
-                color={color}
-                size={24}
-                disabled
-              />
-            ),
-          }}
-        /> */}
       </Tab.Navigator>
     );
   };
