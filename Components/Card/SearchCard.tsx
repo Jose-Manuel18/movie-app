@@ -5,7 +5,6 @@ import { GenreState } from "../../State/GenreState";
 import { Rating } from "react-native-rating-element";
 import { seriesCardProps, GenreProps } from "../Carousel/SeriesCarousel/types";
 import styled from "styled-components/native";
-import CardView from "react-native-cardview";
 import { Genre } from "../../State/UserState";
 const SearchCard = ({ movie, onPress }: seriesCardProps) => {
   const setGenre = useSetRecoilState(Genre);
@@ -17,35 +16,33 @@ const SearchCard = ({ movie, onPress }: seriesCardProps) => {
   );
 
   return (
-    <CardView cardElevation={2} cardMaxElevation={2} cornerRadius={16}>
-      <CardContainer onPress={onPress}>
-        <Image
-          resizeMode="stretch"
-          source={{
-            uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
-          }}
-        />
-        <Block width={16} />
-        <TextContainer>
-          <TText>{movie.title}</TText>
-          <Text>
-            {(currentGenre || []).map((genre) => genre.name).join(", ")}.
-          </Text>
-          <RatingContainer>
-            <Rating
-              rated={movie.vote_average / 2}
-              totalCount={5}
-              ratingColor={Colors.StarColor}
-              size={14}
-              readonly
-              icon="ios-star"
-              direction="row"
-            />
-            <Text>{movie.vote_average / 2 + "/5"}</Text>
-          </RatingContainer>
-        </TextContainer>
-      </CardContainer>
-    </CardView>
+    <CardContainer onPress={onPress}>
+      <Image
+        resizeMode="stretch"
+        source={{
+          uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+        }}
+      />
+      <Block width={16} />
+      <TextContainer>
+        <TText>{movie.title}</TText>
+        <Text>
+          {(currentGenre || []).map((genre) => genre.name).join(", ")}.
+        </Text>
+        <RatingContainer>
+          <Rating
+            rated={movie.vote_average / 2}
+            totalCount={5}
+            ratingColor={Colors.StarColor}
+            size={14}
+            readonly
+            icon="ios-star"
+            direction="row"
+          />
+          <Text>{movie.vote_average / 2 + "/5"}</Text>
+        </RatingContainer>
+      </TextContainer>
+    </CardContainer>
   );
 };
 

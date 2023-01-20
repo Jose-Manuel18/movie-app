@@ -7,7 +7,6 @@ import { GenreProps } from "../../Components/Carousel/SeriesCarousel/types";
 import { useRecoilValueLoadable } from "recoil";
 import { GenreState } from "../../State/GenreState";
 import styled from "styled-components/native";
-import CardView from "react-native-cardview";
 import { filter } from "lodash";
 const DetailsCard = ({ movie }: { movie: movieTypes }) => {
   const { state, contents } = useRecoilValueLoadable(GenreState);
@@ -79,15 +78,13 @@ const DetailsCard = ({ movie }: { movie: movieTypes }) => {
   return (
     <Container>
       <RowContainer>
-        <CardView cardElevation={2} cardMaxElevation={2} cornerRadius={16}>
-          <Poster
-            source={{
-              uri: `https://image.tmdb.org/t/p/w500${
-                movie.poster_path || movie.poster
-              }`,
-            }}
-          />
-        </CardView>
+        <Poster
+          source={{
+            uri: `https://image.tmdb.org/t/p/w500${
+              movie.poster_path || movie.poster
+            }`,
+          }}
+        />
         <BlockX width={16} />
         <ColumnContainer>
           <Title>{movie.title || movie.name}</Title>

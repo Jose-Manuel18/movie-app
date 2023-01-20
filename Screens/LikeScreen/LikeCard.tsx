@@ -1,7 +1,6 @@
 import React from "react";
 import { Rating } from "react-native-rating-element";
 import styled from "styled-components/native";
-import CardView from "react-native-cardview";
 
 import { GestureResponderEvent } from "react-native";
 import { Colors } from "../../Components/Utils/Colors";
@@ -52,50 +51,48 @@ const SearchCard = ({ movie, onPress }: LikeCardProps) => {
   const [deleteLike, { loading, error, data }] = useMutation(DELETE);
 
   return (
-    <CardView cardElevation={2} cardMaxElevation={2} cornerRadius={16}>
-      <CardContainer onPress={onPress}>
-        <Image
-          resizeMode="stretch"
-          source={{
-            uri: `https://image.tmdb.org/t/p/w500${movie.poster}`,
+    <CardContainer onPress={onPress}>
+      <Image
+        resizeMode="stretch"
+        source={{
+          uri: `https://image.tmdb.org/t/p/w500${movie.poster}`,
+        }}
+      />
+      <Block width={16} />
+      <TextContainer>
+        <TText>{movie.title}</TText>
+        <Text>{movie.genre}</Text>
+        <RatingContainer>
+          <Rating
+            rated={movie.rating / 2}
+            totalCount={5}
+            ratingColor={Colors.StarColor}
+            size={14}
+            readonly
+            icon="ios-star"
+            direction="row"
+          />
+          <Text>{movie.rating / 2 + "/5"}</Text>
+        </RatingContainer>
+      </TextContainer>
+
+      <ButtonContainer>
+        <IconButton
+          size={32}
+          color={Colors.Rose}
+          icon="close-circle"
+          onPress={async () => {
+            await deleteLike({
+              variables: {
+                movieDbId: movie.movie_db_id,
+              },
+            });
+            refetch({ ME });
           }}
         />
-        <Block width={16} />
-        <TextContainer>
-          <TText>{movie.title}</TText>
-          <Text>{movie.genre}</Text>
-          <RatingContainer>
-            <Rating
-              rated={movie.rating / 2}
-              totalCount={5}
-              ratingColor={Colors.StarColor}
-              size={14}
-              readonly
-              icon="ios-star"
-              direction="row"
-            />
-            <Text>{movie.rating / 2 + "/5"}</Text>
-          </RatingContainer>
-        </TextContainer>
-
-        <ButtonContainer>
-          <IconButton
-            size={32}
-            color={Colors.Rose}
-            icon="close-circle"
-            onPress={async () => {
-              await deleteLike({
-                variables: {
-                  movieDbId: movie.movie_db_id,
-                },
-              });
-              refetch({ ME });
-            }}
-          />
-        </ButtonContainer>
-        <Block width={32} />
-      </CardContainer>
-    </CardView>
+      </ButtonContainer>
+      <Block width={32} />
+    </CardContainer>
   );
 };
 

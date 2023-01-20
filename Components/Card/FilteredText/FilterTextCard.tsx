@@ -1,23 +1,34 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React from "react";
 import { Colors } from "../../Utils/Colors";
 import { sliderTextProps } from "./types";
+import styled from "styled-components/native";
 
 const FilterTextCard = ({ genre, onPress, isSelected }: sliderTextProps) => {
   return (
-    <View style={styles.container}>
+    <Container onTouchEnd={(e) => e.stopPropagation()}>
       <TouchableOpacity
         style={[isSelected ? styles.buttonSelected : null, styles.button]}
         onPress={onPress}
       >
-        <Text style={styles.text}>{genre.name}</Text>
+        <Text>{genre.name}</Text>
       </TouchableOpacity>
-    </View>
+    </Container>
   );
 };
 
 export default FilterTextCard;
-
+const Container = styled.View<{ color?: string | null }>`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  background-color: ${(p) => p.color};
+`;
+const Text = styled.Text`
+  color: white;
+`;
+const TouchableOpacity = styled.TouchableOpacity``;
 const styles = StyleSheet.create({
   container: {
     height: 30,
