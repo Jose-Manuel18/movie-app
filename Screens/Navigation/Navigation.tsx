@@ -170,7 +170,7 @@ function Navigation() {
                   options={{
                     headerShown: false,
                     presentation: "transparentModal",
-                    animation: "fade",
+                    animation: "slide_from_bottom",
                   }}
                 />
               </Stack.Group>

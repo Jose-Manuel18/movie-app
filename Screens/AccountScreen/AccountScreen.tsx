@@ -17,67 +17,6 @@ import { Goback } from "../../Components/Buttons/Goback";
 export function AccountScreen() {
   const { goBack } = useNavigation();
 
-  // // ref
-  // const bottomSheetRef = useRef<BottomSheet>(null);
-
-  // // variables
-  // const snapPoints = useMemo(() => ["35%"], []);
-
-  // // callbacks
-  // const handleSheetChanges = useCallback((index: number) => {
-  //   bottomSheetRef.current?.snapToIndex(index);
-  // }, []);
-
-  // // renders
-
-  // const resetUser = useSetRecoilState(userState);
-  // const ME = gql`
-  //   query Query {
-  //     me {
-  //       name
-  //       uid
-  //       email
-  //       id
-  //       likes {
-  //         title
-  //         rating
-  //         poster
-  //       }
-  //     }
-  //   }
-  // `;
-  // const { data, loading, error, client } = useQuery(ME);
-  // if (error) {
-  //   console.log(error.networkError);
-  // }
-  // if (loading) return null;
-  // console.log(data.me);
-  // return (
-  //   <Container intensity={8}>
-  //     <BottomSheet
-  //       ref={bottomSheetRef}
-  //       onClose={() => goBack()}
-  //       enablePanDownToClose={true}
-  //       enableOverDrag={false}
-  //       snapPoints={snapPoints}
-  //       onChange={handleSheetChanges}
-  //       backdropComponent={() => <OnTapClose onPress={() => goBack()} />}
-  //     >
-  //       <InnerContainer>
-  //         <Text>{data.me.name}</Text>
-  //         <Text>{data.me.email}</Text>
-  //         <SignOut
-  //         // onPress={() => {
-  //         //   resetUser(null);
-  //         //   client.resetStore();
-  //         // }}
-  //         >
-  //           <Text>hola</Text>
-  //         </SignOut>
-  //       </InnerContainer>
-  //     </BottomSheet>
-  //   </Container>
-  // );
   const sheetRef = useRef<BottomSheet>(null);
 
   // variables

@@ -10,6 +10,7 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { auth } from "./State/firebase";
+import { StatusBar } from "react-native";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +37,7 @@ export default function App() {
         <QueryClientProvider client={queryClient}>
           <SafeAreaProvider>
             <Navigation />
+            <StatusBar barStyle="light-content" />
           </SafeAreaProvider>
         </QueryClientProvider>
       </RecoilRoot>

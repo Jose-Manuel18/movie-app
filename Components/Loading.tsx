@@ -5,7 +5,7 @@ import { Colors } from "./Utils/Colors";
 export const Loading = () => {
   return (
     <View style={[styles.container, styles.horizontal]}>
-      <ActivityIndicator size="small" color={Colors.Rose} />
+      <ActivityIndicator size="large" color={Colors.Rose} />
     </View>
   );
 };

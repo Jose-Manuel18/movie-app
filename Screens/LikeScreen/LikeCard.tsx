@@ -23,6 +23,7 @@ const SearchCard = ({ movie, onPress }: LikeCardProps) => {
   const ME = gql`
     query Query {
       me {
+        id
         likes {
           id
           title
@@ -34,12 +35,25 @@ const SearchCard = ({ movie, onPress }: LikeCardProps) => {
       }
     }
   `;
-  const {
-    loading: loadingFeed,
-    error: errorFeed,
-    data: likeData,
-    refetch,
-  } = useQuery(ME);
+  const { error: errorFeed, data: likeData } = useQuery(ME);
+  const feed = gql`
+    query Query($userId: ID) {
+      likeById(userId: $userId) {
+        title
+        id
+        rating
+        poster
+        overview
+        movie_db_id
+        genre
+      }
+    }
+  `;
+  const { client } = useQuery(feed, {
+    variables: {
+      userId: likeData.me.id,
+    },
+  });
   const DELETE = gql`
     mutation Mutation($movieDbId: Int!) {
       deleteLikeByUser(movie_db_id: $movieDbId) {
@@ -48,7 +62,11 @@ const SearchCard = ({ movie, onPress }: LikeCardProps) => {
       }
     }
   `;
-  const [deleteLike, { loading, error, data }] = useMutation(DELETE);
+  const [deleteLike] = useMutation(DELETE);
+  console.log(errorFeed?.message);
+  if (errorFeed) {
+    console.log(errorFeed);
+  }
 
   return (
     <CardContainer onPress={onPress}>
@@ -87,7 +105,9 @@ const SearchCard = ({ movie, onPress }: LikeCardProps) => {
                 movieDbId: movie.movie_db_id,
               },
             });
-            refetch({ ME });
+            await client.refetchQueries({
+              include: [feed],
+            });
           }}
         />
       </ButtonContainer>
@@ -97,7 +117,7 @@ const SearchCard = ({ movie, onPress }: LikeCardProps) => {
 };
 
 export default SearchCard;
-const CardContainer = styled.View`
+const CardContainer = styled.TouchableOpacity`
   background-color: ${Colors.LightPurple};
   flex-direction: row;
   border-radius: 16px;

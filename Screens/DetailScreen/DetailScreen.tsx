@@ -14,7 +14,7 @@ const DetailScreen = ({ route }) => {
   const movieDetails = route.params.movieDetails;
   const sheetRef = useRef(null);
   const snapPoints = useMemo(() => ["40%"], []);
-  const handleSnapPress = useCallback((index) => {
+  const handleSnapPress = useCallback((index: number) => {
     sheetRef.current?.snapToIndex(index);
   }, []);
 

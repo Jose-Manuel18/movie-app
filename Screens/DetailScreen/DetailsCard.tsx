@@ -7,7 +7,6 @@ import { GenreProps } from "../../Components/Carousel/SeriesCarousel/types";
 import { useRecoilValueLoadable } from "recoil";
 import { GenreState } from "../../State/GenreState";
 import styled from "styled-components/native";
-import { filter } from "lodash";
 const DetailsCard = ({ movie }: { movie: movieTypes }) => {
   const { state, contents } = useRecoilValueLoadable(GenreState);
 
@@ -20,6 +19,7 @@ const DetailsCard = ({ movie }: { movie: movieTypes }) => {
   const ME = gql`
     query Query {
       me {
+        id
         likes {
           id
           title
@@ -44,6 +44,25 @@ const DetailsCard = ({ movie }: { movie: movieTypes }) => {
       }
     }
   `;
+  const { error: errorFeed, data: likeData } = useQuery(ME);
+  const FEED = gql`
+    query Query($userId: ID) {
+      likeById(userId: $userId) {
+        title
+        id
+        rating
+        poster
+        overview
+        movie_db_id
+        genre
+      }
+    }
+  `;
+  const { client } = useQuery(FEED, {
+    variables: {
+      userId: likeData?.me?.id,
+    },
+  });
   const DELETE = gql`
     mutation Mutation($movieDbId: Int!) {
       deleteLikeByUser(movie_db_id: $movieDbId) {
@@ -53,26 +72,22 @@ const DetailsCard = ({ movie }: { movie: movieTypes }) => {
       }
     }
   `;
-  const [
-    deleteLike,
-    { loading: deleteLoading, error: deleteError, data: deleteLikeData },
-  ] = useMutation(DELETE);
-  const {
-    loading: loadingFeed,
-    error: errorFeed,
-    data: likeData,
-    refetch,
-  } = useQuery(ME);
-  const [createLike, { loading, error, data }] = useMutation(LIKE);
-  if (error) console.log(error);
-  if (deleteError) return null;
-  if (errorFeed) return null;
+  const [deleteLike, { error: deleteError }] = useMutation(DELETE, {
+    refetchQueries: [{ query: FEED }],
+  });
+
+  const [createLike, { error }] = useMutation(LIKE, {
+    refetchQueries: [{ query: FEED }],
+  });
 
   const allIds = map(likeData?.me?.likes, "movie_db_id");
-  const filteredId = filter(
-    allIds,
-    (ids: number) => ids === movie.id || movie.movie_db_id,
-  );
+  // const filteredId = filter(
+  //   allIds,
+  //   (ids: number) => ids === movie.id || movie.movie_db_id,
+  // );
+  if (error) return null;
+  if (deleteError) return null;
+  if (errorFeed) return null;
   if (state === "hasError" || state === "loading") return null;
 
   return (
@@ -113,7 +128,9 @@ const DetailsCard = ({ movie }: { movie: movieTypes }) => {
                   },
                 },
               });
-          refetch({ ME });
+          await client.refetchQueries({
+            include: [FEED],
+          });
         }}
       >
         <IconButton
