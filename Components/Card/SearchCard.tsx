@@ -1,13 +1,12 @@
 import React from "react";
 import { Colors } from "../Utils/Colors";
-import { useRecoilValueLoadable, useSetRecoilState } from "recoil";
+import { useRecoilValueLoadable } from "recoil";
 import { GenreState } from "../../State/GenreState";
 import { Rating } from "react-native-rating-element";
 import { seriesCardProps, GenreProps } from "../Carousel/SeriesCarousel/types";
 import styled from "styled-components/native";
-import { Genre } from "../../State/UserState";
+
 const SearchCard = ({ movie, onPress }: seriesCardProps) => {
-  const setGenre = useSetRecoilState(Genre);
   const { state, contents } = useRecoilValueLoadable(GenreState);
   if (state === "hasError" || state === "loading") return null;
   const GenreList: GenreProps[] = contents.genres;
@@ -25,7 +24,7 @@ const SearchCard = ({ movie, onPress }: seriesCardProps) => {
       />
       <Block width={16} />
       <TextContainer>
-        <TText>{movie.title}</TText>
+        <TText>{movie.title || movie.name}</TText>
         <Text>
           {(currentGenre || []).map((genre) => genre.name).join(", ")}.
         </Text>
