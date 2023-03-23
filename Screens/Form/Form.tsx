@@ -8,14 +8,13 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigation } from "@react-navigation/core";
 import { auth } from "../../State/firebase";
 import { FormProps } from "./types";
-import { useMutation, gql, ApolloError } from "@apollo/client";
+import { useMutation, gql,  } from "@apollo/client";
 import { Loading } from "../../Components/Loading";
 import { useSetRecoilState } from "recoil";
 import { userState } from "../../State/UserState";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Block } from "../../Components/Block";
 import { useEffect, useState } from "react";
-import { GraphQLErrors } from "@apollo/client/errors";
 
 const schema = z.object({
   name: z.string().min(1),

@@ -14,11 +14,13 @@ import { SeeAllButton } from "../../Components/Carousel/Index";
 export function HomeScreen() {
   const { navigate } = useNavigation();
   const { top } = useSafeAreaInsets();
+
   const View = styled.ScrollView`
     flex: 1;
     background-color: ${Colors.DarkPurple};
     padding-top: ${top};
   `;
+
   return (
     <View showsVerticalScrollIndicator={false}>
       <SearchButton />

@@ -7,12 +7,13 @@ import styled from "styled-components/native";
 import { gql, useQuery } from "@apollo/client";
 
 import { useNavigation } from "@react-navigation/native";
-import { BlurView } from "expo-blur";
+
 import { userState } from "../../State/UserState";
 import { Colors } from "../../Components/Utils/Colors";
-import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { AccountComponent } from "./AccountComponent";
-import { Goback } from "../../Components/Buttons/Goback";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+
+
+import { Loading } from "../../Components/Loading";
 
 export function AccountScreen() {
   const { goBack } = useNavigation();
@@ -45,10 +46,9 @@ export function AccountScreen() {
   `;
   const { data, loading, error, client } = useQuery(ME);
   if (error) {
-    console.log(error.networkError);
+    console.log(error.message);
   }
-  if (loading) return null;
-  console.log(data.me);
+  if (loading) return <Loading />;
   return (
     <View style={styles.container}>
       <BottomSheet

@@ -1,5 +1,4 @@
 import { View, FlatList } from "react-native";
-import React from "react";
 import { UpComingState } from "../State/UpComingMovieState";
 import { useRecoilValueLoadable } from "recoil";
 import { useNavigation } from "@react-navigation/native";

@@ -29,7 +29,6 @@ export const GenreList = () => {
     return null;
   }
   const results = contents.results;
-  console.log(selected);
   return (
     <>
       <FlatList

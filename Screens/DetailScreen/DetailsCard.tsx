@@ -7,7 +7,7 @@ import { GenreProps } from "../../Components/Carousel/SeriesCarousel/types";
 import { useRecoilValueLoadable } from "recoil";
 import { GenreState } from "../../State/GenreState";
 import styled from "styled-components/native";
-const DetailsCard = ({ movie }: { movie: movieTypes }) => {
+function DetailsCard({ movie }: { movie: movieTypes }) {
   const { state, contents } = useRecoilValueLoadable(GenreState);
 
   const currentGenre: GenreProps[] = contents?.genres?.filter(
@@ -149,7 +149,7 @@ const DetailsCard = ({ movie }: { movie: movieTypes }) => {
       </AddLike>
     </Container>
   );
-};
+}
 
 export default DetailsCard;
 const Container = styled.View`

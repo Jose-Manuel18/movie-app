@@ -1,4 +1,3 @@
-import { View } from "react-native";
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { CarouselImages } from "../Components/Carousel/Index";
@@ -11,11 +10,7 @@ const MoviesAPI = () => {
 
   if (error || isLoading) return null;
 
-  return (
-    <View>
-      <CarouselImages info={data.results} />
-    </View>
-  );
+  return <CarouselImages info={data.results} />;
 };
 
 export default MoviesAPI;
